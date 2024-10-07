@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.Collections;
 import java.util.ArrayList;
 
@@ -47,6 +48,17 @@ public class Main {
             textField.setCaretColor(Color.green);
             textField.setBorder(BorderFactory.createLineBorder(Color.green));
             add(textField);
+
+            // Adicionando KeyListener para enviar o texto ao pressionar Enter
+            textField.addKeyListener(new java.awt.event.KeyAdapter() { // Adiciona um evento de teclado
+                public void keyPressed(java.awt.event.KeyEvent evt) { // Função para verificar se a tecla pressionada é Enter
+                    if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // Verifica se a tecla pressionada é Enter
+                        String mainInput = textField.getText();
+                        textField.setText("");
+                        mainInput(mainInput);
+                    }
+                }
+            });
 
             // Cria um botão de enviar
             JButton btnSend = new JButton("Enviar");
@@ -109,10 +121,10 @@ public class Main {
         // Metodo para receber a entrada do usuário no menu
         void menuInput(String input){
             switch (input) {
-                case "1":
+                case "1", "Instruções", "instruções":
                     instructions();
                     break;
-                case "2":
+                case "2", "Jogar", "jogar":
                     battle();
                     break;
             }
@@ -132,13 +144,13 @@ public class Main {
 
         void instructionsInput(String input){
             switch (input) {
-                case "1":
+                case "1", "Sistema Aritmético", "sistema aritmético":
                     arithmeticSystem();
                     break;
-                case "2":
+                case "2", "Sistema de Batalha", "sistema de batalha":
                     battleSystem();
                     break;
-                case "3":
+                case "3", "Voltar", "voltar":
                     menu();
                     break;
                 default:
@@ -164,7 +176,7 @@ public class Main {
 
         void arithmeticSystemInput(String input){
             switch (input) {
-                case "1":
+                case "1", "Voltar", "voltar":
                     instructions();
                     break;
             }
@@ -190,7 +202,7 @@ public class Main {
 
         void battleSystemInput(String input){
             switch (input) {
-                case "1":
+                case "1", "Voltar", "voltar":
                     instructions();
                     break;
             }
@@ -277,7 +289,7 @@ public class Main {
                     menu();
                     break;
                 default:
-                    textArea.append("\nOpção inválida.\n");
+                    textArea.append("Opção inválida.\n");
                     break;
             }
         }
@@ -371,20 +383,12 @@ public class Main {
         }
 
         void verifyQuestion(String input){
+            if (input.equals("1000 0110")){
 
+            }
         }
     }
 }
 
 
 
-/*
- *      void person(){
-            int life = 100;
-            int attack = 10;
-        }
-
-        void attcakBattle(){
-            
-        }
- */
