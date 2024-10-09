@@ -43,6 +43,7 @@ O projeto está dividido nas seguintes etapas:
 ## 📚 Referências
 
 - Curso de Algoritmos e Programação
+- Curso de Conceito da Computação
 - RPG Textual: [Devil's Bob MUD](http://www.debomud.org/)
 
 ---
