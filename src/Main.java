@@ -28,7 +28,6 @@ public class Main {
 
             // Exibir texto na tela
             textArea = new JTextArea();
-            textArea.setBounds(0, 0, 760, 480);
             textArea.setFont(new Font("Courier New", Font.PLAIN, 18));
             textArea.setForeground(Color.green);
             textArea.setBackground(Color.black);
@@ -36,6 +35,12 @@ public class Main {
             textArea.setWrapStyleWord(true);
             textArea.setEditable(false);
             add(textArea);
+
+            JScrollPane scroll = new JScrollPane(textArea);
+            scroll.setBounds(0, 0, 800, 520);
+            scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Adiciona barra de rolagem
+            scroll.setBorder(null);
+            add(scroll);
 
             menu();
 
@@ -79,6 +84,10 @@ public class Main {
             revalidate(); // Revalida a tela
         }
 
+        void autoScroll() {
+            textArea.setCaretPosition(textArea.getDocument().getLength());
+        }
+
         // Métodos para exibir menu
         void menu() {
             String menu = "THE AGE OF ETHERIS\n\n" +
@@ -111,6 +120,7 @@ public class Main {
                     break;
                 case "battle":
                     battleInput(input);
+                    verifyQuestion(input);
                     break;
                 case "calcular":
                     calcularInput(input);
@@ -119,13 +129,17 @@ public class Main {
         }
 
         // Metodo para receber a entrada do usuário no menu
-        void menuInput(String input){
+        public void menuInput(String input){
             switch (input) {
                 case "1", "Instruções", "instruções":
                     instructions();
                     break;
                 case "2", "Jogar", "jogar":
                     battle();
+                    break;
+                default:
+                    textArea.append("Opção inválida.\n");
+                    autoScroll();
                     break;
             }
         }
@@ -224,48 +238,17 @@ public class Main {
 
         }
 
-        // Sistema de batalha
-        int questionBattleBinary(){
-            ArrayList<Integer> question = new ArrayList<Integer>(); // Lista de perguntas
-            question.add(134); // 1000 0110
-            question.add(78);  // 0100 1110
-            question.add(243); // 1111 0011
-            question.add(97);  // 0110 0001
-            question.add(56);  // 0011 1000
-            question.add(128); // 1000 0000
-            question.add(250); // 1111 1010
-            question.add(512); // 1000 0000 0000
-            question.add(256); // 0001 0000 0000
-            question.add(321); // 0001 0100 0001
-            question.add(76);  // 0100 1100
-            question.add(300); // 0001 0010 1100
-            question.add(436); // 0001 1011 0100
-            question.add(64);  // 0100 0000
-
-
-            Collections.shuffle(question); // Embaralha as perguntas
-            return question.get(0); // Retorna uma pergunta aleatória
-        }
-
-
-        int combatMob (){
-            int question = questionBattleBinary();
-            return question;
-        }
-        int combatMob = combatMob(); // Pergunta do mob
-
-        int combatBoss (){
-            int question = questionBattleBinary();
-            return question;
-        }
-        int combatBoss = combatBoss(); // Pergunta do boss
+        RpgComponent rpgComponent = new RpgComponent();
+        int questionBattleBinary = rpgComponent.questionBinary();
+        int question = questionBattleBinary;
+        String numBinary = Integer.toBinaryString(question);
 
         // Metodo para iniciar a batalha
         void battle(){
             String battle = "Enquanto você procurava por um dos artefatos, você se depara com um inimigo.\n" +
                     "Você está preparado para a batalha?\n" +
                     "Resolva o desafio para acerta-lo.\n\n" +
-                    "Converta " + combatMob + " para binairo:\n" +
+                    "Converta " + question + " para binairo:\n" +
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
                     "2. Calcular\n";
@@ -287,9 +270,6 @@ public class Main {
                     break;
                 case "3":
                     menu();
-                    break;
-                default:
-                    textArea.append("Opção inválida.\n");
                     break;
             }
         }
@@ -315,7 +295,7 @@ public class Main {
 
         void calcular(){
 
-            String textCalc = "Questão: " + combatMob + "\n" +
+            String textCalc = "Questão: " + question + "\n" +
                     "Insira um dos valores para faze a soma em decimal:\n" +
                     "1, 2, 4, 8, 16, 32, 64, 128, 256, 512\n\n" +
                     "Escolha uma das opções: \n" +
@@ -337,43 +317,7 @@ public class Main {
                     battle();
                     viewTable = true;
                     break;
-                case "1":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "2":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "4":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "8":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "16":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "32":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "64":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "128":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "256":
-                    sum += num;
-                    textArea.append("\n" + sum);
-                    break;
-                case "512":
+                case "1", "2", "4", "8",  "16", "32",  "64", "128", "256", "512":
                     sum += num;
                     textArea.append("\n" + sum);
                     break;
@@ -382,10 +326,35 @@ public class Main {
             }
         }
 
-        void verifyQuestion(String input){
-            if (input.equals("1000 0110")){
+        RpgComponent.Enemy enemy = rpgComponent.new Enemy(100, 10);
 
+        void lutaAcertou(){
+            enemy.life -= 10;
+            textArea.append("\nVocê acertou o inimigo!\n" +
+                    "Vida do inimigo: " + enemy.life);
+            if(enemy.life > 0){
+                newBattle();
+            } else {
+                textArea.append("\nVocê derrotou o inimigo!");
             }
+        }
+
+        void verifyQuestion(String input){
+            if(numBinary.equals(input)){
+                lutaAcertou();
+            } else {
+                textArea.append("\nVocê errou!");
+            }
+        }
+
+        void newBattle(){
+            questionBattleBinary = rpgComponent.questionBinary();
+            question = questionBattleBinary;
+            numBinary = Integer.toBinaryString(question);
+            textArea.append("\n\nConverta " + question + " para binário:\n" +
+                    "Opções:\n" +
+                    "1. Mostrar tabela de conversão\n" +
+                    "2. Calcular\n");
         }
     }
 }
