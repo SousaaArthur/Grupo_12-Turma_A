@@ -120,10 +120,12 @@ public class Main {
                     break;
                 case "battle":
                     battleInput(input);
-                    verifyQuestion(input);
                     break;
                 case "calcular":
                     calcularInput(input);
+                    break;
+                case "luta":
+                    verifyQuestion(input);
                     break;
             }
         }
@@ -251,7 +253,8 @@ public class Main {
                     "Converta " + question + " para binairo:\n" +
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
-                    "2. Calcular\n";
+                    "2. Calcular\n" +
+                    "3. Responder\n";
             textArea.setText(battle);
             gameState = "battle";
         }
@@ -269,6 +272,10 @@ public class Main {
                     sum = 0;
                     break;
                 case "3":
+                    gameState = "luta";
+                    textArea.append("\nDigite o número binário: ");
+                    break;
+                case "4":
                     menu();
                     break;
             }
@@ -329,27 +336,31 @@ public class Main {
         RpgComponent.Enemy enemy = rpgComponent.new Enemy(100, 10);
 
         void lutaAcertou(){
-            enemy.life -= 10;
-            textArea.append("\nVocê acertou o inimigo!\n" +
-                    "Vida do inimigo: " + enemy.life);
+            enemy.life -= 30;
             if(enemy.life > 0){
-                newBattle();
+                textArea.append("\nVocê acertou o inimigo!\n" +
+                        "Vida do inimigo: " + enemy.life);
             } else {
-                textArea.append("\nVocê derrotou o inimigo!");
+                textArea.append("\nVida do inimigo: 0");
             }
         }
 
         void verifyQuestion(String input){
             if(numBinary.equals(input)){
                 lutaAcertou();
+                if(enemy.life > 0){
+                    newBattle();
+                } else {
+                    textArea.append("\nVocê derrotou o inimigo!");
+                }
             } else {
                 textArea.append("\nVocê errou!");
+                textArea.append(numBinary);
             }
         }
 
         void newBattle(){
-            questionBattleBinary = rpgComponent.questionBinary();
-            question = questionBattleBinary;
+            question = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(question);
             textArea.append("\n\nConverta " + question + " para binário:\n" +
                     "Opções:\n" +
