@@ -379,7 +379,8 @@ public class Main {
             }
         }
 
-        void newBattle(){
+        // imprimi uma nova batalha
+        void newBattle() {
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
             textArea.append("\n\nConverta " + randomQuestionBinary + " para binário:\n" +
@@ -391,7 +392,7 @@ public class Main {
             gameState = "battle";
         }
 
-
+        // Cria uma nova batalha
         void secondBattle() {
             enemy.life = 100;
             randomQuestionBinary = rpgComponent.questionBinary();
