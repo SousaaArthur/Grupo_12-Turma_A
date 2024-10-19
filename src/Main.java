@@ -88,13 +88,14 @@ public class Main {
 
         // Métodos para exibir menu
         void menu() {
-            String menu = "THE AGE OF ETHERIS\n\n" +
-                    "Selecione uma opção:\n" +
-                    "1. Instruções\n" +
-                    "2. Jogar\n" +
-                    "3. Créditos\n" +
-                    "4. Sair\n";
-            textArea.setText(menu);
+            textArea.setText(
+                    "THE AGE OF ETHERIS\n\n" +
+                            "Selecione uma opção:\n" +
+                            "1. Instruções\n" +
+                            "2. Jogar\n" +
+                            "3. Créditos\n" +
+                            "4. Sair\n"
+            );
             gameState = "menu"; // Definindo o estado inicial como "menu"
         }
 
@@ -113,8 +114,8 @@ public class Main {
                 case "battleSystem":
                     battleSystemInput(input);
                     break;
-                case "gameStart":
-                    gameStartInput(input);
+                case "initialHistory":
+                    inputClass(input);
                     break;
                 case "battle":
                     battleInput(input);
@@ -135,7 +136,7 @@ public class Main {
                     instructions();
                     break;
                 case "2", "Jogar", "jogar":
-                    initialBattle();
+                    initialHistory();
                     break;
                 default:
                     textArea.append("Opção inválida.\n");
@@ -146,13 +147,14 @@ public class Main {
 
         // Métodos para exibir instruções
         void instructions(){
-            String instructions = "Seja bem vindo as instruções!\n" +
-                    "Aqui você podera entender como funciona todos o sistema do jogo.\n" +
-                    "Escolha uma opção:\n" +
-                    "1. Sistema Aritmético\n" +
-                    "2. Sistema de Batalha\n" +
-                    "3. Voltar\n";
-            textArea.setText(instructions);
+            textArea.setText(
+                    "Seja bem vindo as instruções!\n" +
+                            "Aqui você podera entender como funciona todos o sistema do jogo.\n" +
+                            "Escolha uma opção:\n" +
+                            "1. Sistema Aritmético\n" +
+                            "2. Sistema de Batalha\n" +
+                            "3. Voltar\n"
+            );
             gameState = "instructions";
         }
 
@@ -175,17 +177,17 @@ public class Main {
         }
 
         void arithmeticSystem(){
-            String arithmeticSystem = "Sistema Aritmético\n" +
-                    "O sistema aritmético é um sistema de cálculos de aritmética binaria, octal e hexadeciamal que você terá que resolver para avançar no jogo.\n\n" +
-                    "Como vai funcionar?\n" +
-                    "Bom, em várias partes do jogo você terá que resolver cálculos aritméticos para avançar, por exemplo, se você encontrar um baú trancado, você terá que resolver um cálculo para abri-lo.\n" +
-                    "Os cáculos serão de conversão de bases numéricas para binário e de binário para decimal.\n\n" +
-                    "Conversões de texto para binário e de binário para texto.\n" +
-                    "Exemplo: 'Hello' em binário é '01001000 01100101 01101100 01101100 01101111'.\n\n" +
-                    "Opções:\n" +
-                    "1. Voltar\n"
-                    ;
-            textArea.setText(arithmeticSystem);
+            textArea.setText(
+                    "Sistema Aritmético\n" +
+                            "O sistema aritmético é um sistema de cálculos de aritmética binaria, octal e hexadeciamal que você terá que resolver para avançar no jogo.\n\n" +
+                            "Como vai funcionar?\n" +
+                            "Bom, em várias partes do jogo você terá que resolver cálculos aritméticos para avançar, por exemplo, se você encontrar um baú trancado, você terá que resolver um cálculo para abri-lo.\n" +
+                            "Os cáculos serão de conversão de bases numéricas para binário e de binário para decimal.\n\n" +
+                            "Conversões de texto para binário e de binário para texto.\n" +
+                            "Exemplo: 'Hello' em binário é '01001000 01100101 01101100 01101100 01101111'.\n\n" +
+                            "Opções:\n" +
+                            "1. Voltar\n"
+            );
             gameState = "arithmeticSystem";
         }
 
@@ -198,20 +200,20 @@ public class Main {
         }
 
         void battleSystem(){
-            String battleSystem = "Sistema de Batalha\n" +
-                    "O sistema de batalha é um sistema de combate baseado em turnos, onde você terá que derrotar inimigos para avançar no jogo.\n\n" +
-                    "Como vai funcionar?\n" +
-                    "Bom, em várias partes do jogo você terá que enfrentar inimigos para avançar, por exemplo, se você encontrar um inimigo, você terá que derrotá-lo para avançar.\n" +
-                    "Os cáculos serão de conversão de bases numéricas para binário e de binário para decimal.\n\n" +
-                    "Exemplo de batalha:\n" +
-                    "Para derrotar o inimigo você terá que resolver um cálculo aritmético.\n" +
-                    "Se você acertar o cálculo, você ataca o inimigo.\n" +
-                    "Se você errar o cálculo, o inimigo ataca você.\n\n" +
+            textArea.setText(
+                    "Sistema de Batalha\n" +
+                            "O sistema de batalha é um sistema de combate baseado em turnos, onde você terá que derrotar inimigos para avançar no jogo.\n\n" +
+                            "Como vai funcionar?\n" +
+                            "Bom, em várias partes do jogo você terá que enfrentar inimigos para avançar, por exemplo, se você encontrar um inimigo, você terá que derrotá-lo para avançar.\n" +
+                            "Os cáculos serão de conversão de bases numéricas para binário e de binário para decimal.\n\n" +
+                            "Exemplo de batalha:\n" +
+                            "Para derrotar o inimigo você terá que resolver um cálculo aritmético.\n" +
+                            "Se você acertar o cálculo, você ataca o inimigo.\n" +
+                            "Se você errar o cálculo, o inimigo ataca você.\n\n" +
 
-                    "Opções:\n" +
-                    "1. Voltar\n"
-                    ;
-            textArea.setText(battleSystem);
+                            "Opções:\n" +
+                            "1. Voltar\n"
+            );
             gameState = "battleSystem"; // Definindo o estado como "battleSystem"
         }
 
@@ -223,21 +225,6 @@ public class Main {
             }
         }
         // Fim dos métodos para exibir instruções
-
-        // Métodos para iniciar o jogo
-        void gameStart(){
-            String history = "Escolha a sua classe:\n" +
-                    "1. Guerreiro\n" +
-                    "2. Mago\n" +
-                    "3. Elfa\n";
-
-            textArea.setText(history);
-            gameState = "gameStart";
-        }
-
-        void gameStartInput(String input){
-
-        }
 
         RpgComponent rpgComponent = new RpgComponent();
         int questionBattleBinary = rpgComponent.questionBinary();
@@ -310,13 +297,13 @@ public class Main {
         }
 
         void calcular(){
-
-            String textCalc = "Questão: " + randomQuestionBinary + "\n" +
-                    "Insira um dos valores para faze a soma em decimal:\n" +
-                    "1, 2, 4, 8, 16, 32, 64, 128, 256, 512\n\n" +
-                    "Escolha uma das opções: \n" +
-                    "0. Sair\n";
-            textArea.setText(textCalc);
+            textArea.setText(
+                    "Questão: " + randomQuestionBinary + "\n" +
+                            "Insira um dos valores para faze a soma em decimal:\n" +
+                            "1, 2, 4, 8, 16, 32, 64, 128, 256, 512\n\n" +
+                            "Escolha uma das opções: \n" +
+                            "0. Sair\n"
+            );
             gameState = "calcular";
         }
 
@@ -402,6 +389,63 @@ public class Main {
                             "Você está preparado para a batalha?\n" +
                             "Resolva o desafio para acerta-lo.\n\n"
             );
+        }
+
+        //Inicio Historia
+        void initialHistory(){
+            textArea.setText(
+                    "Finalmente você acordou, Equilibrador. O destino de Etheris depende de você. " +
+                            "A Ruptura destruiu o tempo e o espaço, e agora você deve restaurar o equilíbrio." +
+                            "\nQual será sua linhagem?\n\n" +
+                            "1. Elfo: Habilidades de agilidade e conexão espiritual.\n" +
+                            "2. Mago: Mestre em manipulação de feitiços.\n" +
+                            "3. Guerreiro: Força bruta e resistência física.\n"
+            );
+            gameState = "initialHistory";
+        }
+
+        String playerClasse;
+
+        void inputClass(String input) {
+            switch (input) {
+                case "1":
+                    textArea.append(
+                            "\nNarrador: " +
+                            "\nVocê escolheu a linhagem dos Elfos, seres ancestrais conectados ao espírito da natureza. " +
+                                    "Sua agilidade e habilidades místicas serão essenciais para enfrentar os desafios à frente. " +
+                                    "Somente os Elfos compreendem a verdadeira essência do equilíbrio entre as forças naturais e espirituais de Etheris."
+                    );
+                    playerClasse = "Elfo";
+                    playerName();
+                    break;
+                case "2":
+                    textArea.append(
+                            "\nNarrador: " +
+                            "\nVocê escolheu a linhagem dos Magos, mestres das artes arcanas e guardiões dos segredos da magia." +
+                                    " Seu conhecimento e controle sobre os feitiços será a chave para domar as distorções da Ruptura. " +
+                                    "Mas lembre-se, com grande poder vem grande responsabilidade."
+                    );
+                    playerClasse = "Mago";
+                    playerName();
+                    break;
+                case "3":
+                    textArea.append(
+                            "\nNarrador: " +
+                                    "\nVocê escolheu a linhagem dos Guerreiros, heróis de força incomparável e destemidos em batalha. " +
+                                    "Com sua resistência e coragem, você será capaz de enfrentar até mesmo as criaturas mais temíveis que vagam pelas terras distorcidas de Etheris."
+                    );
+                    playerClasse = "Guerreiro";
+                    playerName();
+                    break;
+                default:
+                    textArea.append("Opção inválida.\n");
+                    autoScroll();
+                    break;
+            }
+        }
+
+        void playerName(){
+            textArea.append("\n\nAgora, diga-me, qual é o nome do " + playerClasse + " que restaurará o equilíbrio?" + "\nDigite o seu nome:");
         }
     }
 }
