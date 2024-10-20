@@ -117,6 +117,12 @@ public class Main {
                 case "initialHistory":
                     inputClass(input);
                     break;
+                case "playerName":
+                    inputName(input);
+                    break;
+                case "questionName":
+                    questionName(input);
+                    break;
                 case "battle":
                     battleInput(input);
                     break;
@@ -394,6 +400,7 @@ public class Main {
         //Inicio Historia
         void initialHistory(){
             textArea.setText(
+                    "Aenor:\n" +
                     "Finalmente você acordou, Equilibrador. O destino de Etheris depende de você. " +
                             "A Ruptura destruiu o tempo e o espaço, e agora você deve restaurar o equilíbrio." +
                             "\nQual será sua linhagem?\n\n" +
@@ -404,8 +411,11 @@ public class Main {
             gameState = "initialHistory";
         }
 
+        // Variaveis para armazenar a classe e o nome do jogador
         String playerClasse;
+        String playerName;
 
+        // 1º ATO da historia do jogo
         void inputClass(String input) {
             switch (input) {
                 case "1":
@@ -445,8 +455,49 @@ public class Main {
         }
 
         void playerName(){
-            textArea.append("\n\nAgora, diga-me, qual é o nome do " + playerClasse + " que restaurará o equilíbrio?" + "\nDigite o seu nome:");
+            textArea.append(
+                    "\n\nAenor:" +
+                    "\nAgora, diga-me, qual é o nome do " + playerClasse + " que restaurará o equilíbrio?" + "\nDigite o seu nome:"
+            );
+            gameState = "playerName";
         }
+
+        void inputName(String input){
+            playerName = input;
+            textArea.append(
+                    "\n\nSeu nome é " + playerName + ", o " + playerClasse + "?" +
+                            "\n1. Sim" +
+                            "\n2. Não"
+            );
+            gameState = "questionName";
+        }
+
+        void questionName(String input) {
+            switch (input) {
+                case "1":
+                    textArea.setText(
+                            "Aenor:\n" +
+                            "Muito bem, " + playerName + ". A Ruptura pode ter distorcido o tempo e o espaço, mas sua missão é clara. " +
+                                    "Arcadelis, a última cidade sagrada, é onde você encontrará respostas. " +
+                                    "E lá, o Conselho do Véu lhe explicará como reunir os artefatos necessários para salvar Etheris"
+                    );
+                    break;
+                case "2":
+                    textArea.setText(
+                            "Aenor:\n" +
+                            "Ah, parece que houve um engano. O nome que carrega é de grande importância para sua jornada, Equilibrador. " +
+                                    "Vamos corrigir isso. Qual será o verdadeiro nome pelo qual você será conhecido?" +
+                                    "\n\nDigite o seu nome:"
+                    );
+                    gameState = "playerName";
+                    break;
+                default:
+                    textArea.append("\nOpção inválida.");
+                    autoScroll();
+                    break;
+            }
+        }
+
     }
 }
 
