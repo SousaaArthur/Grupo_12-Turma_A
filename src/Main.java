@@ -481,6 +481,7 @@ public class Main {
                                     "Arcadelis, a última cidade sagrada, é onde você encontrará respostas. " +
                                     "E lá, o Conselho do Véu lhe explicará como reunir os artefatos necessários para salvar Etheris"
                     );
+                    dialog();
                     break;
                 case "2":
                     textArea.setText(
@@ -496,6 +497,16 @@ public class Main {
                     autoScroll();
                     break;
             }
+        }
+
+        void dialog(){
+            textArea.append(
+                    "\n\n1. E se o Conselho do Véu não puder me ajudar?\n" +
+                            "2. Quanto tempo temos até que Etheris seja completamente destruída?\n" +
+                            "3. Como saberei que posso confiar neles?\n" +
+                            "4. O que acontecerá se eu falhar?\n" +
+                            "5. Estou pronto. Como chegamos a Arcadelis?\n"
+            );
         }
 
     }
