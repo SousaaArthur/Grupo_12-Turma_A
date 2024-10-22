@@ -1,20 +1,21 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.KeyEvent;
+import javax.swing.*; // Importa todas as classes do pacote javax.swing
+import java.awt.*; // Importa todas as classes do pacote java.awt
+import java.awt.event.KeyEvent; // Importa a classe KeyEvent do pacote java.awt.event
+import java.util.ArrayList; // Importa a classe ArrayList do pacote java.util
 
 public class Main {
     public static void main(String[] args) {
-        new Screen();
+        new GameWindow();
     }
 
-    public static class Screen extends JFrame {
-        JTextField textField;
-        JTextArea textArea;
+    public static class GameWindow extends JFrame {
+        JTextField inputTextField;
+        JTextArea outputTextArea;
 
-        String gameState;
+        String currentGameState;
 
         // Metodo para inicializar a tela do RPG
-        public Screen(){
+        public GameWindow(){
             setTitle("The Age Of Etheris");
             setVisible(true);
             setSize(800, 600);
@@ -25,40 +26,40 @@ public class Main {
             setLayout(null);
 
             // Exibir texto na tela
-            textArea = new JTextArea();
-            textArea.setFont(new Font("Courier New", Font.PLAIN, 18));
-            textArea.setForeground(Color.green);
-            textArea.setBackground(Color.black);
-            textArea.setLineWrap(true);
-            textArea.setWrapStyleWord(true);
-            textArea.setEditable(false);
-            add(textArea);
+            outputTextArea = new JTextArea();
+            outputTextArea.setFont(new Font("Courier New", Font.PLAIN, 18));
+            outputTextArea.setForeground(Color.green);
+            outputTextArea.setBackground(Color.black);
+            outputTextArea.setLineWrap(true);
+            outputTextArea.setWrapStyleWord(true);
+            outputTextArea.setEditable(false);
+            add(outputTextArea);
 
-            JScrollPane scroll = new JScrollPane(textArea);
+            JScrollPane scroll = new JScrollPane(outputTextArea);
             scroll.setBounds(0, 0, 800, 520);
             scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS); // Adiciona barra de rolagem
             scroll.setBorder(null);
             add(scroll);
 
-            menu();
+            showMainMenu();
 
             // Cria uma caixa de texto
-            textField = new JTextField();
-            textField.setBounds(0, 520, 600, 40);
-            textField.setFont(new Font("Courier New", Font.PLAIN, 20));
-            textField.setForeground(Color.green);
-            textField.setBackground(Color.black);
-            textField.setCaretColor(Color.green);
-            textField.setBorder(BorderFactory.createLineBorder(Color.green));
-            add(textField);
+            inputTextField = new JTextField();
+            inputTextField.setBounds(0, 520, 600, 40);
+            inputTextField.setFont(new Font("Courier New", Font.PLAIN, 20));
+            inputTextField.setForeground(Color.green);
+            inputTextField.setBackground(Color.black);
+            inputTextField.setCaretColor(Color.green);
+            inputTextField.setBorder(BorderFactory.createLineBorder(Color.green));
+            add(inputTextField);
 
             // Adicionando KeyListener para enviar o texto ao pressionar Enter
-            textField.addKeyListener(new java.awt.event.KeyAdapter() { // Adiciona um evento de teclado
+            inputTextField.addKeyListener(new java.awt.event.KeyAdapter() { // Adiciona um evento de teclado
                 public void keyPressed(java.awt.event.KeyEvent evt) { // Função para verificar se a tecla pressionada é Enter
                     if (evt.getKeyCode() == KeyEvent.VK_ENTER) { // Verifica se a tecla pressionada é Enter
-                        String mainInput = textField.getText();
-                        textField.setText("");
-                        mainInput(mainInput);
+                        String mainInput = inputTextField.getText();
+                        inputTextField.setText("");
+                        handleUserInput(mainInput);
                     }
                 }
             });
@@ -73,9 +74,9 @@ public class Main {
             add(btnSend);
 
             btnSend.addActionListener(e -> { // Função lambda para enviar a mensagem
-                String mainInput = textField.getText();
-                textField.setText("");
-                mainInput(mainInput);
+                String mainInput = inputTextField.getText();
+                inputTextField.setText("");
+                handleUserInput(mainInput);
             });
 
             repaint(); // Redesenha a tela
@@ -83,12 +84,12 @@ public class Main {
         }
 
         void autoScroll() {
-            textArea.setCaretPosition(textArea.getDocument().getLength());
+            outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
         }
 
         // Métodos para exibir menu
-        void menu() {
-            textArea.setText(
+        void showMainMenu() {
+            outputTextArea.setText(
                     "THE AGE OF ETHERIS\n\n" +
                             "Selecione uma opção:\n" +
                             "1. Instruções\n" +
@@ -96,17 +97,17 @@ public class Main {
                             "3. Créditos\n" +
                             "4. Sair\n"
             );
-            gameState = "menu"; // Definindo o estado inicial como "menu"
+            currentGameState = "menu"; // Definindo o estado inicial como "menu"
         }
 
         // Metodo para receber a entrada do usuário
-        void mainInput(String input){
-            switch (gameState) {
+        void handleUserInput(String input){
+            switch (currentGameState) {
                 case "menu":
-                    menuInput(input);
+                    handleMainMenuInput(input);
                     break;
                 case "instructions":
-                    instructionsInput(input);
+                    handleInstructionsInput(input);
                     break;
                 case "arithmeticSystem":
                     arithmeticSystemInput(input);
@@ -115,13 +116,13 @@ public class Main {
                     battleSystemInput(input);
                     break;
                 case "initialHistory":
-                    inputClass(input);
+                    chooseCharacterClass(input);
                     break;
                 case "playerName":
-                    inputName(input);
+                    confirmPlayerName(input);
                     break;
                 case "questionName":
-                    questionName(input);
+                    handleNameConfirmation(input);
                     break;
                 case "battle":
                     battleInput(input);
@@ -132,28 +133,35 @@ public class Main {
                 case "responder":
                     verifyQuestion(input);
                     break;
+                case "dialogo_ato1_cena2":
+                    processCharacterDialogInput(input);
+                    break;
             }
         }
 
+        void invalidInput(){
+            outputTextArea.append("\nOpção inválida.");
+            autoScroll();
+        }
+
         // Metodo para receber a entrada do usuário no menu
-        public void menuInput(String input){
+        public void handleMainMenuInput(String input){
             switch (input) {
-                case "1", "Instruções", "instruções":
-                    instructions();
+                case "1":
+                    showInstructions();
                     break;
-                case "2", "Jogar", "jogar":
+                case "2":
                     initialHistory();
                     break;
                 default:
-                    textArea.append("Opção inválida.\n");
-                    autoScroll();
+                    invalidInput();
                     break;
             }
         }
 
         // Métodos para exibir instruções
-        void instructions(){
-            textArea.setText(
+        void showInstructions(){
+            outputTextArea.setText(
                     "Seja bem vindo as instruções!\n" +
                             "Aqui você podera entender como funciona todos o sistema do jogo.\n" +
                             "Escolha uma opção:\n" +
@@ -161,29 +169,28 @@ public class Main {
                             "2. Sistema de Batalha\n" +
                             "3. Voltar\n"
             );
-            gameState = "instructions";
+            currentGameState = "instructions";
         }
 
-        void instructionsInput(String input){
+        void handleInstructionsInput(String input){
             switch (input) {
-                case "1", "Sistema Aritmético", "sistema aritmético":
+                case "1":
                     arithmeticSystem();
                     break;
-                case "2", "Sistema de Batalha", "sistema de batalha":
+                case "2":
                     battleSystem();
                     break;
-                case "3", "Voltar", "voltar":
-                    menu();
+                case "3":
+                    showMainMenu();
                     break;
                 default:
-                    textArea.append("Opção inválida.\n");
-                    autoScroll();
+                    invalidInput();
                     break;
             }
         }
 
         void arithmeticSystem(){
-            textArea.setText(
+            outputTextArea.setText(
                     "Sistema Aritmético\n" +
                             "O sistema aritmético é um sistema de cálculos de aritmética binaria, octal e hexadeciamal que você terá que resolver para avançar no jogo.\n\n" +
                             "Como vai funcionar?\n" +
@@ -194,19 +201,19 @@ public class Main {
                             "Opções:\n" +
                             "1. Voltar\n"
             );
-            gameState = "arithmeticSystem";
+            currentGameState = "arithmeticSystem";
         }
 
         void arithmeticSystemInput(String input){
             switch (input) {
-                case "1", "Voltar", "voltar":
-                    instructions();
+                case "1":
+                    showInstructions();
                     break;
             }
         }
 
         void battleSystem(){
-            textArea.setText(
+            outputTextArea.setText(
                     "Sistema de Batalha\n" +
                             "O sistema de batalha é um sistema de combate baseado em turnos, onde você terá que derrotar inimigos para avançar no jogo.\n\n" +
                             "Como vai funcionar?\n" +
@@ -220,13 +227,13 @@ public class Main {
                             "Opções:\n" +
                             "1. Voltar\n"
             );
-            gameState = "battleSystem"; // Definindo o estado como "battleSystem"
+            currentGameState = "battleSystem"; // Definindo o estado como "battleSystem"
         }
 
         void battleSystemInput(String input){
             switch (input) {
-                case "1", "Voltar", "voltar":
-                    instructions();
+                case "1":
+                    showInstructions();
                     break;
             }
         }
@@ -256,8 +263,8 @@ public class Main {
                     "3. Responder\n" +
                     "=======================================================================\n";
 
-            textArea.setText(inputBattle + battleOptions);
-            gameState = "battle";
+            outputTextArea.setText(inputBattle + battleOptions);
+            currentGameState = "battle";
         }
 
         boolean viewTable = true; // Variável para verificar se a tabela já foi mostrada
@@ -273,11 +280,11 @@ public class Main {
                     sum = 0;
                     break;
                 case "3":
-                    gameState = "responder";
-                    textArea.append("\nDigite o número binário: ");
+                    currentGameState = "responder";
+                    outputTextArea.append("\nDigite o número binário: ");
                     break;
                 case "4":
-                    menu();
+                    showMainMenu();
                     break;
             }
         }
@@ -297,20 +304,20 @@ public class Main {
                     "256 - 0001 0000 0000\n" +
                     "512 - 0010 0000 0000\n";
             if (viewTable) {
-                textArea.append(tabela);
+                outputTextArea.append(tabela);
                 autoScroll();
             }
         }
 
         void calcular(){
-            textArea.setText(
+            outputTextArea.setText(
                     "Questão: " + randomQuestionBinary + "\n" +
                             "Insira um dos valores para faze a soma em decimal:\n" +
                             "1, 2, 4, 8, 16, 32, 64, 128, 256, 512\n\n" +
                             "Escolha uma das opções: \n" +
                             "0. Sair\n"
             );
-            gameState = "calcular";
+            currentGameState = "calcular";
         }
 
         int sum = 0;
@@ -328,24 +335,24 @@ public class Main {
                     break;
                 case "1", "2", "4", "8",  "16", "32",  "64", "128", "256", "512":
                     sum += num;
-                    textArea.append("\n" + sum);
+                    outputTextArea.append("\n" + sum);
                     break;
                 default:
-                    textArea.append("\nEsse número não pertence a base binária.");
+                    outputTextArea.append("\nEsse número não pertence a base binária.");
                     autoScroll();
             }
         }
 
-        RpgComponent.Enemy enemy = rpgComponent.new Enemy(100, 10);
+        RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(100, 10);
 
         void lutaAcertou(){
-            enemy.life -= 50;
-            if(enemy.life > 0){
-                textArea.append("\nVocê acertou o inimigo!\n" +
-                        "Vida do inimigo: " + enemy.life);
+            urrentEnemy.life -= 50;
+            if(urrentEnemy.life > 0){
+                outputTextArea.append("\nVocê acertou o inimigo!\n" +
+                        "Vida do inimigo: " + urrentEnemy.life);
                 autoScroll();
             } else {
-                textArea.append(
+                outputTextArea.append(
                         "\nVida do inimigo: 0"
                 );
                 autoScroll();
@@ -355,10 +362,10 @@ public class Main {
         void verifyQuestion(String input){
             if(numBinary.equals(input)){
                 lutaAcertou();
-                if(enemy.life > 0){
+                if(urrentEnemy.life > 0){
                     newBattle();
                 } else {
-                    textArea.append(
+                    outputTextArea.append(
                             "\n====================================" +
                             "\nVocê derrotou o inimigo!"
                     );
@@ -366,8 +373,8 @@ public class Main {
                     secondBattle();
                 }
             } else {
-                textArea.append("\nVocê errou!");
-                textArea.append(numBinary);
+                outputTextArea.append("\nVocê errou!");
+                outputTextArea.append(numBinary);
                 autoScroll();
             }
         }
@@ -376,18 +383,18 @@ public class Main {
         void newBattle() {
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
-            textArea.append("\n\nConverta " + randomQuestionBinary + " para binário:\n" +
+            outputTextArea.append("\n\nConverta " + randomQuestionBinary + " para binário:\n" +
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
                     "2. Calcular\n");
             autoScroll();
             viewTable = true;
-            gameState = "battle";
+            currentGameState = "battle";
         }
 
         // Cria uma nova batalha
         void secondBattle() {
-            enemy.life = 100;
+            urrentEnemy.life = 100;
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
             battle(
@@ -399,7 +406,7 @@ public class Main {
 
         //Inicio Historia
         void initialHistory(){
-            textArea.setText(
+            outputTextArea.setText(
                     "Aenor:\n" +
                     "Finalmente você acordou, Equilibrador. O destino de Etheris depende de você. " +
                             "A Ruptura destruiu o tempo e o espaço, e agora você deve restaurar o equilíbrio." +
@@ -408,7 +415,7 @@ public class Main {
                             "2. Mago: Mestre em manipulação de feitiços.\n" +
                             "3. Guerreiro: Força bruta e resistência física.\n"
             );
-            gameState = "initialHistory";
+            currentGameState = "initialHistory";
         }
 
         // Variaveis para armazenar a classe e o nome do jogador
@@ -416,99 +423,146 @@ public class Main {
         String playerName;
 
         // 1º ATO da historia do jogo
-        void inputClass(String input) {
+        void chooseCharacterClass(String input) {
             switch (input) {
                 case "1":
-                    textArea.append(
+                    outputTextArea.append(
                             "\nNarrador: " +
                             "\nVocê escolheu a linhagem dos Elfos, seres ancestrais conectados ao espírito da natureza. " +
                                     "Sua agilidade e habilidades místicas serão essenciais para enfrentar os desafios à frente. " +
                                     "Somente os Elfos compreendem a verdadeira essência do equilíbrio entre as forças naturais e espirituais de Etheris."
                     );
                     playerClasse = "Elfo";
-                    playerName();
+                    promptForPlayerName();
                     break;
                 case "2":
-                    textArea.append(
+                    outputTextArea.append(
                             "\nNarrador: " +
                             "\nVocê escolheu a linhagem dos Magos, mestres das artes arcanas e guardiões dos segredos da magia." +
                                     " Seu conhecimento e controle sobre os feitiços será a chave para domar as distorções da Ruptura. " +
                                     "Mas lembre-se, com grande poder vem grande responsabilidade."
                     );
                     playerClasse = "Mago";
-                    playerName();
+                    promptForPlayerName();
                     break;
                 case "3":
-                    textArea.append(
+                    outputTextArea.append(
                             "\nNarrador: " +
                                     "\nVocê escolheu a linhagem dos Guerreiros, heróis de força incomparável e destemidos em batalha. " +
                                     "Com sua resistência e coragem, você será capaz de enfrentar até mesmo as criaturas mais temíveis que vagam pelas terras distorcidas de Etheris."
                     );
                     playerClasse = "Guerreiro";
-                    playerName();
+                    promptForPlayerName();
                     break;
                 default:
-                    textArea.append("Opção inválida.\n");
-                    autoScroll();
+                    invalidInput();
                     break;
             }
         }
 
-        void playerName(){
-            textArea.append(
+        void promptForPlayerName(){
+            outputTextArea.append(
                     "\n\nAenor:" +
                     "\nAgora, diga-me, qual é o nome do " + playerClasse + " que restaurará o equilíbrio?" + "\nDigite o seu nome:"
             );
-            gameState = "playerName";
+            currentGameState = "playerName";
         }
 
-        void inputName(String input){
+        void confirmPlayerName(String input){
             playerName = input;
-            textArea.append(
+            outputTextArea.append(
                     "\n\nSeu nome é " + playerName + ", o " + playerClasse + "?" +
                             "\n1. Sim" +
                             "\n2. Não"
             );
-            gameState = "questionName";
+            currentGameState = "questionName";
         }
 
-        void questionName(String input) {
+        void handleNameConfirmation(String input) {
             switch (input) {
                 case "1":
-                    textArea.setText(
+                    outputTextArea.setText(
+                            "Local: Antigo templo em ruínas\n\n" +
                             "Aenor:\n" +
                             "Muito bem, " + playerName + ". A Ruptura pode ter distorcido o tempo e o espaço, mas sua missão é clara. " +
-                                    "Arcadelis, a última cidade sagrada, é onde você encontrará respostas. " +
-                                    "E lá, o Conselho do Véu lhe explicará como reunir os artefatos necessários para salvar Etheris"
+                                    "Localizada no coração de Etheris, Arcadelis é a última cidade sagrada protegida pela magia dos Guardiões do Véu. " +
+                                    "É lá que você encontrará as respostas para a Ruptura e o caminho para a restauração do equilíbrio.\n" +
+                            "Alguma dúvida antes de partirmos?\n"
                     );
-                    dialog();
+                    initiateCharacterDialog();
                     break;
                 case "2":
-                    textArea.setText(
+                    outputTextArea.setText(
                             "Aenor:\n" +
                             "Ah, parece que houve um engano. O nome que carrega é de grande importância para sua jornada, Equilibrador. " +
                                     "Vamos corrigir isso. Qual será o verdadeiro nome pelo qual você será conhecido?" +
                                     "\n\nDigite o seu nome:"
                     );
-                    gameState = "playerName";
+                    currentGameState = "playerName";
                     break;
                 default:
-                    textArea.append("\nOpção inválida.");
-                    autoScroll();
+                    invalidInput();
                     break;
             }
         }
 
-        void dialog(){
-            textArea.append(
-                    "\n\n1. E se o Conselho do Véu não puder me ajudar?\n" +
-                            "2. Quanto tempo temos até que Etheris seja completamente destruída?\n" +
-                            "3. Como saberei que posso confiar neles?\n" +
-                            "4. O que acontecerá se eu falhar?\n" +
-                            "5. Estou pronto. Como chegamos a Arcadelis?\n"
-            );
+        ArrayList<String> question;
+
+        // Diálogo com Aenor (1º Ato, Cena 1)
+        void initiateCharacterDialog(){
+
+            question = new ArrayList<>();
+            question.add("1. Quem é você?");
+            question.add("2. O que é o Conselho do Véu?");
+            question.add("3. O que é a Ruptura?");
+            question.add("4. Me fale sobre Arcadelis.");
+            question.add("5. Estou pronto. Como chegamos a Arcadelis?");
+
+            // Exibi as perguntas
+            for (int i = 0; i < question.size(); i++) {
+                outputTextArea.append("\n" + question.get(i));
+            }
+            outputTextArea.append("\n=======================================================================");
+
+            currentGameState = "dialogo_ato1_cena2";
         }
 
+        void processCharacterDialogInput(String input){
+           switch (input){
+               case "1":
+                   outputTextArea.append(
+                           "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                           "Me diga, quem é você? Como é que alguém como você se envolve com tudo isso?" +
+                           "\n\nAenor:" +
+                           "\nEu sou Aenor, um dos últimos Elfos da Era dos Espíritos, guardião dos segredos antigos e do equilíbrio entre as forças naturais. " +
+                                   "Fui escolhido pelos Guardiões do Véu para orientar você nesta jornada. Meu papel é guiá-lo até os artefatos que podem restaurar Etheris e ajudá-lo a entender o verdadeiro significado da Ruptura. " +
+                                   "Mas, lembre-se, meu conhecimento tem limites, e o verdadeiro caminho a seguir será revelado por suas escolhas.\n"
+                   );
+                    question.remove(0);
+                    for (int i = 0; i < question.size(); i++) {
+                        outputTextArea.append("\n" + question.get(i));
+                    }
+                   outputTextArea.append("\n=======================================================================");
+                    break;
+               case "2":
+                   outputTextArea.append(
+                          "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                   "O que é o Conselho do Véu? Eles realmente podem me ajudar a salvar Etheris?" +
+                              "\n\nAenor:" +
+                           "\nConselho do Véu é composto pelos últimos sábios e sobreviventes das três eras. " +
+                                  "Eles representam os fragmentos do antigo conhecimento de Etheris. " +
+                                  "Seus membros dedicaram suas vidas a estudar a Ruptura, buscando uma forma de restaurar o equilíbrio. " +
+                                  "Eles estão entre os poucos que ainda resistem ao caos, protegidos pela magia de Arcadelis. " +
+                                  "Embora não sejam perfeitos, sua orientação será crucial para sua jornada.\n"
+                   );
+                   question.remove(1);
+                   for (int i = 0; i < question.size(); i++) {
+                       outputTextArea.append("\n" + question.get(i));
+                   }
+                   outputTextArea.append("\n=======================================================================");
+                   break;
+           }
+        }
     }
 }
 

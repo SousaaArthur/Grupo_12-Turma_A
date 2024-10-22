@@ -12,6 +12,24 @@ public class RpgComponent {
         }
     }
 
+    class Player {
+        int life;
+        int attack;
+        Player(int life, int attack){
+            this.life = life;
+            this.attack = attack;
+        }
+    }
+
+    class inventory {
+        int lifePotion;
+        int attackPotion;
+        inventory(int lifePotion, int attackPotion){
+            this.lifePotion = lifePotion;
+            this.attackPotion = attackPotion;
+        }
+    }
+
     int questionBinary() {
         ArrayList<Integer> question = new ArrayList<Integer>(); // Lista de perguntas
         question.add(134); // 1000 0110
