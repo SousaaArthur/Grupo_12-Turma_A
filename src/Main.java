@@ -561,6 +561,39 @@ public class Main {
                    }
                    outputTextArea.append("\n=======================================================================");
                    break;
+               case "3":
+                     outputTextArea.append(
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                      "O que é a Ruptura? Como ela afetou Etheris?" +
+                            "\n\nAenor:" +
+                            "\nA Ruptura é uma distorção no tecido da realidade, um evento cataclísmico que rasgou o equilíbrio de Etheris. " +
+                                      "Ela surgiu de uma fonte desconhecida, desencadeando uma onda de caos e destruição que afetou todas as eras e dimensões. " +
+                                      "Seus efeitos são imprevisíveis e perigosos, distorcendo o tempo, o espaço e a magia de Etheris. " +
+                                      "A Ruptura é a causa de todas as anomalias que você encontrará em sua jornada, e sua missão é restaurar o equilíbrio antes que seja tarde demais.\n"
+                     );
+                     question.remove(2);
+                     for (int i = 0; i < question.size(); i++) {
+                          outputTextArea.append("\n" + question.get(i));
+                     }
+                     outputTextArea.append("\n=======================================================================");
+                     break;
+            case "4":
+                outputTextArea.append(
+                        "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                "Me fale sobre Arcadelis. O que podemos esperar ao chegar lá?" +
+                        "\n\nAenor:" +
+                        "\nArcadelis é a última cidade sagrada de Etheris, protegida pela magia dos Guardiões do Véu. " +
+                                "Ela é um refúgio seguro em meio ao caos da Ruptura, um farol de esperança para os poucos que ainda resistem. " +
+                                "Lá você encontrará os sábios do Conselho do Véu, os artefatos antigos que podem restaurar o equilíbrio e os segredos ocultos da magia de Etheris. " +
+                                "Mas cuidado, Arcadelis também é um lugar de mistérios e perigos, onde cada escolha pode ter consequências imprevisíveis. " +
+                                "Sua jornada até lá será repleta de desafios, mas é o único caminho para salvar Etheris.\n"
+                );
+                question.remove(3);
+                for (int i = 0; i < question.size(); i++) {
+                    outputTextArea.append("\n" + question.get(i));
+                }
+                outputTextArea.append("\n=======================================================================");
+                break;
            }
         }
     }
