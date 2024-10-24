@@ -594,7 +594,21 @@ public class Main {
                 }
                 outputTextArea.append("\n=======================================================================");
                 break;
+                case "5":
+                atoCena2();
+                break;
+                default:
+                invalidInput();
+                break;
+            
            }
+
+        }
+        void atoCena2 (){
+            outputTextArea.setText( 
+                "Aenor:" + 
+                "\n Corajoso como esperado, " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço."
+            );
         }
     }
 }
