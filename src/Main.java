@@ -136,6 +136,9 @@ public class Main {
                 case "dialogo_ato1_cena2":
                     processCharacterDialogInput(input);
                     break;
+                case "ato1_cena2":
+                entradaAto1Cena2(input);
+                break;
             }
         }
 
@@ -607,8 +610,26 @@ public class Main {
         void atoCena2 (){
             outputTextArea.setText( 
                 "Aenor:" + 
-                "\n Corajoso como esperado, " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço."
+                "\n Corajoso como esperado, " + playerName + " o " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço.\n" +
+                playerName + " o " + playerClasse + " a jornada até Arcadelis é perigosa, mas necessária. Você tem dois caminhos diante de si, cada um com seus próprios perigos e recompensas. Ouça com atenção. \n\n" + 
+                " A primeira opção é atravessar a Floresta das Almas Perdidas, onde os espíritos das eras passadas vagam sem descanso. Esse caminho é traiçoeiro e silencioso, mas os espíritos tentarão invadir sua mente, testando sua determinação. Se conseguir passar pela floresta, você poderá encontrar o Santuário dos Espíritos, onde segredos antigos podem ser revelados a você. No entanto, será testado espiritualmente, e aqueles que falham perdem-se para sempre. \n\n" +
+                " Sua segunda opção é enfrentar as Montanhas Quebradas, uma região desolada, corrompida por fissuras temporais. As distorções no tempo tornam este lugar caótico e imprevisível. Criaturas de todas as épocas caçam indiscriminadamente, e você enfrentará inimigos de eras distantes, todos misturados e sem controle. Atravesse essas montanhas, e encontrará a Fortaleza Esquecida, onde as armas e armaduras da Era dos Titãs estão enterradas nas ruínas. Esse caminho testará sua força e coragem, mas as recompensas podem ser imensas.\n\n" +
+                "1. Florestas das Almas Perdidas\n" + "2. Montanhas Quebradas"
             );
+            currentGameState = "ato1_cena2";
+        }
+        void entradaAto1Cena2 (String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                        "O Equilibrador escolheu o caminho da Floresta das Almas Perdidas. À medida que você avança, a temperatura cai, e a névoa começa a envolver tudo ao seu redor. As árvores, com troncos retorcidos e galhos contorcidos, parecem sussurrar em uma língua antiga, suas sombras se movendo de maneira inquietante à medida que você segue adiante. \n\n" + 
+                        "A luz do sol se apaga lentamente, e o mundo parece perder suas cores, ficando cada vez mais cinza e desolado. Não há som de vida, apenas o sussurro dos espíritos que vagam pela floresta. Suas presenças são como sombras de eras passadas, almas que não encontraram descanso desde a Ruptura. Eles observam cada movimento, silenciosamente esperando por aqueles que falham na resistência mental para reivindicar suas mentes e suas almas."
+                    );
+                    break;
+            
+                default:
+                    break;
+            }
         }
     }
 }
