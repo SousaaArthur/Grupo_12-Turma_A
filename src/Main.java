@@ -530,72 +530,95 @@ public class Main {
             currentGameState = "dialogo_ato1_cena2";
         }
 
+        // Arrays com valores booleano para verifica quando uma opção for utilizada
+        boolean[] numQuestion = {true, true, true, true};
+
         void processCharacterDialogInput(String input){
            switch (input){
                case "1":
-                   outputTextArea.append(
-                           "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                           "Me diga, quem é você? Como é que alguém como você se envolve com tudo isso?" +
-                           "\n\nAenor:" +
-                           "\nEu sou Aenor, um dos últimos Elfos da Era dos Espíritos, guardião dos segredos antigos e do equilíbrio entre as forças naturais. " +
-                                   "Fui escolhido pelos Guardiões do Véu para orientar você nesta jornada. Meu papel é guiá-lo até os artefatos que podem restaurar Etheris e ajudá-lo a entender o verdadeiro significado da Ruptura. " +
-                                   "Mas, lembre-se, meu conhecimento tem limites, e o verdadeiro caminho a seguir será revelado por suas escolhas.\n"
-                   );
-                    question.remove(0);
+                   if (numQuestion[0]){
+                       outputTextArea.append(
+                               "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                       "Me diga, quem é você? Como é que alguém como você se envolve com tudo isso?" +
+                                       "\n\nAenor:" +
+                                       "\nEu sou Aenor, um dos últimos Elfos da Era dos Espíritos, guardião dos segredos antigos e do equilíbrio entre as forças naturais. " +
+                                       "Fui escolhido pelos Guardiões do Véu para orientar você nesta jornada. Meu papel é guiá-lo até os artefatos que podem restaurar Etheris e ajudá-lo a entender o verdadeiro significado da Ruptura. " +
+                                       "Mas, lembre-se, meu conhecimento tem limites, e o verdadeiro caminho a seguir será revelado por suas escolhas.\n"
+                       );
+                       question.set(0, "");
+                       for (int i = 0; i < question.size(); i++) {
+                           outputTextArea.append("\n" + question.get(i));
+                       }
+                       outputTextArea.append("\n=======================================================================");
+                       numQuestion[0] = false; // impede que o a opção 1 seja utilizada novamente
+                   } else {
+                       invalidInput();
+                   }
+                    break;
+               case "2":
+                   if (numQuestion[1]){
+                       outputTextArea.append(
+                               "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                       "O que é o Conselho do Véu? Eles realmente podem me ajudar a salvar Etheris?" +
+                                       "\n\nAenor:" +
+                                       "\nConselho do Véu é composto pelos últimos sábios e sobreviventes das três eras. " +
+                                       "Eles representam os fragmentos do antigo conhecimento de Etheris. " +
+                                       "Seus membros dedicaram suas vidas a estudar a Ruptura, buscando uma forma de restaurar o equilíbrio. " +
+                                       "Eles estão entre os poucos que ainda resistem ao caos, protegidos pela magia de Arcadelis. " +
+                                       "Embora não sejam perfeitos, sua orientação será crucial para sua jornada.\n"
+                       );
+                       question.set(1, "");
+                       for (int i = 0; i < question.size(); i++) {
+                           outputTextArea.append("\n" + question.get(i));
+                       }
+                       outputTextArea.append("\n=======================================================================");
+                       numQuestion[1] = false; // impede que o a opção 2 seja utilizada novamente
+                   } else {
+                       invalidInput();
+                   }
+                   break;
+               case "3":
+                     if (numQuestion[2]){
+                         outputTextArea.append(
+                                 "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                         "O que é a Ruptura? Como ela afetou Etheris?" +
+                                         "\n\nAenor:" +
+                                         "\nA Ruptura é uma distorção no tecido da realidade, um evento cataclísmico que rasgou o equilíbrio de Etheris. " +
+                                         "Ela surgiu de uma fonte desconhecida, desencadeando uma onda de caos e destruição que afetou todas as eras e dimensões. " +
+                                         "Seus efeitos são imprevisíveis e perigosos, distorcendo o tempo, o espaço e a magia de Etheris. " +
+                                         "A Ruptura é a causa de todas as anomalias que você encontrará em sua jornada, e sua missão é restaurar o equilíbrio antes que seja tarde demais.\n"
+                         );
+                         question.set(2, "");
+                         for (int i = 0; i < question.size(); i++) {
+                             outputTextArea.append("\n" + question.get(i));
+                         }
+                         outputTextArea.append("\n=======================================================================");
+                         numQuestion[2] = false; // impede que o a opção 3 seja utilizada novamente
+                     } else {
+                         invalidInput();
+                     }
+                     break;
+                case "4":
+                if (numQuestion[3]){
+                    outputTextArea.append(
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                    "Me fale sobre Arcadelis. O que podemos esperar ao chegar lá?" +
+                                    "\n\nAenor:" +
+                                    "\nArcadelis é a última cidade sagrada de Etheris, protegida pela magia dos Guardiões do Véu. " +
+                                    "Ela é um refúgio seguro em meio ao caos da Ruptura, um farol de esperança para os poucos que ainda resistem. " +
+                                    "Lá você encontrará os sábios do Conselho do Véu, os artefatos antigos que podem restaurar o equilíbrio e os segredos ocultos da magia de Etheris. " +
+                                    "Mas cuidado, Arcadelis também é um lugar de mistérios e perigos, onde cada escolha pode ter consequências imprevisíveis. " +
+                                    "Sua jornada até lá será repleta de desafios, mas é o único caminho para salvar Etheris.\n"
+                    );
+                    question.set(3, "");;
                     for (int i = 0; i < question.size(); i++) {
                         outputTextArea.append("\n" + question.get(i));
                     }
-                   outputTextArea.append("\n=======================================================================");
-                    break;
-               case "2":
-                   outputTextArea.append(
-                          "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                   "O que é o Conselho do Véu? Eles realmente podem me ajudar a salvar Etheris?" +
-                              "\n\nAenor:" +
-                           "\nConselho do Véu é composto pelos últimos sábios e sobreviventes das três eras. " +
-                                  "Eles representam os fragmentos do antigo conhecimento de Etheris. " +
-                                  "Seus membros dedicaram suas vidas a estudar a Ruptura, buscando uma forma de restaurar o equilíbrio. " +
-                                  "Eles estão entre os poucos que ainda resistem ao caos, protegidos pela magia de Arcadelis. " +
-                                  "Embora não sejam perfeitos, sua orientação será crucial para sua jornada.\n"
-                   );
-                   question.remove(1);
-                   for (int i = 0; i < question.size(); i++) {
-                       outputTextArea.append("\n" + question.get(i));
-                   }
-                   outputTextArea.append("\n=======================================================================");
-                   break;
-               case "3":
-                     outputTextArea.append(
-                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                      "O que é a Ruptura? Como ela afetou Etheris?" +
-                            "\n\nAenor:" +
-                            "\nA Ruptura é uma distorção no tecido da realidade, um evento cataclísmico que rasgou o equilíbrio de Etheris. " +
-                                      "Ela surgiu de uma fonte desconhecida, desencadeando uma onda de caos e destruição que afetou todas as eras e dimensões. " +
-                                      "Seus efeitos são imprevisíveis e perigosos, distorcendo o tempo, o espaço e a magia de Etheris. " +
-                                      "A Ruptura é a causa de todas as anomalias que você encontrará em sua jornada, e sua missão é restaurar o equilíbrio antes que seja tarde demais.\n"
-                     );
-                     question.remove(2);
-                     for (int i = 0; i < question.size(); i++) {
-                          outputTextArea.append("\n" + question.get(i));
-                     }
-                     outputTextArea.append("\n=======================================================================");
-                     break;
-            case "4":
-                outputTextArea.append(
-                        "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                "Me fale sobre Arcadelis. O que podemos esperar ao chegar lá?" +
-                        "\n\nAenor:" +
-                        "\nArcadelis é a última cidade sagrada de Etheris, protegida pela magia dos Guardiões do Véu. " +
-                                "Ela é um refúgio seguro em meio ao caos da Ruptura, um farol de esperança para os poucos que ainda resistem. " +
-                                "Lá você encontrará os sábios do Conselho do Véu, os artefatos antigos que podem restaurar o equilíbrio e os segredos ocultos da magia de Etheris. " +
-                                "Mas cuidado, Arcadelis também é um lugar de mistérios e perigos, onde cada escolha pode ter consequências imprevisíveis. " +
-                                "Sua jornada até lá será repleta de desafios, mas é o único caminho para salvar Etheris.\n"
-                );
-                question.remove(3);
-                for (int i = 0; i < question.size(); i++) {
-                    outputTextArea.append("\n" + question.get(i));
+                    outputTextArea.append("\n=======================================================================");
+                    numQuestion[3] = false; // impede que o a opção 4 seja utilizada novamente
+                } else {
+                    invalidInput();
                 }
-                outputTextArea.append("\n=======================================================================");
                 break;
                 case "5":
                 atoCena2();
@@ -603,17 +626,16 @@ public class Main {
                 default:
                 invalidInput();
                 break;
-            
            }
-
         }
+
         void atoCena2 (){
             outputTextArea.setText( 
                 "Aenor:" + 
-                "\n Corajoso como esperado, " + playerName + " o " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço.\n" +
-                playerName + " o " + playerClasse + " a jornada até Arcadelis é perigosa, mas necessária. Você tem dois caminhos diante de si, cada um com seus próprios perigos e recompensas. Ouça com atenção. \n\n" + 
-                " A primeira opção é atravessar a Floresta das Almas Perdidas, onde os espíritos das eras passadas vagam sem descanso. Esse caminho é traiçoeiro e silencioso, mas os espíritos tentarão invadir sua mente, testando sua determinação. Se conseguir passar pela floresta, você poderá encontrar o Santuário dos Espíritos, onde segredos antigos podem ser revelados a você. No entanto, será testado espiritualmente, e aqueles que falham perdem-se para sempre. \n\n" +
-                " Sua segunda opção é enfrentar as Montanhas Quebradas, uma região desolada, corrompida por fissuras temporais. As distorções no tempo tornam este lugar caótico e imprevisível. Criaturas de todas as épocas caçam indiscriminadamente, e você enfrentará inimigos de eras distantes, todos misturados e sem controle. Atravesse essas montanhas, e encontrará a Fortaleza Esquecida, onde as armas e armaduras da Era dos Titãs estão enterradas nas ruínas. Esse caminho testará sua força e coragem, mas as recompensas podem ser imensas.\n\n" +
+                "\nCorajoso como esperado, " + playerName + " o " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço.\n" +
+                playerName + " o " + playerClasse + " a jornada até Arcadelis é perigosa, mas necessária. Você tem dois caminhos diante de si, cada um com seus próprios perigos e recompensas. Ouça com atenção. \n\n" +
+                "A primeira opção é atravessar a Floresta das Almas Perdidas, onde os espíritos das eras passadas vagam sem descanso. Esse caminho é traiçoeiro e silencioso, mas os espíritos tentarão invadir sua mente, testando sua determinação. Se conseguir passar pela floresta, você poderá encontrar o Santuário dos Espíritos, onde segredos antigos podem ser revelados a você. No entanto, será testado espiritualmente, e aqueles que falham perdem-se para sempre. \n\n" +
+                "Sua segunda opção é enfrentar as Montanhas Quebradas, uma região desolada, corrompida por fissuras temporais. As distorções no tempo tornam este lugar caótico e imprevisível. Criaturas de todas as épocas caçam indiscriminadamente, e você enfrentará inimigos de eras distantes, todos misturados e sem controle. Atravesse essas montanhas, e encontrará a Fortaleza Esquecida, onde as armas e armaduras da Era dos Titãs estão enterradas nas ruínas. Esse caminho testará sua força e coragem, mas as recompensas podem ser imensas.\n\n" +
                 "1. Florestas das Almas Perdidas\n" + "2. Montanhas Quebradas"
             );
             currentGameState = "ato1_cena2";
@@ -626,7 +648,6 @@ public class Main {
                         "A luz do sol se apaga lentamente, e o mundo parece perder suas cores, ficando cada vez mais cinza e desolado. Não há som de vida, apenas o sussurro dos espíritos que vagam pela floresta. Suas presenças são como sombras de eras passadas, almas que não encontraram descanso desde a Ruptura. Eles observam cada movimento, silenciosamente esperando por aqueles que falham na resistência mental para reivindicar suas mentes e suas almas."
                     );
                     break;
-            
                 default:
                     break;
             }
