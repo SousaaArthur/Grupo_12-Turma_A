@@ -139,6 +139,10 @@ public class Main {
                 case "ato1_cena2":
                 entradaAto1Cena2(input);
                 break;
+                case "ato1_cena3":
+                entradaAto1Cena3(input);
+                break;
+                
             }
         }
 
@@ -621,7 +625,7 @@ public class Main {
                 }
                 break;
                 case "5":
-                atoCena2();
+                ato1_Cena2();
                 break;
                 default:
                 invalidInput();
@@ -629,7 +633,7 @@ public class Main {
            }
         }
 
-        void atoCena2 (){
+        void ato1_Cena2 (){
             outputTextArea.setText( 
                 "Aenor:" + 
                 "\nCorajoso como esperado, " + playerName + " o " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço.\n" +
@@ -645,13 +649,35 @@ public class Main {
                 case "1":
                     outputTextArea.setText(
                         "O Equilibrador escolheu o caminho da Floresta das Almas Perdidas. À medida que você avança, a temperatura cai, e a névoa começa a envolver tudo ao seu redor. As árvores, com troncos retorcidos e galhos contorcidos, parecem sussurrar em uma língua antiga, suas sombras se movendo de maneira inquietante à medida que você segue adiante. \n\n" + 
-                        "A luz do sol se apaga lentamente, e o mundo parece perder suas cores, ficando cada vez mais cinza e desolado. Não há som de vida, apenas o sussurro dos espíritos que vagam pela floresta. Suas presenças são como sombras de eras passadas, almas que não encontraram descanso desde a Ruptura. Eles observam cada movimento, silenciosamente esperando por aqueles que falham na resistência mental para reivindicar suas mentes e suas almas."
+                        "A luz do sol se apaga lentamente, e o mundo parece perder suas cores, ficando cada vez mais cinza e desolado. Não há som de vida, apenas o sussurro dos espíritos que vagam pela floresta. Suas presenças são como sombras de eras passadas, almas que não encontraram descanso desde a Ruptura. Eles observam cada movimento, silenciosamente esperando por aqueles que falham na resistência mental para reivindicar suas mentes e suas almas.\n\n" +
+                        "1. Continuar" 
                     );
-                    break;
+                    currentGameState = "ato1_cena3";
+                break;
                 default:
+                invalidInput();
                     break;
+
             }
         }
+        void entradaAto1Cena3( String input){
+        switch (input)    {
+            case "1":
+            ato1_Cena3();
+            break;
+            default:
+            invalidInput();
+        }
+        }
+        void ato1_Cena3(){
+            outputTextArea.setText(
+                "Narrador: \nCaminhando mais fundo na Floresta das Almas Perdidas, você sente uma presença intensa. O ar fica denso e uma estranha sensação de frio envolve seu corpo. Das sombras retorcidas de uma árvore, uma figura se destaca: um espírito guerreiro, conhecido como o Guardião Espectral de Selendis. \n\n" +
+                "Descrição do Inimigo: \nO Guardião Espectral é uma figura encapuzada, com um manto esfarrapado que parece feito de névoa. Ele carrega uma lâmina longa, desgastada e corroída, mas com um brilho sinistro nas bordas. Seus olhos são dois pontos de luz espectral, frios e vazios, como se sua alma tivesse sido drenada há séculos. Suas mãos são garras translúcidas, e ele flutua levemente acima do chão, deixando um rastro de névoa. Sua voz ecoa como um murmúrio antigo, repetindo palavras desconexas em uma língua esquecida.\n\n" +
+                "O Guardião Espectral: \nNinguém passa… ninguém escapa… aquele que busca Arcadelis, prove sua coragem ou junte-se às almas errantes desta floresta.\n\n" +
+                "1. Lutar\n" + "2. Fugir\n"
+            );
+        }
+
     }
 }
 
