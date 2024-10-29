@@ -1,8 +1,13 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.ArrayList; // Importa a classe ArrayList
+import java.util.Collections; // Importa a classe Collections
+import javax.sound.sampled.*; // Importa as classes necessárias para tocar música
+import java.io.File; // Importa a classe File
+import java.io.IOException; // Importa a classe IOException
+
 
 public class RpgComponent {
 
+    // Classe para criar um inimigo
     class Enemy {
         int life;
         int attack;
@@ -12,6 +17,7 @@ public class RpgComponent {
         }
     }
 
+    // Classe para criar um jogador
     class Player {
         int life;
         int attack;
@@ -21,6 +27,7 @@ public class RpgComponent {
         }
     }
 
+    // Classe para criar um inventário
     class inventory {
         int lifePotion;
         int attackPotion;
@@ -30,6 +37,7 @@ public class RpgComponent {
         }
     }
 
+    // Metodo parar gera uma pergunta de matemática
     int questionBinary() {
         ArrayList<Integer> question = new ArrayList<Integer>(); // Lista de perguntas
         question.add(134); // 1000 0110
@@ -50,6 +58,36 @@ public class RpgComponent {
 
         Collections.shuffle(question); // Embaralha as perguntas
         return question.get(0); // Retorna uma pergunta aleatória
+    }
+
+    // Metodo para tocar música
+    public class MusicPlayer {
+        private Clip clip;
+
+        public MusicPlayer(String filePath) {
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+                clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+            } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Metodo para tocar a música em loop
+        public void play() {
+            if (clip != null) {
+                clip.loop(Clip.LOOP_CONTINUOUSLY); // Loop infinito
+                clip.start();
+            }
+        }
+
+        // Metodo para parar a música
+        public void stop() {
+            if (clip != null && clip.isRunning()) {
+                clip.stop();
+            }
+        }
     }
 }
 

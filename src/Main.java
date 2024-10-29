@@ -1,6 +1,7 @@
 import javax.swing.*; // Importa todas as classes do pacote javax.swing
 import java.awt.*; // Importa todas as classes do pacote java.awt
 import java.awt.event.KeyEvent; // Importa a classe KeyEvent do pacote java.awt.event
+import java.net.URL;
 import java.util.ArrayList; // Importa a classe ArrayList do pacote java.util
 
 public class Main {
@@ -11,8 +12,10 @@ public class Main {
     public static class GameWindow extends JFrame {
         JTextField inputTextField;
         JTextArea outputTextArea;
-
         String currentGameState;
+        RpgComponent.MusicPlayer musicPlayer;
+
+        RpgComponent rpgComponent = new RpgComponent();
 
         // Metodo para inicializar a tela do RPG
         public GameWindow(){
@@ -79,6 +82,14 @@ public class Main {
                 handleUserInput(mainInput);
             });
 
+            // Instanciando RpgComponent e MusicPlayer
+            RpgComponent rpgComponent = new RpgComponent(); // Instanciando o RpgComponent
+            URL url = getClass().getResource("/Sounds/music01.wav"); // URL do arquivo de música
+            musicPlayer = rpgComponent.new MusicPlayer(url.getPath()); // Instanciando o musicPlayer
+
+            // Inicia a música
+            musicPlayer.play();
+
             repaint(); // Redesenha a tela
             revalidate(); // Revalida a tela
         }
@@ -140,9 +151,13 @@ public class Main {
                 entradaAto1Cena2(input);
                 break;
                 case "ato1_cena3":
-                entradaAto1Cena3(input);
+                    entradaAto1Cena3(input);
                 break;
-                
+                case "option2Ato1Cena4":
+                    option2Ato1Cena4(input);
+                break;
+                case "option2Ato1Cena5":
+                    confirmToEscape(input);
             }
         }
 
@@ -158,7 +173,19 @@ public class Main {
                     showInstructions();
                     break;
                 case "2":
-                    initialHistory();
+                    option2Ato1Cena4(input);
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/music02.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
                     break;
                 default:
                     invalidInput();
@@ -189,9 +216,6 @@ public class Main {
                     break;
                 case "3":
                     showMainMenu();
-                    break;
-                default:
-                    invalidInput();
                     break;
             }
         }
@@ -246,7 +270,6 @@ public class Main {
         }
         // Fim dos métodos para exibir instruções
 
-        RpgComponent rpgComponent = new RpgComponent();
         int questionBattleBinary = rpgComponent.questionBinary();
         int randomQuestionBinary = questionBattleBinary;
         String numBinary = Integer.toBinaryString(randomQuestionBinary);
@@ -644,6 +667,7 @@ public class Main {
             );
             currentGameState = "ato1_cena2";
         }
+
         void entradaAto1Cena2 (String input){
             switch (input) {
                 case "1":
@@ -655,20 +679,21 @@ public class Main {
                     currentGameState = "ato1_cena3";
                 break;
                 default:
-                invalidInput();
+                    invalidInput();
                     break;
-
             }
         }
+
         void entradaAto1Cena3( String input){
-        switch (input)    {
-            case "1":
-            ato1_Cena3();
-            break;
-            default:
-            invalidInput();
+            switch (input)    {
+                case "1":
+                ato1_Cena3();
+                break;
+                default:
+                invalidInput();
+            }
         }
-        }
+
         void ato1_Cena3(){
             outputTextArea.setText(
                 "Narrador: \nCaminhando mais fundo na Floresta das Almas Perdidas, você sente uma presença intensa. O ar fica denso e uma estranha sensação de frio envolve seu corpo. Das sombras retorcidas de uma árvore, uma figura se destaca: um espírito guerreiro, conhecido como o Guardião Espectral de Selendis. \n\n" +
@@ -676,8 +701,61 @@ public class Main {
                 "O Guardião Espectral: \nNinguém passa… ninguém escapa… aquele que busca Arcadelis, prove sua coragem ou junte-se às almas errantes desta floresta.\n\n" +
                 "1. Lutar\n" + "2. Fugir\n"
             );
+            currentGameState = "option2Ato1Cena4";
         }
 
+        void option2Ato1Cena4(String input){
+            currentGameState = "option2Ato1Cena5";
+            switch (input){
+                case "2":
+                    outputTextArea.setText(
+                            "Narrador:" +
+                                    "Sentindo o peso da presença do Guardião Espectral, você decide que lutar contra essa alma inquieta é um risco que talvez não possa se dar ao luxo de correr agora. " +
+                                    "No entanto, escapar da Floresta das Almas Perdidas exige mais do que simplesmente correr. " +
+                                    "As almas errantes clamam por energia vital, e o próprio tecido da realidade ao seu redor começa a se desintegrar, como se a floresta tentasse segurá-lo no seu domínio.\n\n" +
+                                    "Os sussurros dos espíritos se intensificam, e o Guardião Espectral o observa, intrigado pela sua hesitação. Ele se move, bloqueando o caminho enquanto murmura:\n\n" +
+                                    "Guardião Espectral:\n" +
+                                    "Fugir... é recusar o fardo. Mas ninguém escapa deste lugar sem ser marcado pela escuridão.\n\n" +
+                                    "Para escapar de sua vigilância, uma última barreira espiritual surge, com números antigos que se distorcem diante dos seus olhos. " +
+                                    "Um enigma temporal se revela — uma sequência decimal que só pode ser superada se você encontrar sua essência binária, liberando-se da corrente espiritual que tenta prendê-lo aqui.\n\n" +
+                                    "1. Resolver o enigma\n" + "2. Lutar contra o Guardião Espectral\n"
+                    );
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void confirmToEscape(String input){
+            currentGameState = "option2Ato1Cena6";
+            switch (input){
+                case "1":
+                    outputTextArea.append(
+                            "\nTem certeza que deseja fugir? Se vocẽ fugir agora você não aumentarar suas forças e vidas e continara sendo um " + playerClasse + " fraco." +
+                            "Mas poupara sua vida e poderar enfretar inimigo mais fortes no futuro e se redimir pela sua vergonhar.\n" +
+                            "1. Sim\n" + "2. Não"
+                    );
+                    autoScroll();
+                    break;
+                case "2":
+                    outputTextArea.append("\nContinuando a jornada...");
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void escapeAto1Cena6(String input){
+            outputTextArea.setText(
+                    "Desafio de fuga:\n" +
+                            "Converta o número " + questionBattleBinary + " para binário e insira o resultado corretamente. Caso erre, a presença do Guardião Espectral o impedirá de fugir, e você terá que enfrentá-lo.\n" +
+                            "1. Mostrar tabela de conversão\n" +
+                            "2. Ajuda\n" +
+                            "3. Responder\n"
+            );
+        }
     }
 }
 
