@@ -82,6 +82,9 @@ public class Main {
                 handleUserInput(mainInput);
             });
 
+            repaint(); // Redesenha a tela
+            revalidate(); // Revalida a tela
+            
             // Instanciando RpgComponent e MusicPlayer
             RpgComponent rpgComponent = new RpgComponent(); // Instanciando o RpgComponent
             URL url = getClass().getResource("/Sounds/music01.wav"); // URL do arquivo de música
@@ -89,9 +92,6 @@ public class Main {
 
             // Inicia a música
             musicPlayer.play();
-
-            repaint(); // Redesenha a tela
-            revalidate(); // Revalida a tela
         }
 
         void autoScroll() {
@@ -158,6 +158,13 @@ public class Main {
                 break;
                 case "option2Ato1Cena5":
                     confirmToEscape(input);
+                    break;
+                case "option2Ato1Cena6":
+                    inputEscapeAto1Cena6(input);
+                    break;
+                case "responderQuestao01":
+                    verifyQuestionEscape(input);
+                    break;
             }
         }
 
@@ -173,7 +180,7 @@ public class Main {
                     showInstructions();
                     break;
                 case "2":
-                    option2Ato1Cena4(input);
+                    initialHistory();
                     if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
                         musicPlayer.stop();
                     }
@@ -561,70 +568,70 @@ public class Main {
         boolean[] numQuestion = {true, true, true, true};
 
         void processCharacterDialogInput(String input){
-           switch (input){
-               case "1":
-                   if (numQuestion[0]){
-                       outputTextArea.append(
-                               "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                       "Me diga, quem é você? Como é que alguém como você se envolve com tudo isso?" +
-                                       "\n\nAenor:" +
-                                       "\nEu sou Aenor, um dos últimos Elfos da Era dos Espíritos, guardião dos segredos antigos e do equilíbrio entre as forças naturais. " +
-                                       "Fui escolhido pelos Guardiões do Véu para orientar você nesta jornada. Meu papel é guiá-lo até os artefatos que podem restaurar Etheris e ajudá-lo a entender o verdadeiro significado da Ruptura. " +
-                                       "Mas, lembre-se, meu conhecimento tem limites, e o verdadeiro caminho a seguir será revelado por suas escolhas.\n"
-                       );
-                       question.set(0, "");
-                       for (int i = 0; i < question.size(); i++) {
-                           outputTextArea.append("\n" + question.get(i));
-                       }
-                       outputTextArea.append("\n=======================================================================");
+        switch (input){
+            case "1":
+                if (numQuestion[0]){
+                    outputTextArea.append(
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                    "Me diga, quem é você? Como é que alguém como você se envolve com tudo isso?" +
+                                    "\n\nAenor:" +
+                                    "\nEu sou Aenor, um dos últimos Elfos da Era dos Espíritos, guardião dos segredos antigos e do equilíbrio entre as forças naturais. " +
+                                    "Fui escolhido pelos Guardiões do Véu para orientar você nesta jornada. Meu papel é guiá-lo até os artefatos que podem restaurar Etheris e ajudá-lo a entender o verdadeiro significado da Ruptura. " +
+                                    "Mas, lembre-se, meu conhecimento tem limites, e o verdadeiro caminho a seguir será revelado por suas escolhas.\n"
+                    );
+                    question.set(0, "");
+                    for (int i = 0; i < question.size(); i++) {
+                        outputTextArea.append("\n" + question.get(i));
+                    }
+                    outputTextArea.append("\n=======================================================================");
                        numQuestion[0] = false; // impede que o a opção 1 seja utilizada novamente
-                   } else {
-                       invalidInput();
-                   }
+                } else {
+                    invalidInput();
+                }
                     break;
-               case "2":
-                   if (numQuestion[1]){
-                       outputTextArea.append(
-                               "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                       "O que é o Conselho do Véu? Eles realmente podem me ajudar a salvar Etheris?" +
-                                       "\n\nAenor:" +
-                                       "\nConselho do Véu é composto pelos últimos sábios e sobreviventes das três eras. " +
-                                       "Eles representam os fragmentos do antigo conhecimento de Etheris. " +
-                                       "Seus membros dedicaram suas vidas a estudar a Ruptura, buscando uma forma de restaurar o equilíbrio. " +
-                                       "Eles estão entre os poucos que ainda resistem ao caos, protegidos pela magia de Arcadelis. " +
-                                       "Embora não sejam perfeitos, sua orientação será crucial para sua jornada.\n"
-                       );
-                       question.set(1, "");
-                       for (int i = 0; i < question.size(); i++) {
-                           outputTextArea.append("\n" + question.get(i));
-                       }
-                       outputTextArea.append("\n=======================================================================");
-                       numQuestion[1] = false; // impede que o a opção 2 seja utilizada novamente
-                   } else {
-                       invalidInput();
-                   }
-                   break;
-               case "3":
-                     if (numQuestion[2]){
-                         outputTextArea.append(
-                                 "\n\n" + playerName + " o " + playerClasse + ":\n" +
-                                         "O que é a Ruptura? Como ela afetou Etheris?" +
-                                         "\n\nAenor:" +
-                                         "\nA Ruptura é uma distorção no tecido da realidade, um evento cataclísmico que rasgou o equilíbrio de Etheris. " +
-                                         "Ela surgiu de uma fonte desconhecida, desencadeando uma onda de caos e destruição que afetou todas as eras e dimensões. " +
-                                         "Seus efeitos são imprevisíveis e perigosos, distorcendo o tempo, o espaço e a magia de Etheris. " +
-                                         "A Ruptura é a causa de todas as anomalias que você encontrará em sua jornada, e sua missão é restaurar o equilíbrio antes que seja tarde demais.\n"
-                         );
-                         question.set(2, "");
-                         for (int i = 0; i < question.size(); i++) {
-                             outputTextArea.append("\n" + question.get(i));
-                         }
-                         outputTextArea.append("\n=======================================================================");
+            case "2":
+                if (numQuestion[1]){
+                    outputTextArea.append(
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                    "O que é o Conselho do Véu? Eles realmente podem me ajudar a salvar Etheris?" +
+                                    "\n\nAenor:" +
+                                    "\nConselho do Véu é composto pelos últimos sábios e sobreviventes das três eras. " +
+                                    "Eles representam os fragmentos do antigo conhecimento de Etheris. " +
+                                    "Seus membros dedicaram suas vidas a estudar a Ruptura, buscando uma forma de restaurar o equilíbrio. " +
+                                    "Eles estão entre os poucos que ainda resistem ao caos, protegidos pela magia de Arcadelis. " +
+                                    "Embora não sejam perfeitos, sua orientação será crucial para sua jornada.\n"
+                    );
+                    question.set(1, "");
+                    for (int i = 0; i < question.size(); i++) {
+                            outputTextArea.append("\n" + question.get(i));
+                    }
+                    outputTextArea.append("\n=======================================================================");
+                    numQuestion[1] = false; // impede que o a opção 2 seja utilizada novamente
+                } else {
+                    invalidInput();
+                }
+                break;
+            case "3":
+                    if (numQuestion[2]){
+                        outputTextArea.append(
+                                "\n\n" + playerName + " o " + playerClasse + ":\n" +
+                                        "O que é a Ruptura? Como ela afetou Etheris?" +
+                                        "\n\nAenor:" +
+                                        "\nA Ruptura é uma distorção no tecido da realidade, um evento cataclísmico que rasgou o equilíbrio de Etheris. " +
+                                        "Ela surgiu de uma fonte desconhecida, desencadeando uma onda de caos e destruição que afetou todas as eras e dimensões. " +
+                                        "Seus efeitos são imprevisíveis e perigosos, distorcendo o tempo, o espaço e a magia de Etheris. " +
+                                        "A Ruptura é a causa de todas as anomalias que você encontrará em sua jornada, e sua missão é restaurar o equilíbrio antes que seja tarde demais.\n"
+                        );
+                        question.set(2, "");
+                        for (int i = 0; i < question.size(); i++) {
+                            outputTextArea.append("\n" + question.get(i));
+                        }
+                        outputTextArea.append("\n=======================================================================");
                          numQuestion[2] = false; // impede que o a opção 3 seja utilizada novamente
-                     } else {
-                         invalidInput();
-                     }
-                     break;
+                    } else {
+                        invalidInput();
+                    }
+                    break;
                 case "4":
                 if (numQuestion[3]){
                     outputTextArea.append(
@@ -653,7 +660,7 @@ public class Main {
                 default:
                 invalidInput();
                 break;
-           }
+            }
         }
 
         void ato1_Cena2 (){
@@ -705,11 +712,10 @@ public class Main {
         }
 
         void option2Ato1Cena4(String input){
-            currentGameState = "option2Ato1Cena5";
             switch (input){
                 case "2":
                     outputTextArea.setText(
-                            "Narrador:" +
+                            "Narrador:\n" +
                                     "Sentindo o peso da presença do Guardião Espectral, você decide que lutar contra essa alma inquieta é um risco que talvez não possa se dar ao luxo de correr agora. " +
                                     "No entanto, escapar da Floresta das Almas Perdidas exige mais do que simplesmente correr. " +
                                     "As almas errantes clamam por energia vital, e o próprio tecido da realidade ao seu redor começa a se desintegrar, como se a floresta tentasse segurá-lo no seu domínio.\n\n" +
@@ -718,22 +724,22 @@ public class Main {
                                     "Fugir... é recusar o fardo. Mas ninguém escapa deste lugar sem ser marcado pela escuridão.\n\n" +
                                     "Para escapar de sua vigilância, uma última barreira espiritual surge, com números antigos que se distorcem diante dos seus olhos. " +
                                     "Um enigma temporal se revela — uma sequência decimal que só pode ser superada se você encontrar sua essência binária, liberando-se da corrente espiritual que tenta prendê-lo aqui.\n\n" +
-                                    "1. Resolver o enigma\n" + "2. Lutar contra o Guardião Espectral\n"
+                                    "1. Resolver o enigma e fugir\n" + "2. Ficar e lutar contra o Guardião Espectral\n"
                     );
                     break;
                 default:
                     invalidInput();
                     break;
             }
+            currentGameState = "option2Ato1Cena5";
         }
 
         void confirmToEscape(String input){
-            currentGameState = "option2Ato1Cena6";
             switch (input){
                 case "1":
                     outputTextArea.append(
-                            "\nTem certeza que deseja fugir? Se vocẽ fugir agora você não aumentarar suas forças e vidas e continara sendo um " + playerClasse + " fraco." +
-                            "Mas poupara sua vida e poderar enfretar inimigo mais fortes no futuro e se redimir pela sua vergonhar.\n" +
+                            "\nTem certeza que deseja fugir? Se vocẽ fugir agora você não aumentarar suas forças e vidas e continara sendo um " + playerClasse + " fraco. " +
+                            "Mas poupara sua vida e poderar enfretar inimigos mais fortes no futuro e se redimir pela sua vergonhar.\n" +
                             "1. Sim\n" + "2. Não"
                     );
                     autoScroll();
@@ -745,19 +751,60 @@ public class Main {
                     invalidInput();
                     break;
             }
+            currentGameState = "option2Ato1Cena6";
         }
 
         void escapeAto1Cena6(String input){
             outputTextArea.setText(
                     "Desafio de fuga:\n" +
-                            "Converta o número " + questionBattleBinary + " para binário e insira o resultado corretamente. Caso erre, a presença do Guardião Espectral o impedirá de fugir, e você terá que enfrentá-lo.\n" +
+                            "Converta o número " + questionBattleBinary + " para binário e insira o resultado corretamente. Caso erre, a presença do Guardião Espectral o impedirá de fugir, e você terá que enfrentá-lo.\n\n" +
                             "1. Mostrar tabela de conversão\n" +
-                            "2. Ajuda\n" +
-                            "3. Responder\n"
+                            "2. Responder\n" +
+                            "3. Ajuda\n"
             );
+            currentGameState = "escapeAto1Cena6";
+        }
+
+        void inputEscapeAto1Cena6(String input){
+            switch (input) {
+                case "1":
+                    tabelaBinario();
+                    break;
+                case "2":
+                    outputTextArea.append("\nDigite o número binário: ");
+                    currentGameState = "responderQuestao01";
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        void verifyQuestionEscape(String input){
+            if(numBinary.equals(input)){
+                outputTextArea.append("\nVocê conseguiu fugir do Guardião Espectral!");
+                autoScroll();
+            } else {
+                outputTextArea.append("\nVocê errou!");
+                outputTextArea.append(numBinary);
+                autoScroll();
+            }
         }
     }
 }
 
-
+/*
+ *         void verifyQuestion(String input){
+            if(numBinary.equals(input)){
+                lutaAcertou();
+                if(urrentEnemy.life > 0){
+                    newBattle();
+                } else {
+                    outputTextArea.append(
+                            "\n====================================" +
+                            "\nVocê derrotou o inimigo!"
+                    );
+                    autoScroll();
+                    secondBattle();
+                }
+ */
 
