@@ -87,7 +87,7 @@ public class Main {
             
             // Instanciando RpgComponent e MusicPlayer
             RpgComponent rpgComponent = new RpgComponent(); // Instanciando o RpgComponent
-            URL url = getClass().getResource("/Sounds/music01.wav"); // URL do arquivo de música
+            URL url = getClass().getResource("/Sounds/musicMenu.wav"); // URL do arquivo de música
             musicPlayer = rpgComponent.new MusicPlayer(url.getPath()); // Instanciando o musicPlayer
 
             // Inicia a música
@@ -156,14 +156,20 @@ public class Main {
                 case "option2Ato1Cena4":
                     option2Ato1Cena4(input);
                 break;
-                case "option2Ato1Cena5":
+                case "opcaoFugir2Ato1Cena5":
                     confirmToEscape(input);
                     break;
                 case "option2Ato1Cena6":
+                    escapeAto1Cena6(input);
+                    break;
+                case "inputEscapeAto1Cena6":
                     inputEscapeAto1Cena6(input);
                     break;
-                case "responderQuestao01":
+                case "questionEscape01":
                     verifyQuestionEscape(input);
+                    break;
+                case "opcaoLutarAto1Cena5":
+                    batalharGuardiaoEspectral();
                     break;
             }
         }
@@ -185,7 +191,7 @@ public class Main {
                         musicPlayer.stop();
                     }
 
-                    URL url = getClass().getResource("/Sounds/music02.wav");
+                    URL url = getClass().getResource("/Sounds/musicBegin.wav");
 
                     if (url != null) { // Verifica se a URL não é nula
                         musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
@@ -285,13 +291,13 @@ public class Main {
             battle(
                     "Enquanto você procurava por um dos artefatos, você se depara com um inimigo.\n" +
                             "Você está preparado para a batalha?\n" +
-                            "Resolva o desafio para acerta-lo.\n\n"
+                            "Resolva o desafio para acerta-lo.\n\n", "battle"
             );
         }
 
         // Metodo para iniciar a batalha
-        void battle(String input){
-            String inputBattle = input;
+        void battle(String texto, String status){
+            String inputBattle = texto;
             String battleOptions =
                     "Converta " + randomQuestionBinary + " para binairo:\n" +
                     "Opções:\n" +
@@ -301,7 +307,7 @@ public class Main {
                     "=======================================================================\n";
 
             outputTextArea.setText(inputBattle + battleOptions);
-            currentGameState = "battle";
+            currentGameState = status;
         }
 
         boolean viewTable = true; // Variável para verificar se a tabela já foi mostrada
@@ -367,7 +373,6 @@ public class Main {
                     sum = 0;
                     break;
                 case "0":
-                    battle("Retornando batalha...");
                     viewTable = true;
                     break;
                 case "1", "2", "4", "8",  "16", "32",  "64", "128", "256", "512":
@@ -437,7 +442,7 @@ public class Main {
             battle(
                     "Enquanto você anda pela masmorra, você se depara com um inimigo.\n" +
                             "Você está preparado para a batalha?\n" +
-                            "Resolva o desafio para acerta-lo.\n\n"
+                            "Resolva o desafio para acerta-lo.\n\n", "battle"
             );
         }
 
@@ -662,7 +667,9 @@ public class Main {
                 break;
             }
         }
+        // Fim do diálogo com Aenor
 
+        // Escolha do caminho (1º Ato, Cena 2)
         void ato1_Cena2 (){
             outputTextArea.setText( 
                 "Aenor:" + 
@@ -675,6 +682,7 @@ public class Main {
             currentGameState = "ato1_cena2";
         }
 
+        //  Floresta das Almas Perdidas
         void entradaAto1Cena2 (String input){
             switch (input) {
                 case "1":
@@ -695,6 +703,18 @@ public class Main {
             switch (input)    {
                 case "1":
                 ato1_Cena3();
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
                 break;
                 default:
                 invalidInput();
@@ -711,8 +731,24 @@ public class Main {
             currentGameState = "option2Ato1Cena4";
         }
 
+        // Ação de fugir
         void option2Ato1Cena4(String input){
             switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador:\n" +
+                                    "Com determinação, você encara o Guardião Espectral. " +
+                                    "As sombras em volta dele parecem se agitar, como se a própria floresta o tivesse escolhido para defender suas profundezas. " +
+                                    "Seus olhos vazios brilham com um tom pálido e ameaçador, e sua figura espectral flutua levemente sobre o solo, emoldurada pela névoa fria e densa da Floresta das Almas Perdidas.\n" +
+                                    "O Guardião Espectral ergue sua mão esquelética e uma lâmina etérea se materializa em sua garra, pulsando com uma energia misteriosa e antiga. Sua voz ecoa, reverberando com a força de mil almas perdidas:\n" +
+                                    "\nGuardião Espectral:\n" +
+                                    "Corajoso, mas imprudente, Equilibrador. Somente aqueles que enfrentam a morte com valor merecem cruzar para além desta floresta. Mostre-me a força da sua alma!\n\n" +
+                                    "Narrador:\n " +
+                                    "O ar ao seu redor fica mais pesado, e o frio penetra até os ossos, testando sua resistência. A névoa, que antes o ocultava, agora parece puxá-lo para a batalha. A floresta observa, silenciosa, e os sussurros das almas perdidas intensificam-se, como se aguardassem para ver quem triunfará.\n\n" +
+                                    "1. Luatar contra o Guardião Espectral\n"
+                    );
+                    currentGameState = "opcaoLutarAto1Cena5";
+                    break;
                 case "2":
                     outputTextArea.setText(
                             "Narrador:\n" +
@@ -726,12 +762,25 @@ public class Main {
                                     "Um enigma temporal se revela — uma sequência decimal que só pode ser superada se você encontrar sua essência binária, liberando-se da corrente espiritual que tenta prendê-lo aqui.\n\n" +
                                     "1. Resolver o enigma e fugir\n" + "2. Ficar e lutar contra o Guardião Espectral\n"
                     );
+                    currentGameState = "opcaoFugir2Ato1Cena5";
                     break;
                 default:
                     invalidInput();
                     break;
             }
-            currentGameState = "option2Ato1Cena5";
+        }
+
+        // Ação de lutar
+        void batalharGuardiaoEspectral() {
+            urrentEnemy.life = 100;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                    "O combate com o Guardião Espectral começa! Use suas habilidades e estratégias com sabedoria para sobreviver à sua lâmina etérea e superar sua defesa de sombras. " +
+                            "A cada golpe desferido, a essência espectral do Guardião se desvanece um pouco mais, mas cuidado — ele também possui ataques que drenam sua energia vital.\n\n" +
+                    "Resolva o desafio para acertá-lo.\n\n", "batalhar02"
+            );
         }
 
         void confirmToEscape(String input){
@@ -754,6 +803,7 @@ public class Main {
             currentGameState = "option2Ato1Cena6";
         }
 
+        // Enigma pra fugir
         void escapeAto1Cena6(String input){
             outputTextArea.setText(
                     "Desafio de fuga:\n" +
@@ -762,7 +812,7 @@ public class Main {
                             "2. Responder\n" +
                             "3. Ajuda\n"
             );
-            currentGameState = "escapeAto1Cena6";
+            currentGameState = "inputEscapeAto1Cena6";
         }
 
         void inputEscapeAto1Cena6(String input){
@@ -772,14 +822,16 @@ public class Main {
                     break;
                 case "2":
                     outputTextArea.append("\nDigite o número binário: ");
-                    currentGameState = "responderQuestao01";
+                    currentGameState = "questionEscape01";
                     break;
                 default:
                     break;
             }
         }
 
+        // Verifica se o jogador acertou o enigma
         void verifyQuestionEscape(String input){
+            outputTextArea.append("\nVocê digitou: " + input);
             if(numBinary.equals(input)){
                 outputTextArea.append("\nVocê conseguiu fugir do Guardião Espectral!");
                 autoScroll();
@@ -789,22 +841,10 @@ public class Main {
                 autoScroll();
             }
         }
+
+        // Ação de lutar
+        void option1Ato1Cena4(String input){
+
+        }
     }
 }
-
-/*
- *         void verifyQuestion(String input){
-            if(numBinary.equals(input)){
-                lutaAcertou();
-                if(urrentEnemy.life > 0){
-                    newBattle();
-                } else {
-                    outputTextArea.append(
-                            "\n====================================" +
-                            "\nVocê derrotou o inimigo!"
-                    );
-                    autoScroll();
-                    secondBattle();
-                }
- */
-
