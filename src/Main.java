@@ -136,19 +136,19 @@ public class Main {
                     handleNameConfirmation(input);
                     break;
                 case "battle":
-                    battleInput(input);
-                    break;
-                case "calcular":
-                    calcularInput(input);
+                    battleInput(input,"responder");
                     break;
                 case "responder":
-                    verifyQuestion(input);
+                    verifyQuestion(input, "battle", "secondBattle", "Você derrotou o inimigo!");
+                    break;
+                case "secondBattle":
+                    secondBattle();
                     break;
                 case "dialogo_ato1_cena2":
                     processCharacterDialogInput(input);
                     break;
                 case "ato1_cena2":
-                entradaAto1Cena2(input);
+                    entradaAto1Cena2(input);
                 break;
                 case "ato1_cena3":
                     entradaAto1Cena3(input);
@@ -170,6 +170,17 @@ public class Main {
                     break;
                 case "opcaoLutarAto1Cena5":
                     batalharGuardiaoEspectral();
+                    break;
+                case "batalharGuardiãoEspectral":
+                    battleInput(input, "verificaRespostaAto1Cena5");
+                    break;
+                case "verificaRespostaAto1Cena5":
+                    verifyQuestion(input, "batalharGuardiãoEspectral", "entradaProximaCena",
+                            "Ao derrotar o Guardião Espectral, a névoa ao seu redor começa a dissipar-se, e a escuridão da floresta dá lugar a um brilho pálido e sereno. " +
+                                    "Uma força nova e vigorosa flui em você, fortalecendo seu corpo e espírito. Você agora sente que está mais preparado para o que a jornada até Arcadelis exigirá.");
+                    break;
+                case "entradaProximaCena":
+                    inputAto1Cena6(input);
                     break;
             }
         }
@@ -302,8 +313,8 @@ public class Main {
                     "Converta " + randomQuestionBinary + " para binairo:\n" +
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
-                    "2. Calcular\n" +
-                    "3. Responder\n" +
+                    "2. Responder\n" +
+                            "3. Calcular\n" +
                     "=======================================================================\n";
 
             outputTextArea.setText(inputBattle + battleOptions);
@@ -312,22 +323,18 @@ public class Main {
 
         boolean viewTable = true; // Variável para verificar se a tabela já foi mostrada
 
-        void battleInput(String input) {
+        void battleInput(String input, String gameState) {
             switch (input) {
                 case "1":
                     tabelaBinario();
                     viewTable = false;
                     break;
                 case "2":
-                    calcular();
-                    sum = 0;
-                    break;
-                case "3":
-                    currentGameState = "responder";
+                    currentGameState = gameState;
                     outputTextArea.append("\nDigite o número binário: ");
                     break;
-                case "4":
-                    showMainMenu();
+                case "3":
+                    // Opção de ajuda
                     break;
             }
         }
@@ -352,39 +359,6 @@ public class Main {
             }
         }
 
-        void calcular(){
-            outputTextArea.setText(
-                    "Questão: " + randomQuestionBinary + "\n" +
-                            "Insira um dos valores para faze a soma em decimal:\n" +
-                            "1, 2, 4, 8, 16, 32, 64, 128, 256, 512\n\n" +
-                            "Escolha uma das opções: \n" +
-                            "0. Sair\n"
-            );
-            currentGameState = "calcular";
-        }
-
-        int sum = 0;
-        void calcularInput(String input){
-            int num = Integer.parseInt(input);
-
-            switch (input){
-                case "-1":
-                    calcular();
-                    sum = 0;
-                    break;
-                case "0":
-                    viewTable = true;
-                    break;
-                case "1", "2", "4", "8",  "16", "32",  "64", "128", "256", "512":
-                    sum += num;
-                    outputTextArea.append("\n" + sum);
-                    break;
-                default:
-                    outputTextArea.append("\nEsse número não pertence a base binária.");
-                    autoScroll();
-            }
-        }
-
         RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(100, 10);
 
         void lutaAcertou(){
@@ -401,18 +375,18 @@ public class Main {
             }
         }
 
-        void verifyQuestion(String input){
+        void verifyQuestion(String input, String returnBattle, String gameState, String text){
             if(numBinary.equals(input)){
                 lutaAcertou();
                 if(urrentEnemy.life > 0){
-                    newBattle();
+                    newBattle(returnBattle);
                 } else {
                     outputTextArea.append(
-                            "\n====================================" +
-                            "\nVocê derrotou o inimigo!"
+                            "\n====================================\n" +
+                            text + "\n1. Continuar"
                     );
                     autoScroll();
-                    secondBattle();
+                    currentGameState = gameState;
                 }
             } else {
                 outputTextArea.append("\nVocê errou!");
@@ -422,16 +396,18 @@ public class Main {
         }
 
         // imprimi uma nova batalha
-        void newBattle() {
+        void newBattle(String returnBattle) {
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
             outputTextArea.append("\n\nConverta " + randomQuestionBinary + " para binário:\n" +
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
-                    "2. Calcular\n");
+                    "2. Responder\n" +
+                    "3. Ajuda\n"
+            );
             autoScroll();
             viewTable = true;
-            currentGameState = "battle";
+            currentGameState = returnBattle;
         }
 
         // Cria uma nova batalha
@@ -779,8 +755,19 @@ public class Main {
                     "Desafio:\n" +
                     "O combate com o Guardião Espectral começa! Use suas habilidades e estratégias com sabedoria para sobreviver à sua lâmina etérea e superar sua defesa de sombras. " +
                             "A cada golpe desferido, a essência espectral do Guardião se desvanece um pouco mais, mas cuidado — ele também possui ataques que drenam sua energia vital.\n\n" +
-                    "Resolva o desafio para acertá-lo.\n\n", "batalhar02"
+                    "Resolva o desafio para acertá-lo.\n\n", "batalharGuardiãoEspectral"
             );
+        }
+
+        void inputAto1Cena6(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.append("Indo para proxima cena");
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
         }
 
         void confirmToEscape(String input){
@@ -836,15 +823,17 @@ public class Main {
                 outputTextArea.append("\nVocê conseguiu fugir do Guardião Espectral!");
                 autoScroll();
             } else {
-                outputTextArea.append("\nVocê errou!");
-                outputTextArea.append(numBinary);
+                outputTextArea.append(
+                                "\nNarrador:\n" +
+                                "Você tenta fugir, mas algo dá errado ao resolver o enigma. " +
+                                "Sua mente corre, mas a resposta escapa pelos dedos, e, no último segundo, um silêncio pesado preenche o ar. O Guardião Espectral, sem piedade, avança sobre você antes que possa escapar\n\n" +
+                                "Agora, não há outra opção: sua única escolha é lutar para sobreviver e provar sua coragem diante dos espíritos da floresta.\n" +
+                                "1. Continuar"
+                );
+                currentGameState = "opcaoLutarAto1Cena5";
                 autoScroll();
             }
         }
 
-        // Ação de lutar
-        void option1Ato1Cena4(String input){
-
-        }
     }
 }
