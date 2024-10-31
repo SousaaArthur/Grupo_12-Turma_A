@@ -182,6 +182,7 @@ public class Main {
                 case "entradaProximaCena":
                     inputAto1Cena6(input);
                     break;
+                    
             }
         }
 
@@ -721,7 +722,7 @@ public class Main {
                                     "Corajoso, mas imprudente, Equilibrador. Somente aqueles que enfrentam a morte com valor merecem cruzar para além desta floresta. Mostre-me a força da sua alma!\n\n" +
                                     "Narrador:\n " +
                                     "O ar ao seu redor fica mais pesado, e o frio penetra até os ossos, testando sua resistência. A névoa, que antes o ocultava, agora parece puxá-lo para a batalha. A floresta observa, silenciosa, e os sussurros das almas perdidas intensificam-se, como se aguardassem para ver quem triunfará.\n\n" +
-                                    "1. Luatar contra o Guardião Espectral\n"
+                                    "1. Lutar contra o Guardião Espectral\n"
                     );
                     currentGameState = "opcaoLutarAto1Cena5";
                     break;
@@ -762,7 +763,7 @@ public class Main {
         void inputAto1Cena6(String input){
             switch (input){
                 case "1":
-                    outputTextArea.append("Indo para proxima cena");
+                    ato1Cena7();
                     break;
                 default:
                     invalidInput();
@@ -834,6 +835,35 @@ public class Main {
                 autoScroll();
             }
         }
-
+        
+        void ato1Cena7(){
+            outputTextArea.setText(
+                "Narrador:\n" +
+                "Após a intensa batalha, ou a astúcia de escapar, você segue pela trilha nebulosa da Floresta das Almas Perdidas. O caminho à frente continua envolto em uma penumbra inquietante, onde as sombras das árvores retorcidas parecem observá-lo com olhos invisíveis. O sussurro dos espíritos diminui, como se até eles tivessem sido acalmados — ou advertidos — pela sua passagem.\n\n" +
+                "A bruma que antes ocultava tudo ao redor começa a clarear aos poucos, revelando uma luz distante, fraca, mas constante, indicando que o final da floresta talvez esteja próximo. Em cada passo, o peso das eras perdidas parece diminuir, enquanto o silêncio, antes opressivo, se transforma em uma quietude mais serena.\n\n" +
+                "Com a saída quase ao alcance, você sente que seu caminho até Arcadelis não está longe. Mas, em um lugar como este, qualquer alívio pode ser passageiro.\n\n" +
+                "1. Continuar"
+            );
+        }
+        void entradaAto1Cena7(String input){
+            switch (input) {
+                case "1":
+                    
+                    break;
+                default:
+                invalidInput();
+                    break;
+            }
+        }
+        void ato1Cena8(){
+            outputTextArea.setText(
+                "Narrador:\n" +
+                "Das sombras mais densas da floresta, emerge uma figura sinistra. Seu corpo é uma mistura de ossos e vapor etéreo, formando uma silhueta disforme e espectral. Ele se arrasta silenciosamente, como se estivesse flutuando, seus braços estendendo-se em garras retorcidas que parecem capazes de atravessar o próprio véu da realidade. Sua cabeça, envolta em rachaduras pulsantes com uma luz azul-gélida, transmite um frio penetrante e inumano\n\n" +
+                "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
+                "1. Lutar\n" + "2. Fugir\n"
+            
+            );
+        }
     }
+
 }
