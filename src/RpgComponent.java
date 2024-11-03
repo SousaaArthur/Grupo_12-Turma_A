@@ -18,10 +18,11 @@ public class RpgComponent {
     }
 
     // Classe para criar um jogador
-    class Player {
+    public class Player {
         int life;
         int attack;
-        Player(int life, int attack){
+
+        public Player(int life, int attack) {
             this.life = life;
             this.attack = attack;
         }
@@ -86,6 +87,22 @@ public class RpgComponent {
         public void stop() {
             if (clip != null && clip.isRunning()) {
                 clip.stop();
+            }
+        }
+
+        public static void playOnce(String filePath){
+            try {
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
+                Clip singleClip = AudioSystem.getClip();
+                singleClip.open(audioInputStream);
+                singleClip.start();
+                singleClip.addLineListener(event -> {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        singleClip.close();
+                    }
+                });
+            }  catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+                e.printStackTrace();
             }
         }
     }

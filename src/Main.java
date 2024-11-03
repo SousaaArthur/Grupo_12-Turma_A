@@ -182,7 +182,9 @@ public class Main {
                 case "entradaProximaCena":
                     inputAto1Cena6(input);
                     break;
-                    
+                case "ato1Cena8":
+                    entradaAto1Cena7(input);
+                    break;
             }
         }
 
@@ -193,12 +195,26 @@ public class Main {
 
         // Metodo para receber a entrada do usuário no menu
         public void handleMainMenuInput(String input){
+            URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
             switch (input) {
                 case "1":
                     showInstructions();
+
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
                     break;
                 case "2":
                     initialHistory();
+
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
+
                     if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
                         musicPlayer.stop();
                     }
@@ -232,15 +248,31 @@ public class Main {
         }
 
         void handleInstructionsInput(String input){
+            URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
             switch (input) {
                 case "1":
                     arithmeticSystem();
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
                     break;
                 case "2":
                     battleSystem();
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
                     break;
                 case "3":
                     showMainMenu();
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
                     break;
             }
         }
@@ -264,6 +296,12 @@ public class Main {
             switch (input) {
                 case "1":
                     showInstructions();
+                    URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
                     break;
             }
         }
@@ -290,6 +328,15 @@ public class Main {
             switch (input) {
                 case "1":
                     showInstructions();
+                    URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
+                    break;
+                default:
+                    invalidInput();
                     break;
             }
         }
@@ -364,6 +411,12 @@ public class Main {
 
         void lutaAcertou(){
             urrentEnemy.life -= 50;
+            URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
+            if (hitSound != null) {
+                rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
+            } else {
+                System.out.println("Efeito sonoro não encontrado!");
+            }
             if(urrentEnemy.life > 0){
                 outputTextArea.append("\nVocê acertou o inimigo!\n" +
                         "Vida do inimigo: " + urrentEnemy.life);
@@ -382,6 +435,28 @@ public class Main {
                 if(urrentEnemy.life > 0){
                     newBattle(returnBattle);
                 } else {
+                    // Efeito sonoro de vitória
+                    URL hitSound = getClass().getResource("/Sounds/SoundsEffect/winBattle.wav");
+                    if (hitSound != null) {
+                        rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
+
+                    // Musica depois da batalha
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBegin.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+
                     outputTextArea.append(
                             "\n====================================\n" +
                             text + "\n1. Continuar"
@@ -440,6 +515,11 @@ public class Main {
         // Variaveis para armazenar a classe e o nome do jogador
         String playerClasse;
         String playerName;
+        int playerLife = 0;
+        int playerAttack = 0;
+
+        // Instanciando a classe Player
+        RpgComponent.Player jogador = rpgComponent.new Player(playerLife, playerAttack);
 
         // 1º ATO da historia do jogo
         void chooseCharacterClass(String input) {
@@ -452,6 +532,8 @@ public class Main {
                                     "Somente os Elfos compreendem a verdadeira essência do equilíbrio entre as forças naturais e espirituais de Etheris."
                     );
                     playerClasse = "Elfo";
+                    playerLife = 25;
+                    playerAttack = 10;
                     promptForPlayerName();
                     break;
                 case "2":
@@ -462,6 +544,8 @@ public class Main {
                                     "Mas lembre-se, com grande poder vem grande responsabilidade."
                     );
                     playerClasse = "Mago";
+                    playerLife = 30;
+                    playerAttack = 15;
                     promptForPlayerName();
                     break;
                 case "3":
@@ -471,6 +555,8 @@ public class Main {
                                     "Com sua resistência e coragem, você será capaz de enfrentar até mesmo as criaturas mais temíveis que vagam pelas terras distorcidas de Etheris."
                     );
                     playerClasse = "Guerreiro";
+                    playerLife = 20;
+                    playerAttack = 20;
                     promptForPlayerName();
                     break;
                 default:
@@ -764,6 +850,18 @@ public class Main {
             switch (input){
                 case "1":
                     ato1Cena7();
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBegin.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
                     break;
                 default:
                     invalidInput();
@@ -844,11 +942,12 @@ public class Main {
                 "Com a saída quase ao alcance, você sente que seu caminho até Arcadelis não está longe. Mas, em um lugar como este, qualquer alívio pode ser passageiro.\n\n" +
                 "1. Continuar"
             );
+            currentGameState = "ato1Cena8";
         }
         void entradaAto1Cena7(String input){
             switch (input) {
                 case "1":
-                    
+                    ato1Cena8();
                     break;
                 default:
                 invalidInput();
@@ -861,7 +960,6 @@ public class Main {
                 "Das sombras mais densas da floresta, emerge uma figura sinistra. Seu corpo é uma mistura de ossos e vapor etéreo, formando uma silhueta disforme e espectral. Ele se arrasta silenciosamente, como se estivesse flutuando, seus braços estendendo-se em garras retorcidas que parecem capazes de atravessar o próprio véu da realidade. Sua cabeça, envolta em rachaduras pulsantes com uma luz azul-gélida, transmite um frio penetrante e inumano\n\n" +
                 "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
                 "1. Lutar\n" + "2. Fugir\n"
-            
             );
         }
     }
