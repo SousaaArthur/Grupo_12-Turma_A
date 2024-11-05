@@ -126,6 +126,9 @@ public class Main {
                 case "battleSystem":
                     battleSystemInput(input);
                     break;
+                case "restartGame":
+                    restartGame(input);
+                    break;
                 case "initialHistory":
                     chooseCharacterClass(input);
                     break;
@@ -211,8 +214,6 @@ public class Main {
 
                     if (soundSelect != null) {
                         rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
-                    } else {
-                        System.out.println("Efeito sonoro não encontrado!");
                     }
 
                     if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
@@ -407,25 +408,71 @@ public class Main {
             }
         }
 
-        RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(100, 10);
+        int enemyLife = 20;
+        int enemyAttack = 10;
+        RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(enemyLife, enemyAttack);
 
         void lutaAcertou(){
-            urrentEnemy.life -= 50;
+            enemyLife -= playerAttack;
             URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
             if (hitSound != null) {
                 rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
-            } else {
-                System.out.println("Efeito sonoro não encontrado!");
             }
+
             if(urrentEnemy.life > 0){
                 outputTextArea.append("\nVocê acertou o inimigo!\n" +
-                        "Vida do inimigo: " + urrentEnemy.life);
+                        "Vida do inimigo: " + enemyLife);
                 autoScroll();
             } else {
                 outputTextArea.append(
                         "\nVida do inimigo: 0"
                 );
                 autoScroll();
+            }
+        }
+
+        void lutaErrou(){
+            playerLife -= enemyAttack;
+            URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
+            if (hitSound != null) {
+                rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
+            }
+
+            if (playerLife > 0){
+                outputTextArea.append(
+                        "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
+                                "Dano recebido: " + enemyAttack + "\n" +
+                                "Sua vida: " + playerLife
+                );
+                autoScroll();
+            } else {
+                outputTextArea.append(
+                        "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
+                                "Dano recebido: " + enemyAttack + "\n" +
+                                "Sua vida: 0\n" +
+                                "\nInfelizmente você foi derrotado pelo inimigo. Sua jornada acaba aqui." +
+                                "\n1. Reiniciar\n"
+                );
+                currentGameState = "restartGame";
+                autoScroll();
+            }
+        }
+
+        void restartGame(String input){
+            if (input.equals("1")) {
+                showMainMenu();
+                if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                    musicPlayer.stop();
+                }
+
+                URL url = getClass().getResource("/Sounds/musicMenu.wav");
+
+                if (url != null) { // Verifica se a URL não é nula
+                    musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                    musicPlayer.play();
+                }
+            } else {
+                invalidInput();
             }
         }
 
@@ -439,8 +486,6 @@ public class Main {
                     URL hitSound = getClass().getResource("/Sounds/SoundsEffect/winBattle.wav");
                     if (hitSound != null) {
                         rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
-                    } else {
-                        System.out.println("Efeito sonoro não encontrado!");
                     }
 
                     // Musica depois da batalha
@@ -453,8 +498,6 @@ public class Main {
                     if (url != null) { // Verifica se a URL não é nula
                         musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
                         musicPlayer.play();
-                    } else {
-                        System.out.println("Arquivo de música não encontrado!");
                     }
 
                     outputTextArea.append(
@@ -465,8 +508,12 @@ public class Main {
                     currentGameState = gameState;
                 }
             } else {
-                outputTextArea.append("\nVocê errou!");
-                outputTextArea.append(numBinary);
+                lutaErrou();
+                if(playerLife > 0){
+                    newBattle(returnBattle);
+                }
+                // outputTextArea.append(numBinary);
+
                 autoScroll();
             }
         }
@@ -954,6 +1001,7 @@ public class Main {
                     break;
             }
         }
+
         void ato1Cena8(){
             outputTextArea.setText(
                 "Narrador:\n" +
@@ -961,6 +1009,17 @@ public class Main {
                 "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
                 "1. Lutar\n" + "2. Fugir\n"
             );
+            currentGameState = "batalharVultoLamentacoes";
+        }
+
+        void entradaAto1Cena8(String input){
+            switch (input) {
+                case "1":
+                    //batalharVultoLamentacoes();
+                default:
+                invalidInput();
+                    break;
+            }
         }
     }
 
