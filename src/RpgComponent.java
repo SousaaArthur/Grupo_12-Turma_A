@@ -48,7 +48,7 @@ public class RpgComponent {
         question.add(56);  // 0011 1000
         question.add(128); // 1000 0000
         question.add(250); // 1111 1010
-        question.add(512); // 1000 0000 0000
+        question.add(512); // 0010 0000 0000
         question.add(256); // 0001 0000 0000
         question.add(321); // 0001 0100 0001
         question.add(76);  // 0100 1100

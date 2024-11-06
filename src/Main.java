@@ -188,6 +188,9 @@ public class Main {
                 case "ato1Cena8":
                     entradaAto1Cena7(input);
                     break;
+                case "opcaoLutarAto1Cena8":
+                    entradaAto1Cena8(input);
+                    break;
             }
         }
 
@@ -347,14 +350,6 @@ public class Main {
         int randomQuestionBinary = questionBattleBinary;
         String numBinary = Integer.toBinaryString(randomQuestionBinary);
 
-        void initialBattle(){
-            battle(
-                    "Enquanto você procurava por um dos artefatos, você se depara com um inimigo.\n" +
-                            "Você está preparado para a batalha?\n" +
-                            "Resolva o desafio para acerta-lo.\n\n", "battle"
-            );
-        }
-
         // Metodo para iniciar a batalha
         void battle(String texto, String status){
             String inputBattle = texto;
@@ -408,31 +403,55 @@ public class Main {
             }
         }
 
-        int enemyLife = 20;
-        int enemyAttack = 10;
-        RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(enemyLife, enemyAttack);
+
+
+        RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(0, 0);
 
         void lutaAcertou(){
-            enemyLife -= playerAttack;
+            urrentEnemy.life -= playerAttack;
+
             URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
             if (hitSound != null) {
                 rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
             }
 
             if(urrentEnemy.life > 0){
-                outputTextArea.append("\nVocê acertou o inimigo!\n" +
-                        "Vida do inimigo: " + enemyLife);
+                textoDeAcerto(playerClasse);
                 autoScroll();
             } else {
                 outputTextArea.append(
-                        "\nVida do inimigo: 0"
+                        "Danos causados: " + playerAttack + "\n" +
+                                "Vida do inimigo: 0"
                 );
                 autoScroll();
             }
         }
 
+        void textoDeAcerto(String input){
+            switch (input){
+                case "Elfo":
+                    outputTextArea.append(
+                            "Com sua força e agilidade, você acerta o inimigo com seu poderoso arco e flecha, causando " + playerAttack + " de dano.\n" +
+                                    "Vida do inimigo: " + urrentEnemy.life
+                    );
+                    break;
+                case "Mago":
+                    outputTextArea.append(
+                            "Você conjura um feitiço arcano e lança uma bola de fogo contra o inimigo, causando " + playerAttack + " de dano.\n" +
+                                    "Vida do inimigo: " + urrentEnemy.life
+                    );
+                    break;
+                case "Guerreiro":
+                    outputTextArea.append(
+                            "Com sua força bruta, você desfere um golpe poderoso com sua espada contra o inimigo, causando " + playerAttack + " de dano.\n" +
+                                    "Vida do inimigo: " + urrentEnemy.life
+                    );
+                    break;
+            }
+        }
+
         void lutaErrou(){
-            playerLife -= enemyAttack;
+            playerLife -= urrentEnemy.attack;
             URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
             if (hitSound != null) {
                 rpgComponent.new MusicPlayer(hitSound.getPath()).playOnce(hitSound.getPath());
@@ -441,14 +460,14 @@ public class Main {
             if (playerLife > 0){
                 outputTextArea.append(
                         "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
-                                "Dano recebido: " + enemyAttack + "\n" +
+                                "Dano recebido: " + urrentEnemy.attack + "\n" +
                                 "Sua vida: " + playerLife
                 );
                 autoScroll();
             } else {
                 outputTextArea.append(
                         "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
-                                "Dano recebido: " + enemyAttack + "\n" +
+                                "Dano recebido: " + urrentEnemy.attack + "\n" +
                                 "Sua vida: 0\n" +
                                 "\nInfelizmente você foi derrotado pelo inimigo. Sua jornada acaba aqui." +
                                 "\n1. Reiniciar\n"
@@ -564,6 +583,7 @@ public class Main {
         String playerName;
         int playerLife = 0;
         int playerAttack = 0;
+        int playerLevel = 0;
 
         // Instanciando a classe Player
         RpgComponent.Player jogador = rpgComponent.new Player(playerLife, playerAttack);
@@ -581,6 +601,7 @@ public class Main {
                     playerClasse = "Elfo";
                     playerLife = 25;
                     playerAttack = 10;
+                    playerLevel = 2;
                     promptForPlayerName();
                     break;
                 case "2":
@@ -593,6 +614,7 @@ public class Main {
                     playerClasse = "Mago";
                     playerLife = 30;
                     playerAttack = 15;
+                    playerLevel = 3;
                     promptForPlayerName();
                     break;
                 case "3":
@@ -604,6 +626,7 @@ public class Main {
                     playerClasse = "Guerreiro";
                     playerLife = 20;
                     playerAttack = 20;
+                    playerLevel = 2;
                     promptForPlayerName();
                     break;
                 default:
@@ -882,14 +905,21 @@ public class Main {
 
         // Ação de lutar
         void batalharGuardiaoEspectral() {
-            urrentEnemy.life = 100;
+            urrentEnemy.life = 20;
+            urrentEnemy.attack = 10;
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
             battle(
                     "Desafio:\n" +
                     "O combate com o Guardião Espectral começa! Use suas habilidades e estratégias com sabedoria para sobreviver à sua lâmina etérea e superar sua defesa de sombras. " +
                             "A cada golpe desferido, a essência espectral do Guardião se desvanece um pouco mais, mas cuidado — ele também possui ataques que drenam sua energia vital.\n\n" +
-                    "Resolva o desafio para acertá-lo.\n\n", "batalharGuardiãoEspectral"
+                    "Resolva o desafio para acertá-lo.\n\n" +
+                            "Guardião Espetral: Level [2]\n" +
+                            "Vida: " + urrentEnemy.life +
+                    "\nAtaque: " + urrentEnemy.attack +
+                    "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                    "Sua vida: " + playerLife +
+                    "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
             );
         }
 
@@ -906,8 +936,6 @@ public class Main {
                     if (url != null) { // Verifica se a URL não é nula
                         musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
                         musicPlayer.play();
-                    } else {
-                        System.out.println("Arquivo de música não encontrado!");
                     }
                     break;
                 default:
@@ -1004,22 +1032,54 @@ public class Main {
 
         void ato1Cena8(){
             outputTextArea.setText(
-                "Narrador:\n" +
+                "\nNarrador:\n" +
                 "Das sombras mais densas da floresta, emerge uma figura sinistra. Seu corpo é uma mistura de ossos e vapor etéreo, formando uma silhueta disforme e espectral. Ele se arrasta silenciosamente, como se estivesse flutuando, seus braços estendendo-se em garras retorcidas que parecem capazes de atravessar o próprio véu da realidade. Sua cabeça, envolta em rachaduras pulsantes com uma luz azul-gélida, transmite um frio penetrante e inumano\n\n" +
                 "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
                 "1. Lutar\n" + "2. Fugir\n"
             );
-            currentGameState = "batalharVultoLamentacoes";
+            currentGameState = "opcaoLutarAto1Cena8";
         }
 
         void entradaAto1Cena8(String input){
             switch (input) {
                 case "1":
-                    //batalharVultoLamentacoes();
+                    outputTextArea.setText(
+                            "Narrador:\n" +
+                                    "Com bravura, você encara o Vulto das Lamentações. A figura à sua frente é sombria, envolta em mantos esvoaçantes que parecem feitos da própria neblina da Floresta das Almas Perdidas. Suas mãos ossudas flutuam ao redor do corpo, e um manto de escuridão emana dele, como se carregasse o luto de eras esquecidas. " +
+                                    "Os olhos do Vulto, vazios e profundos, brilham com um leve tom azul acinzentado, refletindo a dor das almas que ele arrasta consigo.\n\n" +
+                                    "O Vulto das Lamentações ergue seus braços finos, e, com um gesto lento, forma uma foice feita de sombras e lamentos, pulsando com uma energia misteriosa e inquietante. " +
+                                    "Sua voz surge num sussurro arrepiado, como uma sinfonia de gritos abafados e saudades eternas:\n\n" +
+                                    "Vulto das Lamentações:\n" +
+                                    "Aquele que busca a paz neste mundo perdido deve provar que entende a dor e o sacrifício. Equilibrador, sinta o peso das eras e prove que é digno de carregar a esperança de Etheris!\n\n" +
+                                    "Narrador:\n" +
+                                    "O ar ao seu redor se enche de melancolia, e a temperatura cai ainda mais, fazendo seu corpo estremecer. A névoa, que parecia protegê-lo, agora se fecha ao seu redor, tornando o ambiente claustrofóbico. " +
+                                    "Ao longe, as sombras das almas perdidas se agitam, observando em silêncio como testemunhas do combate, ansiosas por ver qual lado prevalecerá.\n\n" +
+                                    "1. Lutar contra o Vulto das Lamentações\n"
+                    );
                 default:
                 invalidInput();
                     break;
             }
+        }
+
+        void batalharVultoLamentacoes() {
+            urrentEnemy.life = 25;
+            urrentEnemy.attack = 5;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                           "\n" +
+                            "O combate com o Vulto das Lamentações começa! Use suas habilidades e estratégias com cautela para enfrentar sua presença opressiva e esquivar dos golpes fantasmagóricos que ele desferirá.\n" +
+                            "Cada ataque bem-sucedido enfraquece um pouco mais as sombras densas que o envolvem, mas cuidado — ele possui um poder que drena sua vitalidade, alimentando-se do medo e das hesitações de seus oponentes.\n" +
+                            "Resolva o desafio para acertá-lo.\n\n" +
+                            "Guardião Espetral: Level [2]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
+            );
         }
     }
 
