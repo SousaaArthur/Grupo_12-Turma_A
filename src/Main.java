@@ -138,15 +138,6 @@ public class Main {
                 case "questionName":
                     handleNameConfirmation(input);
                     break;
-                case "battle":
-                    battleInput(input,"responder");
-                    break;
-                case "responder":
-                    verifyQuestion(input, "battle", "secondBattle", "Você derrotou o inimigo!");
-                    break;
-                case "secondBattle":
-                    secondBattle();
-                    break;
                 case "dialogo_ato1_cena2":
                     processCharacterDialogInput(input);
                     break;
@@ -163,13 +154,20 @@ public class Main {
                     confirmToEscape(input);
                     break;
                 case "option2Ato1Cena6":
-                    escapeAto1Cena6(input);
+                    escapeEnemy("inputEscapeAto1Cena6");
                     break;
                 case "inputEscapeAto1Cena6":
-                    inputEscapeAto1Cena6(input);
+                    inputEscapeEnemy(input, "questionEscape01");
                     break;
                 case "questionEscape01":
-                    verifyQuestionEscape(input);
+                    verifyQuestionEscape(input,
+                            "Narrador:\n" +
+                                    "Com um esforço final, você resolve o enigma e escapa da Floresta das Almas Perdidas. " +
+                                    "A névoa se dissipa, e a escuridão ao seu redor se desfaz, revelando um caminho claro à sua frente. " +
+                                    "O Guardião Espectral, frustrado por sua fuga, desaparece nas sombras, mas sua presença assombrosa permanece, lembrando-o de que a floresta não esquece aqueles que a desafiam.\n\n" +
+                                    "Agora, você está livre para continuar sua jornada até Arcadelis, mas a lembrança da Floresta das Almas Perdidas permanecerá com você, testemunha silenciosa de sua coragem e determinação.\n" +
+                                    "1. Continuar", "entradaProximaCena", "opcaoLutarAto1Cena5"
+                            );
                     break;
                 case "opcaoLutarAto1Cena5":
                     batalharGuardiaoEspectral();
@@ -190,6 +188,21 @@ public class Main {
                     break;
                 case "opcaoLutarAto1Cena8":
                     entradaAto1Cena8(input);
+                    break;
+                case "opcaoBatalharAto1Cena9":
+                    opcaoBatalharAto1Cena9(input);
+                    break;
+                case "lutaContraVultoDasLamentações":
+                    batalharVultoLamentacoes();
+                    break;
+                case "batalharVultoLamentacoes":
+                    battleInput(input, "verificaRespostaAto1Cena8");
+                    break;
+                case "verificaRespostaAto1Cena8":
+                    verifyQuestion(input, "batalharVultoLamentacoes", "entradaProximaCenaAto1Cena8",
+                            "Ao derrotar o Vulto das Lamentações, você sente uma sensação de alívio e paz. " +
+                                    "A escuridão que o envolvia se dissipa, revelando um caminho iluminado que se estende à sua frente. " +
+                                    "Você percebe que está mais próximo de Arcadelis, e a esperança de restaurar o equilíbrio em Etheris se fortalece em seu coração.");
                     break;
             }
         }
@@ -230,6 +243,14 @@ public class Main {
                         musicPlayer.play();
                     } else {
                         System.out.println("Arquivo de música não encontrado!");
+                    }
+                    break;
+                case "4":
+                    System.exit(0);
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
                     }
                     break;
                 default:
@@ -358,7 +379,7 @@ public class Main {
                     "Opções:\n" +
                     "1. Mostrar tabela de conversão\n" +
                     "2. Responder\n" +
-                            "3. Calcular\n" +
+                    "3. Ajudar\n" +
                     "=======================================================================\n";
 
             outputTextArea.setText(inputBattle + battleOptions);
@@ -375,12 +396,20 @@ public class Main {
                     break;
                 case "2":
                     currentGameState = gameState;
-                    outputTextArea.append("\nDigite o número binário: ");
+                    outputTextArea.append("\nDigite o número binário:\n");
+                    autoScroll();
                     break;
                 case "3":
-                    // Opção de ajuda
+                    opcaoAjuda();
+                    autoScroll();
                     break;
             }
+        }
+
+        void opcaoAjuda(){
+            outputTextArea.append(
+                    "\nA resposta é: " + numBinary
+            );
         }
 
         // Metodo para mostrar a tabela de conversão
@@ -955,7 +984,7 @@ public class Main {
                     autoScroll();
                     break;
                 case "2":
-                    outputTextArea.append("\nContinuando a jornada...");
+                    batalharGuardiaoEspectral();
                     break;
                 default:
                     invalidInput();
@@ -965,7 +994,7 @@ public class Main {
         }
 
         // Enigma pra fugir
-        void escapeAto1Cena6(String input){
+        void escapeEnemy(String gameState){
             outputTextArea.setText(
                     "Desafio de fuga:\n" +
                             "Converta o número " + questionBattleBinary + " para binário e insira o resultado corretamente. Caso erre, a presença do Guardião Espectral o impedirá de fugir, e você terá que enfrentá-lo.\n\n" +
@@ -973,28 +1002,36 @@ public class Main {
                             "2. Responder\n" +
                             "3. Ajuda\n"
             );
-            currentGameState = "inputEscapeAto1Cena6";
+            currentGameState = gameState;
         }
 
-        void inputEscapeAto1Cena6(String input){
+        void inputEscapeEnemy(String input, String gameState){
             switch (input) {
                 case "1":
                     tabelaBinario();
                     break;
                 case "2":
                     outputTextArea.append("\nDigite o número binário: ");
-                    currentGameState = "questionEscape01";
+                    currentGameState = gameState;
+                    break;
+                case "3":
+                    opcaoAjuda();
                     break;
                 default:
+                    invalidInput();
                     break;
             }
         }
 
         // Verifica se o jogador acertou o enigma
-        void verifyQuestionEscape(String input){
+        boolean escapeEnemy = false;
+        void verifyQuestionEscape(String input, String text, String acertou, String errou){
             outputTextArea.append("\nVocê digitou: " + input);
             if(numBinary.equals(input)){
-                outputTextArea.append("\nVocê conseguiu fugir do Guardião Espectral!");
+                outputTextArea.append("\n\nVocê conseguiu fugir do Guardião Espectral!\n\n");
+                outputTextArea.append(text);
+                escapeEnemy = true;
+                currentGameState = acertou;
                 autoScroll();
             } else {
                 outputTextArea.append(
@@ -1004,7 +1041,8 @@ public class Main {
                                 "Agora, não há outra opção: sua única escolha é lutar para sobreviver e provar sua coragem diante dos espíritos da floresta.\n" +
                                 "1. Continuar"
                 );
-                currentGameState = "opcaoLutarAto1Cena5";
+                escapeEnemy = false;
+                currentGameState = errou;
                 autoScroll();
             }
         }
@@ -1023,6 +1061,18 @@ public class Main {
             switch (input) {
                 case "1":
                     ato1Cena8();
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
                     break;
                 default:
                 invalidInput();
@@ -1032,7 +1082,7 @@ public class Main {
 
         void ato1Cena8(){
             outputTextArea.setText(
-                "\nNarrador:\n" +
+                "Narrador:\n" +
                 "Das sombras mais densas da floresta, emerge uma figura sinistra. Seu corpo é uma mistura de ossos e vapor etéreo, formando uma silhueta disforme e espectral. Ele se arrasta silenciosamente, como se estivesse flutuando, seus braços estendendo-se em garras retorcidas que parecem capazes de atravessar o próprio véu da realidade. Sua cabeça, envolta em rachaduras pulsantes com uma luz azul-gélida, transmite um frio penetrante e inumano\n\n" +
                 "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
                 "1. Lutar\n" + "2. Fugir\n"
@@ -1056,6 +1106,18 @@ public class Main {
                                     "Ao longe, as sombras das almas perdidas se agitam, observando em silêncio como testemunhas do combate, ansiosas por ver qual lado prevalecerá.\n\n" +
                                     "1. Lutar contra o Vulto das Lamentações\n"
                     );
+                    currentGameState = "opcaoBatalharAto1Cena9";
+                default:
+//                invalidInput();
+                    break;
+            }
+        }
+
+        void opcaoBatalharAto1Cena9(String input){
+            switch (input) {
+                case "1":
+                    batalharVultoLamentacoes();
+                    break;
                 default:
                 invalidInput();
                     break;
@@ -1073,14 +1135,18 @@ public class Main {
                             "O combate com o Vulto das Lamentações começa! Use suas habilidades e estratégias com cautela para enfrentar sua presença opressiva e esquivar dos golpes fantasmagóricos que ele desferirá.\n" +
                             "Cada ataque bem-sucedido enfraquece um pouco mais as sombras densas que o envolvem, mas cuidado — ele possui um poder que drena sua vitalidade, alimentando-se do medo e das hesitações de seus oponentes.\n" +
                             "Resolva o desafio para acertá-lo.\n\n" +
-                            "Guardião Espetral: Level [2]\n" +
+                            "Vulto das Lamentações: Level [2]\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
                             "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
             );
+            currentGameState = "batalharVultoLamentacoes";
         }
     }
 
+    void ato1Cena9(String input){
+
+    }
 }
