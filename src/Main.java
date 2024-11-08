@@ -97,9 +97,9 @@ public class Main {
         void autoScroll() {
             outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
         }
-
         // Métodos para exibir menu
         void showMainMenu() {
+            URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
             outputTextArea.setText(
                     "THE AGE OF ETHERIS\n\n" +
                             "Selecione uma opção:\n" +
@@ -109,6 +109,11 @@ public class Main {
                             "4. Sair\n"
             );
             currentGameState = "menu"; // Definindo o estado inicial como "menu"
+            if (soundSelect != null) {
+                rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+            } else {
+                System.out.println("Efeito sonoro não encontrado!");
+            }
         }
 
         // Metodo para receber a entrada do usuário
@@ -125,6 +130,9 @@ public class Main {
                     break;
                 case "battleSystem":
                     battleSystemInput(input);
+                    break;
+                case "credits":
+                    showMainMenu();
                     break;
                 case "restartGame":
                     restartGame(input);
@@ -245,6 +253,14 @@ public class Main {
                         System.out.println("Arquivo de música não encontrado!");
                     }
                     break;
+                case "3":
+                    credits();
+                    if (soundSelect != null) {
+                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
+                    } else {
+                        System.out.println("Efeito sonoro não encontrado!");
+                    }
+                    break;
                 case "4":
                     System.exit(0);
                     if (soundSelect != null) {
@@ -257,6 +273,21 @@ public class Main {
                     invalidInput();
                     break;
             }
+        }
+
+        // Créditos
+        void credits(){
+            outputTextArea.setText(
+                    "Desenvolvido por:\n" +
+                    "Arthur Araújo\n" +
+                    "Maria Eduarda\n\n" +
+                    "Grupo: 12\n" +
+                    "Turma: A\n\n" +
+                    "Agradecimentos especiais a todos os professores e colegas que nos apoiaram e ajudaram durante o desenvolvimento deste projeto.\n\n" +
+                    "Obrigado por jogar The Age Of Etheris!\n\n" +
+                            "1. Voltar"
+            );
+            currentGameState = "credits";
         }
 
         // Métodos para exibir instruções
