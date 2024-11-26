@@ -212,6 +212,15 @@ public class Main {
                                     "A escuridão que o envolvia se dissipa, revelando um caminho iluminado que se estende à sua frente. " +
                                     "Você percebe que está mais próximo de Arcadelis, e a esperança de restaurar o equilíbrio em Etheris se fortalece em seu coração.");
                     break;
+                case "entradaProximaCenaAto1Cena8":
+                    entradaAto1Cena9(input);
+                    break;
+                case "ato1Cena10":
+                    entradaAto1Cena10(input);
+                    break;
+                case "ato1Cena11":
+                    entradaAto1Cena11(input);
+                    break;
             }
         }
 
@@ -868,9 +877,8 @@ public class Main {
                 "Aenor:" + 
                 "\nCorajoso como esperado, " + playerName + " o " + playerClasse + ". No entanto, a jornada Arcadelis não será facíl. As terras de Etheris foram devastadas pela Ruptura, e ocaminho que antes era claro agora é fragmentado por distorções do tempo e do espaço.\n" +
                 playerName + " o " + playerClasse + " a jornada até Arcadelis é perigosa, mas necessária. Você tem dois caminhos diante de si, cada um com seus próprios perigos e recompensas. Ouça com atenção. \n\n" +
-                "A primeira opção é atravessar a Floresta das Almas Perdidas, onde os espíritos das eras passadas vagam sem descanso. Esse caminho é traiçoeiro e silencioso, mas os espíritos tentarão invadir sua mente, testando sua determinação. Se conseguir passar pela floresta, você poderá encontrar o Santuário dos Espíritos, onde segredos antigos podem ser revelados a você. No entanto, será testado espiritualmente, e aqueles que falham perdem-se para sempre. \n\n" +
-                "Sua segunda opção é enfrentar as Montanhas Quebradas, uma região desolada, corrompida por fissuras temporais. As distorções no tempo tornam este lugar caótico e imprevisível. Criaturas de todas as épocas caçam indiscriminadamente, e você enfrentará inimigos de eras distantes, todos misturados e sem controle. Atravesse essas montanhas, e encontrará a Fortaleza Esquecida, onde as armas e armaduras da Era dos Titãs estão enterradas nas ruínas. Esse caminho testará sua força e coragem, mas as recompensas podem ser imensas.\n\n" +
-                "1. Florestas das Almas Perdidas\n" + "2. Montanhas Quebradas"
+                "A primeira missão é atravessar a Floresta das Almas Perdidas, onde os espíritos das eras passadas vagam sem descanso. Esse caminho é traiçoeiro e silencioso, mas os espíritos tentarão invadir sua mente, testando sua determinação. Se conseguir passar pela floresta, você poderá encontrar o Santuário do Véu, onde segredos antigos podem ser revelados a você. No entanto, será testado espiritualmente, e aqueles que falham perdem-se para sempre. \n\n" +
+                "1. Florestas das Almas Perdidas\n"
             );
             currentGameState = "ato1_cena2";
         }
@@ -1175,9 +1183,59 @@ public class Main {
             );
             currentGameState = "batalharVultoLamentacoes";
         }
-    }
 
-    void ato1Cena9(String input){
+        void entradaAto1Cena9(String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Após o que pareceu uma eternidade, você finalmente avista uma saída à frente. A névoa densa da Floresta das Almas Perdidas começa a se dissipar, e a luz, antes apagada, retorna timidamente entre as árvores retorcidas. Os sussurros das almas, que o acompanharam por todo o caminho, tornam-se cada vez mais distantes, até desaparecerem completamente, como se a floresta reconhecesse que sua força foi suficiente para sobreviver ao seu domínio sombrio.\n\n" +
+                                    "Ao cruzar os limites da floresta, uma brisa fresca e revigorante o recebe. O ar aqui é diferente — puro e cheio de promessa, como se o próprio mundo estivesse celebrando sua saída. Atrás de você, a entrada da floresta parece desaparecer entre as sombras, um lembrete de que poucos conseguem vencê-la.\n\n" +
+                                    "Diante de seus olhos, você vê pela primeira vez a silhueta de Arcadelis, a cidade protegida por uma barreira mágica que brilha com uma luz dourada. Suas torres, embora desgastadas pelo tempo e pela Ruptura, permanecem de pé, como um símbolo de resistência em um mundo fragmentado.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato1Cena10";
+                break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
 
+        void entradaAto1Cena10(String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Após um breve descanso em Arcadelis, você sente o chamado do seu destino mais uma vez. Guiado por fragmentos de memórias e sussurros do equilíbrio, você decide ir até o lendário Santuário do Véu, um local sagrado onde os Guardiões dos Três Véus residem. É dito que esses Guardiões possuem o conhecimento das eras perdidas e orientam aqueles que carregam o fardo de restaurar Etheris.\n\n" +
+                                    "A jornada até o santuário não é longa, mas o peso da missão em seus ombros torna cada passo significativo. Ao se aproximar, a paisagem muda: a terra ao redor se torna pura e imaculada, como se o próprio mundo estivesse protegido pela presença dos Guardiões. O Santuário do Véu surge diante de você, uma estrutura majestosa esculpida em cristal e pedra antiga, pulsando com energia espiritual.\n\n" +
+                                    "1. Entrar no Santuário do Véu"
+                    );
+                    currentGameState = "ato1Cena11";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto1Cena11(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "As enormes portas do santuário se abrem sozinhas, revelando um salão iluminado por uma luz suave e dourada. No centro, os três Guardiões o aguardam. Suas figuras são imponentes e envoltas em mantos que representam as três eras: o Espírito Eterno, o Arcano Perdido e o Colosso Imortal. Suas vozes ecoam em uníssono, carregadas de sabedoria e autoridade:\n\n" +
+                                    "Guardiões: \n" +
+                                    "Bem-vindo, " + playerName + ", o " + playerClasse + ". Você provou sua coragem na Floresta das Almas Perdidas e alcançou Arcadelis. Mas seu caminho ainda está repleto de desafios. Nós, os Guardiões dos Três Véus, revelaremos sua próxima missão, que o aproximará dos artefatos necessários para restaurar Etheris. Prepare-se, pois o equilíbrio exige mais do que força — ele exige sacrifício, sabedoria e determinação\n\n" +
+                                    "Narrador: \n" +
+                                    "Narrador:\n" +
+                                    "Os Guardiões, posicionados em um triângulo ao seu redor, começam a canalizar sua energia. O salão é preenchido por símbolos arcanos que flutuam no ar, cada um brilhando com uma cor distinta: dourado, prateado e carmesim. O Véu do Espírito fala primeiro, sua voz suave e melancólica como uma canção antiga:\n\n" +
+                                    "Guardião do Espírito:\n" +
+                                    "O próximo passo de sua jornada o levará até o Selendis, onde o tempo e a realidade se entrelaçam. Lá repousa o fragmento do Cetro do Espírito Eterno, um dos artefatos que você busca. No entanto, o caminho é traiçoeiro. Almas esquecidas vagam por lá, e enigmas antigos protegerão o artefato de olhos indignos.\n\n" +
+                                    "1. Continuar"
+                    );
+                    break;
+            }
+        }
     }
 }
