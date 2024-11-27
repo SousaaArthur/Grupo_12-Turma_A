@@ -28,16 +28,6 @@ public class RpgComponent {
         }
     }
 
-    // Classe para criar um inventário
-    class inventory {
-        int lifePotion;
-        int attackPotion;
-        inventory(int lifePotion, int attackPotion){
-            this.lifePotion = lifePotion;
-            this.attackPotion = attackPotion;
-        }
-    }
-
     // Metodo parar gera uma pergunta de matemática
     int questionBinary() {
         ArrayList<Integer> question = new ArrayList<Integer>(); // Lista de pergunta

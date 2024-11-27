@@ -221,6 +221,18 @@ public class Main {
                 case "ato1Cena11":
                     entradaAto1Cena11(input);
                     break;
+                case "ato1Cena12":
+                    entradaAto1Cena12(input);
+                    break;
+                case "ato2Cena01":
+                    entradaAto2Cena01(input);
+                    break;
+                case "ato2Cena02":
+                    entradaAto2Cena02(input);
+                    break;
+                case "ato2Cena03":
+                    opcaoLutarMilira(input);
+                    break;
             }
         }
 
@@ -1146,8 +1158,9 @@ public class Main {
                                     "1. Lutar contra o Vulto das Lamentações\n"
                     );
                     currentGameState = "opcaoBatalharAto1Cena9";
+                    break;
                 default:
-//                invalidInput();
+                    invalidInput();
                     break;
             }
         }
@@ -1234,8 +1247,98 @@ public class Main {
                                     "O próximo passo de sua jornada o levará até o Selendis, onde o tempo e a realidade se entrelaçam. Lá repousa o fragmento do Cetro do Espírito Eterno, um dos artefatos que você busca. No entanto, o caminho é traiçoeiro. Almas esquecidas vagam por lá, e enigmas antigos protegerão o artefato de olhos indignos.\n\n" +
                                     "1. Continuar"
                     );
+                    currentGameState = "ato1Cena12";
+                    break;
+                default:
+                    invalidInput();
                     break;
             }
+        }
+
+        void entradaAto1Cena12(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Com a bênção dos Guardiões, você parte em direção a Selendis, a cidade dos espíritos. O caminho até lá é longo e repleto de desafios, mas a promessa de um artefato antigo e poderoso o impulsiona. A paisagem ao redor muda à medida que você avança, as sombras se tornando mais densas e os sussurros das almas mais intensos.\n\n" +
+                                    "Ao chegar aos portões de Selendis, você é recebido por uma visão assombrosa. A cidade, outrora grandiosa e majestosa, agora está envolta em uma névoa espectral, suas torres e muralhas desgastadas pelo tempo e pela Ruptura. As ruas estão desertas, mas você sente a presença de algo antigo e poderoso espreitando nas sombras.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena01";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena01(String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Ao adentrar os portões de Selendis, você sente uma presença inquietante ao seu redor. A cidade, outrora grandiosa e majestosa, agora está envolta em uma névoa espectral, suas torres e muralhas desgastadas pelo tempo e pela Ruptura. As ruas estão desertas, mas você sente a presença de algo antigo e poderoso espreitando nas sombras.\n\n" +
+                                    "A cidade parece viva, mas não da maneira que você esperava. As sombras se movem, as paredes sussurram e os espíritos das eras passadas parecem observá-lo com olhos vazios. Seu objetivo é claro: encontrar o fragmento do Cetro do Espírito Eterno e provar sua coragem diante dos desafios que Selendis reserva.\n\n" +
+                                    "1. Explorar a cidade\n"
+                    );
+                    currentGameState = "ato2Cena02";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena02(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Enquanto você avança pelas ruas silenciosas de Selendis, um frio sobrenatural se apodera do ambiente. Cada passo parece ecoar por toda a cidade, e a névoa espectral começa a se agitar ao seu redor, como se algo estivesse despertando.\n\n" +
+                                    "De repente, uma figura emerge das sombras. É uma mulher alta e elegante, com traços esculpidos de uma beleza sombria. Sua pele tem o tom pálido da morte, e seus olhos brilham como lanternas fantasmagóricas. Seu vestido flutua ao redor dela como uma extensão da névoa, e uma aura opressiva permeia o ar.\n\n" +
+                                    "Milira, Guardiã das Almas Perdidas: \n" +
+                                    "Então, você é o " + playerName + ", o " + playerClasse + "... aquele que ousa desafiar os limites entre a vida e a morte. Selendis não é lugar para mortais, muito menos para aqueles que buscam os segredos do Cetro. Este fragmento não será entregue tão facilmente.\n\n" +
+                                    "Narrador: \n" +
+                                    "A voz de Milira é ao mesmo tempo doce e aterrorizante, reverberando como um coro de lamentações. Com um movimento gracioso, ela ergue a mão, e espíritos atormentados começam a se materializar ao seu redor, prontos para protegê-la a qualquer custo.\n\n" +
+                                    "Milira, Guardiã das Almas Perdidas: \n" +
+                                    "Se você deseja provar sua força e pureza de alma, terá que enfrentar não apenas a mim, mas também as dores de todos aqueles que se perderam neste lugar. Mostre-me se você realmente é digno de restaurar o equilíbrio de Etheris!\n\n" +
+                                    "Desafio: \n" +
+                                    "Prepare-se para enfrentar Milira, Guardiã das Almas Perdidas! Use sua estratégia e habilidades para superar seus ataques espectrais e resolver os enigmas que ela colocará em seu caminho. A batalha será árdua, mas a recompensa pode mudar o destino de Etheris.\n\n" +
+                                    "1. Lutar contra Milira\n"
+                    );
+                    currentGameState = "ato2Cena03";
+                break;
+            }
+        }
+
+        void opcaoLutarMilira(String input){
+            switch (input){
+                case "1":
+                    batalharMilira();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharMilira(){
+            urrentEnemy.life = 25;
+            urrentEnemy.attack = 5;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "O combate com Milira, Guardiã das Almas Perdidas, começa! Use suas habilidades e estratégias com sabedoria para enfrentar seus ataques devastadores e resistir à aura opressiva que drena sua força.\n\n" +
+                            "Milira é astuta e ágil, envolvendo-se em um véu de espíritos atormentados que dificultam seus movimentos e obscurecem seus ataques. Cada golpe desferido reduz sua conexão com os espíritos, mas cuidado — ela possui um poder único de manipular ilusões, confundindo sua percepção e testando sua determinação.\n\n" +
+                            "Milira, Guardiã das Almas Perdidas: Level [2]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
+            );
+            currentGameState = "batalhaMilira";
         }
     }
 }
