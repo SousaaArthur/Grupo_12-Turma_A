@@ -3,7 +3,12 @@ import java.awt.*; // Importa todas as classes do pacote java.awt
 import java.awt.event.KeyEvent; // Importa a classe KeyEvent do pacote java.awt.event
 import java.net.URL;
 import java.util.ArrayList; // Importa a classe ArrayList do pacote java.util
-
+/*
+*
+* GRUPO 12 - TURMA A
+* INTEGRANTES: Arthur Araújo e Maria Eduarda
+*
+*/
 public class Main {
     public static void main(String[] args) {
         new GameWindow();
@@ -158,25 +163,6 @@ public class Main {
                 case "option2Ato1Cena4":
                     option2Ato1Cena4(input);
                 break;
-                case "opcaoFugir2Ato1Cena5":
-                    confirmToEscape(input);
-                    break;
-                case "option2Ato1Cena6":
-                    escapeEnemy("inputEscapeAto1Cena6");
-                    break;
-                case "inputEscapeAto1Cena6":
-                    inputEscapeEnemy(input, "questionEscape01");
-                    break;
-                case "questionEscape01":
-                    verifyQuestionEscape(input,
-                            "Narrador:\n" +
-                                    "Com um esforço final, você resolve o enigma e escapa da Floresta das Almas Perdidas. " +
-                                    "A névoa se dissipa, e a escuridão ao seu redor se desfaz, revelando um caminho claro à sua frente. " +
-                                    "O Guardião Espectral, frustrado por sua fuga, desaparece nas sombras, mas sua presença assombrosa permanece, lembrando-o de que a floresta não esquece aqueles que a desafiam.\n\n" +
-                                    "Agora, você está livre para continuar sua jornada até Arcadelis, mas a lembrança da Floresta das Almas Perdidas permanecerá com você, testemunha silenciosa de sua coragem e determinação.\n" +
-                                    "1. Continuar", "entradaProximaCena", "opcaoLutarAto1Cena5"
-                            );
-                    break;
                 case "opcaoLutarAto1Cena5":
                     batalharGuardiaoEspectral();
                     break;
@@ -400,7 +386,7 @@ public class Main {
             URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
             switch (input) {
                 case "1":
-                    initialHistory();
+                    showInstructions();
 
                     if (soundSelect != null) {
                         rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
@@ -499,11 +485,6 @@ public class Main {
                     break;
                 case "3":
                     showMainMenu();
-                    if (soundSelect != null) {
-                        rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
-                    } else {
-                        System.out.println("Efeito sonoro não encontrado!");
-                    }
                     break;
             }
         }
@@ -515,8 +496,7 @@ public class Main {
                             "Como vai funcionar?\n" +
                             "Bom, em várias partes do jogo você terá que resolver cálculos aritméticos para avançar, por exemplo, se você encontrar um baú trancado, você terá que resolver um cálculo para abri-lo.\n" +
                             "Os cáculos serão de conversão de bases numéricas para binário e de binário para decimal.\n\n" +
-                            "Conversões de texto para binário e de binário para texto.\n" +
-                            "Exemplo: 'Hello' em binário é '01001000 01100101 01101100 01101100 01101111'.\n\n" +
+                            "Exemplo: '10' em binário é '1010'.\n\n" +
                             "Opções:\n" +
                             "1. Voltar\n"
             );
@@ -586,7 +566,7 @@ public class Main {
                     "1. Mostrar tabela de conversão\n" +
                     "2. Responder\n" +
                     "3. Ajudar\n" +
-                    "=======================================================================\n";
+                    "==================================BATALHA====================================\n";
 
             outputTextArea.setText(inputBattle + battleOptions);
             currentGameState = status;
@@ -707,7 +687,8 @@ public class Main {
                 autoScroll();
             } else {
                 outputTextArea.append(
-                        "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
+                        "\n==================================PERDEU====================================\n" +
+                        "\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
                                 "Sua vida: " + playerLife + " -" + urrentEnemy.attack + "\n" +
                                 "Sua vida: 0\n" +
                                 "\nInfelizmente você foi derrotado pelo inimigo. Sua jornada acaba aqui." +
@@ -761,7 +742,7 @@ public class Main {
                     }
 
                     outputTextArea.append(
-                            "\n====================================\n" +
+                            "\n==================================VENCEU====================================\n" +
                             text + "\n1. Continuar"
                     );
                     autoScroll();
@@ -1099,12 +1080,11 @@ public class Main {
                 "Narrador: \nCaminhando mais fundo na Floresta das Almas Perdidas, você sente uma presença intensa. O ar fica denso e uma estranha sensação de frio envolve seu corpo. Das sombras retorcidas de uma árvore, uma figura se destaca: um espírito guerreiro, conhecido como o Guardião Espectral de Selendis. \n\n" +
                 "Descrição do Inimigo: \nO Guardião Espectral é uma figura encapuzada, com um manto esfarrapado que parece feito de névoa. Ele carrega uma lâmina longa, desgastada e corroída, mas com um brilho sinistro nas bordas. Seus olhos são dois pontos de luz espectral, frios e vazios, como se sua alma tivesse sido drenada há séculos. Suas mãos são garras translúcidas, e ele flutua levemente acima do chão, deixando um rastro de névoa. Sua voz ecoa como um murmúrio antigo, repetindo palavras desconexas em uma língua esquecida.\n\n" +
                 "O Guardião Espectral: \nNinguém passa… ninguém escapa… aquele que busca Arcadelis, prove sua coragem ou junte-se às almas errantes desta floresta.\n\n" +
-                "1. Lutar\n" + "2. Fugir\n"
+                "1. Lutar\n"
             );
             currentGameState = "option2Ato1Cena4";
         }
 
-        // Ação de fugir
         void option2Ato1Cena4(String input){
             switch (input){
                 case "1":
@@ -1121,21 +1101,6 @@ public class Main {
                                     "1. Lutar contra o Guardião Espectral\n"
                     );
                     currentGameState = "opcaoLutarAto1Cena5";
-                    break;
-                case "2":
-                    outputTextArea.setText(
-                            "Narrador:\n" +
-                                    "Sentindo o peso da presença do Guardião Espectral, você decide que lutar contra essa alma inquieta é um risco que talvez não possa se dar ao luxo de correr agora. " +
-                                    "No entanto, escapar da Floresta das Almas Perdidas exige mais do que simplesmente correr. " +
-                                    "As almas errantes clamam por energia vital, e o próprio tecido da realidade ao seu redor começa a se desintegrar, como se a floresta tentasse segurá-lo no seu domínio.\n\n" +
-                                    "Os sussurros dos espíritos se intensificam, e o Guardião Espectral o observa, intrigado pela sua hesitação. Ele se move, bloqueando o caminho enquanto murmura:\n\n" +
-                                    "Guardião Espectral:\n" +
-                                    "Fugir... é recusar o fardo. Mas ninguém escapa deste lugar sem ser marcado pela escuridão.\n\n" +
-                                    "Para escapar de sua vigilância, uma última barreira espiritual surge, com números antigos que se distorcem diante dos seus olhos. " +
-                                    "Um enigma temporal se revela — uma sequência decimal que só pode ser superada se você encontrar sua essência binária, liberando-se da corrente espiritual que tenta prendê-lo aqui.\n\n" +
-                                    "1. Resolver o enigma e fugir\n" + "2. Ficar e lutar contra o Guardião Espectral\n"
-                    );
-                    currentGameState = "opcaoFugir2Ato1Cena5";
                     break;
                 default:
                     invalidInput();
@@ -1154,10 +1119,10 @@ public class Main {
                     "O combate com o Guardião Espectral começa! Use suas habilidades e estratégias com sabedoria para sobreviver à sua lâmina etérea e superar sua defesa de sombras. " +
                             "A cada golpe desferido, a essência espectral do Guardião se desvanece um pouco mais, mas cuidado — ele também possui ataques que drenam sua energia vital.\n\n" +
                     "Resolva o desafio para acertá-lo.\n\n" +
-                            "Guardião Espetral: Level [2]\n" +
+                            "Guardião Espetral:\n" +
                             "Vida: " + urrentEnemy.life +
                     "\nAtaque: " + urrentEnemy.attack +
-                    "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                    "\n\n" + playerName + " o " + playerClasse + ":\n" +
                     "Sua vida: " + playerLife +
                     "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
             );
@@ -1184,80 +1149,6 @@ public class Main {
             }
         }
 
-        void confirmToEscape(String input){
-            switch (input){
-                case "1":
-                    outputTextArea.append(
-                            "\nTem certeza que deseja fugir? Se vocẽ fugir agora você não aumentarar suas forças e vidas e continara sendo um " + playerClasse + " fraco. " +
-                            "Mas poupara sua vida e poderar enfretar inimigos mais fortes no futuro e se redimir pela sua vergonhar.\n" +
-                            "1. Sim\n" + "2. Não"
-                    );
-                    autoScroll();
-                    break;
-                case "2":
-                    batalharGuardiaoEspectral();
-                    break;
-                default:
-                    invalidInput();
-                    break;
-            }
-            currentGameState = "option2Ato1Cena6";
-        }
-
-        // Enigma pra fugir
-        void escapeEnemy(String gameState){
-            outputTextArea.setText(
-                    "Desafio de fuga:\n" +
-                            "Converta o número " + questionBattleBinary + " para binário e insira o resultado corretamente. Caso erre, a presença do Guardião Espectral o impedirá de fugir, e você terá que enfrentá-lo.\n\n" +
-                            "1. Mostrar tabela de conversão\n" +
-                            "2. Responder\n" +
-                            "3. Ajuda\n"
-            );
-            currentGameState = gameState;
-        }
-
-        void inputEscapeEnemy(String input, String gameState){
-            switch (input) {
-                case "1":
-                    tabelaBinario();
-                    break;
-                case "2":
-                    outputTextArea.append("\nDigite o número binário: ");
-                    currentGameState = gameState;
-                    break;
-                case "3":
-                    opcaoAjuda();
-                    break;
-                default:
-                    invalidInput();
-                    break;
-            }
-        }
-
-        // Verifica se o jogador acertou o enigma
-        boolean escapeEnemy = false;
-        void verifyQuestionEscape(String input, String text, String acertou, String errou){
-            outputTextArea.append("\nVocê digitou: " + input);
-            if(numBinary.equals(input)){
-                outputTextArea.append("\n\nVocê conseguiu fugir do Guardião Espectral!\n\n");
-                outputTextArea.append(text);
-                escapeEnemy = true;
-                currentGameState = acertou;
-                autoScroll();
-            } else {
-                outputTextArea.append(
-                                "\nNarrador:\n" +
-                                "Você tenta fugir, mas algo dá errado ao resolver o enigma. " +
-                                "Sua mente corre, mas a resposta escapa pelos dedos, e, no último segundo, um silêncio pesado preenche o ar. O Guardião Espectral, sem piedade, avança sobre você antes que possa escapar\n\n" +
-                                "Agora, não há outra opção: sua única escolha é lutar para sobreviver e provar sua coragem diante dos espíritos da floresta.\n" +
-                                "1. Continuar"
-                );
-                escapeEnemy = false;
-                currentGameState = errou;
-                autoScroll();
-            }
-        }
-        
         void ato1Cena7(){
             outputTextArea.setText(
                 "Narrador:\n" +
@@ -1296,7 +1187,7 @@ public class Main {
                 "Narrador:\n" +
                 "Das sombras mais densas da floresta, emerge uma figura sinistra. Seu corpo é uma mistura de ossos e vapor etéreo, formando uma silhueta disforme e espectral. Ele se arrasta silenciosamente, como se estivesse flutuando, seus braços estendendo-se em garras retorcidas que parecem capazes de atravessar o próprio véu da realidade. Sua cabeça, envolta em rachaduras pulsantes com uma luz azul-gélida, transmite um frio penetrante e inumano\n\n" +
                 "Essa criatura, conhecida como Vulto das Lamentações, carrega a energia inquieta das almas que nunca encontraram paz. Ao seu redor, o ar fica pesado, os murmúrios dos espíritos aumentam, ecoando com a dor dos tempos esquecidos. Ele avança lentamente, bloqueando seu caminho como o último teste antes de deixar a floresta. Suas intenções são claras: apenas aqueles fortes o suficiente sobreviverão a sua presença avassaladora.\n\n" +
-                "1. Lutar\n" + "2. Fugir\n"
+                "1. Lutar\n"
             );
             currentGameState = "opcaoLutarAto1Cena8";
         }
@@ -1347,10 +1238,10 @@ public class Main {
                             "O combate com o Vulto das Lamentações começa! Use suas habilidades e estratégias com cautela para enfrentar sua presença opressiva e esquivar dos golpes fantasmagóricos que ele desferirá.\n" +
                             "Cada ataque bem-sucedido enfraquece um pouco mais as sombras densas que o envolvem, mas cuidado — ele possui um poder que drena sua vitalidade, alimentando-se do medo e das hesitações de seus oponentes.\n" +
                             "Resolva o desafio para acertá-lo.\n\n" +
-                            "Vulto das Lamentações: Level [2]\n" +
+                            "Vulto das Lamentações:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharVultoLamentacoes"
             );
@@ -1502,10 +1393,10 @@ public class Main {
                     "Desafio:\n" +
                             "O combate com Milira, Guardiã das Almas Perdidas, começa! Use suas habilidades e estratégias com sabedoria para enfrentar seus ataques devastadores e resistir à aura opressiva que drena sua força.\n\n" +
                             "Milira é astuta e ágil, envolvendo-se em um véu de espíritos atormentados que dificultam seus movimentos e obscurecem seus ataques. Cada golpe desferido reduz sua conexão com os espíritos, mas cuidado — ela possui um poder único de manipular ilusões, confundindo sua percepção e testando sua determinação.\n\n" +
-                            "Milira, Guardiã das Almas Perdidas: Level [2]\n" +
+                            "Milira, Guardiã das Almas Perdidas:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharMilira"
             );
@@ -1662,10 +1553,10 @@ public class Main {
                     "Desafio:\n" +
                             "Os três magos antigos se posicionam para enfreta-los um de cada vez e o primeiro mago que você terá que enfrentar será o Lunareth, Mestre da Magia Arcana. \n\n" +
                             "Ele domina o conhecimento puro dos Arcanos, manipulando o tecido da realidade com precisão impecável. Runas mágicas e símbolos antigos giram ao seu redor, amplificando seu poder. Capaz de invocar ilusões aterrorizantes, teletransportar-se em um piscar de olhos e conjurar feitiços que distorcem o tempo e o espaço, Lunareth é o guardião do equilíbrio entre o conhecimento e o caos.\n\n" +
-                            "Lunareth, Mestre da Magia Arcana: Level [7]\n" +
+                            "Lunareth, Mestre da Magia Arcana:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharMagosAntigos"
             );
@@ -1703,10 +1594,10 @@ public class Main {
                     "Desafio:\n" +
                             "O segundo mago que você terá que enfrentar será o Eryndor, Mestre da Magia Negra. \n\n" +
                             "Ele manipula feitiços sombrios, drenando energia vital e invocando sombras que obscurecem a visão e confundem seus oponentes. Com sua presença sinistra, ele domina a necromancia, conjurando espíritos vingativos e escuridão que consome tudo ao seu redor. Seus encantamentos corruptores enfraquecem os inimigos, transformando sua força em desespero.\n\n" +
-                            "Eryndor, Mestre da Magia Negra: Level [7]\n" +
+                            "Eryndor, Mestre da Magia Negra:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharEryndor"
             );
@@ -1744,10 +1635,10 @@ public class Main {
                     "Desafio:\n" +
                             "O terceiro mago que você terá que enfrentar será o Kaeltharion, Mestre da Magia Elemental. \n\n" +
                             "Ele controla os elementos primordiais, invocando tempestades de fogo, ondas de gelo e relâmpagos devastadores. Sua magia é tão antiga quanto o próprio mundo, e sua conexão com os elementos é absoluta. Capaz de moldar a própria natureza ao seu redor, Kaeltharion é o guardião do equilíbrio entre a criação e a destruição.\n\n" +
-                            "Kaeltharion, Mestre da Magia Elemental: Level [7]\n" +
+                            "Kaeltharion, Mestre da Magia Elemental:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharKaeltharion"
             );
@@ -1880,10 +1771,10 @@ public class Main {
                     "Desafio:\n" +
                             "O combate com Titanus, o Colosso Guardião, começa! Use suas habilidades e estratégias com sabedoria para enfrentar seus ataques devastadores e resistir à aura opressiva que drena sua força.\n\n" +
                             "Titanus é uma força da natureza, dominando o poder da terra e a resistência do tempo. Seus golpes são devastadores, capazes de despedaçar montanhas e desafiar os deuses. Com sua presença esmagadora, ele testa sua coragem e determinação, desafiando-o a provar que é digno de empunhar a Lâmina do Colosso Imortal.\n\n" +
-                            "Titanus, Colosso Guardião: Level [10]\n" +
+                            "Titanus, Colosso Guardião:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharTitanus"
             );
@@ -2016,7 +1907,7 @@ public class Main {
         }
 
         void batalharRuptura(){
-            urrentEnemy.life = 95;
+            urrentEnemy.life = 140;
             urrentEnemy.attack = 35;
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
@@ -2024,10 +1915,10 @@ public class Main {
                     "Desafio:\n" +
                             "A batalha final com a Ruptura, a Fonte do Caos, começa! Use todas as suas habilidades e estratégias para enfrentar seus ataques devastadores e resistir à energia caótica que ameaça consumir tudo ao seu redor.\n\n" +
                             "A Ruptura é a personificação do desequilíbrio, a entidade que desfez Etheris e ameaça destruir tudo. Sua forma é uma mistura de luz e sombra, infinitamente mutável e imprevisível. Com tentáculos etéreos e olhos brilhantes, ela desafia sua existência e sua determinação, testando sua coragem até o limite.\n\n" +
-                            "Ruptura, Fonte do Caos: Level [15]\n" +
+                            "Ruptura, Fonte do Caos:\n" +
                             "Vida: " + urrentEnemy.life +
                             "\nAtaque: " + urrentEnemy.attack +
-                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "\n\n" + playerName + " o " + playerClasse + ":\n" +
                             "Sua vida: " + playerLife +
                             "\nSua força: " + playerAttack + "\n\n", "batalharRuptura"
             );
@@ -2101,7 +1992,7 @@ public class Main {
                                     "O Equilibrador, cuja coragem e determinação salvaram o mundo, é lembrado como um herói eterno. Seu nome ecoa em canções e lendas, sua jornada reverenciada por gerações futuras. O Cetro do Espírito Eterno, o Grimório Arcano Perdido e a Lâmina do Colosso Imortal permanecem como símbolos de sua bravura e sacrifício.\n\n" +
                                     "E assim, Etheris encontra a paz, mas o Equilibrador sabe que o equilíbrio do mundo é frágil e sempre exigirá vigilância e coragem. A jornada do Equilibrador pode ter chegado ao fim, mas o legado de sua coragem viverá para sempre.\n\n" +
                                     "Fim\n\n" +
-                                    "Agradecimentos especiais aos Guardiões dos Três Véus, cuja orientação e sabedoria guiaram o Equilibrador em sua jornada. Que a luz da harmonia eterna brilhe sobre Etheris para sempre.\n\n" +
+                                    "Muito obrigado por jogar A era de Etheris, Espero que tenha gostado :)" +
                                     "Créditos\n\n" +
                                     "Desenvolvido por: Arthur Araújo Sousa e Maria Eduarda\n" +
                                     "Agradecimentos Especiais: Eduardo Takeo e Fabio Brussolo\n\n"
