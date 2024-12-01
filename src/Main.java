@@ -233,6 +233,160 @@ public class Main {
                 case "ato2Cena03":
                     opcaoLutarMilira(input);
                     break;
+                case "lutaContraMilira":
+                    batalharMilira();
+                    break;
+                case "batalharMilira":
+                battleInput(input, "verificaRespostaAto2Cena03");
+                    break;
+                case "verificaRespostaAto2Cena03":
+                    verifyQuestion(input, "batalharMilira", "entradaProximaCenaAto2Cena03",
+                            "Ao derrotar Milira, a Guardiã da Floresta, você sente uma onda de energia e vitalidade fluir em seu corpo. " +
+                                    "A escuridão que a envolvia se dissipa, revelando um caminho claro e sereno à sua frente. " +
+                                    "Você percebe que está mais próximo de Arcadelis, e a esperança de restaurar o equilíbrio em Etheris se fortalece em seu coração.");
+                    break;
+                case "entradaProximaCenaAto2Cena03":
+                    entradaAto2Cena03(input);
+                    break;
+                case "ato2Cena04":
+                    entradaAto2Cena04(input);
+                    break;
+                case "ato2Cena05":
+                    entradaAto2Cena05(input);
+                    break;
+                case "ato2Cena06":
+                    entradaAto2Cena06(input);
+                    break;
+                case "ato2Cena07":
+                    entradaAto2Cena07(input);
+                    break;
+                case "ato2Cena08":
+                    entradaAto2Cena08(input);
+                    break;
+                case "ato2Cena09":
+                    opcaoLutarMagosAntigos(input);
+                    break;
+                case "lutaContraMagosAntigos":
+                    batalharMagosAntigos();
+                    break;
+                case "batalharMagosAntigos":
+                    battleInput(input, "verificaRespostaAto2Cena09");
+                    break;
+                case "verificaRespostaAto2Cena09":
+                    verifyQuestion(input, "batalharMagosAntigos", "opcaoLutaContraEryndor",
+                            "Com a queda de Lunareth, sua magia arcana se dissipa como poeira ao vento. Antes de desaparecer, ele o encara com respeito e adverte:\n" +
+                                    "'Prepare-se, Equilibrador. Eryndor, o Mestre da Magia Negra, já o aguarda.'\n" +
+                                    "As sombras ao redor se intensificam, e um frio inquietante toma conta da torre. " +
+                                    "O próximo desafio será ainda mais sombrio e desafiador. Siga em frente, pois a luta está apenas começando.\n\n"
+                            );
+                    break;
+                case "opcaoLutaContraEryndor":
+                    opcaoLutaContraEryndor(input);
+                    break;
+                case "lutarContraEryndor":
+                    batalharEryndor();
+                    break;
+                case "batalharEryndor":
+                    battleInput(input, "verificaRespostaAto2Cena10");
+                    break;
+                case "verificaRespostaAto2Cena10":
+                    verifyQuestion(input, "batalharEryndor", "opcaoLutarContraKaeltharion",
+                            "Com o último golpe, Eryndor cai de joelhos, sua figura sombria se desfazendo em névoa negra que se dispersa pelo ar. Sua voz ecoa, profunda e carregada de resignação:\n" +
+                                    "Você derrotou a escuridão, mas a luz pode ser igualmente implacável. Prepare-se, Equilibrador, pois Kaeltharion, o Mestre da Magia Divina, será seu próximo oponente. Que a sua força esteja à altura do julgamento divino.\n" +
+                                    "Enquanto a escuridão recua, a atmosfera da torre muda. Uma luz dourada começa a emanar dos corredores à frente, trazendo consigo uma sensação de peso e reverência. O último desafio o aguarda.\n\n"
+                    );
+                    break;
+                case "opcaoLutarContraKaeltharion":
+                    opcaoLutarContraKaeltharion(input);
+                    break;
+                case "lutarContraKaeltharion":
+                    batalharKaeltharion();
+                    break;
+                case "batalharKaeltharion":
+                    battleInput(input, "verificaRespostaAto2Cena11");
+                    break;
+                case "verificaRespostaAto2Cena11":
+                    verifyQuestion(input, "batalharKaeltharion", "entradaProximaCenaAto2Cena11",
+                            "Com o último golpe, Kaeltharion cai de joelhos, sua figura radiante se desfazendo em luz dourada que se dispersa pelo ar. Sua voz ecoa, suave e carregada de respeito:\n" +
+                                    "Você superou a luz e a escuridão, Equilibrador. Sua jornada está apenas começando, e o destino de Etheris depende de você. " +
+                                    "Agora, você está pronto para enfrentar o desafio final e restaurar o equilíbrio em Etheris. Que a sua coragem e determinação o guiem até o fim.\n\n"
+                    );
+                    break;
+                case "entradaProximaCenaAto2Cena11":
+                    entradaProximaCenaAto2Cena11(input);
+                    break;
+                case "ato2Cena12":
+                    entradaProximaCenaAto2Cena12(input);
+                    break;
+                case "ato2Cena13":
+                    entradaProximaCenaAto2Cena13(input);
+                    break;
+                case "ato2Cena14":
+                    entradaProximaCenaAto2Cena14(input);
+                    break;
+                case "ato2Cena15":
+                    entradaProximaCenaAto2Cena15(input);
+                    break;
+                case "opcaoLutarContraTitanus":
+                    opcaoLutarContraTitanus(input);
+                    break;
+                case "lutarContraTitanus":
+                    batalharTitanus();
+                    break;
+                case "batalharTitanus":
+                    battleInput(input, "verificaRespostaAto2Cena15");
+                    break;
+                case "verificaRespostaAto2Cena15":
+                    verifyQuestion(input, "batalharTitanus", "entradaProximaCenaAto2Cena16",
+                            "Com o último golpe, Titanus cai de joelhos, sua figura imponente se desfazendo em poeira que se dispersa pelo ar. " +
+                                    "O chão treme e a torre estremece, mas você permanece firme, sua determinação inabalável. " +
+                                    "A escuridão e a luz se dissipam, revelando um brilho intenso que emana do centro da torre. " +
+                                    "O equilíbrio em Etheris foi restaurado, e a paz e a harmonia retornam à terra. " +
+                                    "Sua jornada está completa, Equilibrador. O destino de Etheris está em suas mãos, e a esperança de um novo amanhecer brilha em seu coração.\n\n"
+                    );
+                    break;
+                case "entradaProximaCenaAto2Cena16":
+                    entradaProximaCenaAto2Cena16(input);
+                    break;
+                case "ato2Cena17":
+                    entradaProximaCenaAto2Cena17(input);
+                    break;
+                case "ato2Cena18":
+                    entradaProximaCenaAto2Cena18(input);
+                    break;
+                case "ato3Cena01":
+                    entradaProximaCenaAto3Cena01(input);
+                    break;
+                case "ato3Cena02":
+                entradaProximaCenaAto3Cena02(input);
+                break;
+                case "opcaoLutarContraRuptura":
+                    opcaoLutarContraRuptura(input);
+                    break;
+                case "lutarContraRuptura":
+                    batalharRuptura();
+                    break;
+                case "batalharRuptura":
+                    battleInput(input, "verificaRespostaAto3Cena02");
+                    break;
+                case "verificaRespostaAto3Cena02":
+                    verifyQuestion(input, "batalharRuptura", "entradaProximaCenaAto3Cena03",
+                            "Com o último golpe, Ruptura cai de joelhos, sua figura sombria se desfazendo em fumaça que se dispersa pelo ar. " +
+                                    "O chão treme e a torre estremece, mas você permanece firme, sua determinação inabalável. " +
+                                    "A escuridão e a luz se dissipam, revelando um brilho intenso que emana do centro da torre. " +
+                                    "O equilíbrio em Etheris foi restaurado, e a paz e a harmonia retornam à terra. " +
+                                    "Sua jornada está completa, Equilibrador. O destino de Etheris está em suas mãos, e a esperança de um novo amanhecer brilha em seu coração.\n\n"
+                    );
+                    break;
+                case "entradaProximaCenaAto3Cena03":
+                    entradaProximaCenaAto3Cena03(input);
+                    break;
+                case "ato3Cena04":
+                    entradaProximaCenaAto3Cena04(input);
+                    break;
+                case "fim":
+                    fim(input);
+                    break;
             }
         }
 
@@ -246,7 +400,7 @@ public class Main {
             URL soundSelect = getClass().getResource("/Sounds/SoundsEffect/soundSelect.wav");
             switch (input) {
                 case "1":
-                    showInstructions();
+                    initialHistory();
 
                     if (soundSelect != null) {
                         rpgComponent.new MusicPlayer(soundSelect.getPath()).playOnce(soundSelect.getPath());
@@ -484,11 +638,11 @@ public class Main {
             }
         }
 
-
-
         RpgComponent.Enemy urrentEnemy = rpgComponent.new Enemy(0, 0);
 
         void lutaAcertou(){
+            playerLife+=3;
+            playerAttack+=3;
             urrentEnemy.life -= playerAttack;
 
             URL hitSound = getClass().getResource("/Sounds/SoundsEffect/hitBattle.wav");
@@ -513,19 +667,25 @@ public class Main {
                 case "Elfo":
                     outputTextArea.append(
                             "Com sua força e agilidade, você acerta o inimigo com seu poderoso arco e flecha, causando " + playerAttack + " de dano.\n" +
-                                    "Vida do inimigo: " + urrentEnemy.life
+                                    "Vida do inimigo: " + urrentEnemy.life + " -" + playerAttack +
+                                    "\nSua vida: " + playerLife + " +3" +
+                                    "\nSua força: " + playerAttack + " +3"
                     );
                     break;
                 case "Mago":
                     outputTextArea.append(
                             "Você conjura um feitiço arcano e lança uma bola de fogo contra o inimigo, causando " + playerAttack + " de dano.\n" +
-                                    "Vida do inimigo: " + urrentEnemy.life
+                                    "Vida do inimigo: " + urrentEnemy.life + " -" + playerAttack +
+                                    "\nSua vida: " + playerLife + " +3" +
+                                    "\nSua força: " + playerAttack + " +3"
                     );
                     break;
                 case "Guerreiro":
                     outputTextArea.append(
                             "Com sua força bruta, você desfere um golpe poderoso com sua espada contra o inimigo, causando " + playerAttack + " de dano.\n" +
-                                    "Vida do inimigo: " + urrentEnemy.life
+                                    "Vida do inimigo: " + urrentEnemy.life + " -" + playerAttack +
+                                    "\nSua vida: " + playerLife + " +3" +
+                                    "\nSua força: " + playerAttack + " +3"
                     );
                     break;
             }
@@ -542,13 +702,13 @@ public class Main {
                 outputTextArea.append(
                         "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
                                 "Dano recebido: " + urrentEnemy.attack + "\n" +
-                                "Sua vida: " + playerLife
+                                "Sua vida: " + playerLife + " -" + urrentEnemy.attack
                 );
                 autoScroll();
             } else {
                 outputTextArea.append(
                         "\n\nVocê acidentalmente errou o ataque contra o inimigo! O inimigo se aproveita da oportunidade e te acerta com um ataque...\n" +
-                                "Dano recebido: " + urrentEnemy.attack + "\n" +
+                                "Sua vida: " + playerLife + " -" + urrentEnemy.attack + "\n" +
                                 "Sua vida: 0\n" +
                                 "\nInfelizmente você foi derrotado pelo inimigo. Sua jornada acaba aqui." +
                                 "\n1. Reiniciar\n"
@@ -1192,9 +1352,8 @@ public class Main {
                             "\nAtaque: " + urrentEnemy.attack +
                             "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
                             "Sua vida: " + playerLife +
-                            "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
+                            "\nSua força: " + playerAttack + "\n\n", "batalharVultoLamentacoes"
             );
-            currentGameState = "batalharVultoLamentacoes";
         }
 
         void entradaAto1Cena9(String input){
@@ -1292,6 +1451,18 @@ public class Main {
         void entradaAto2Cena02(String input){
             switch (input){
                 case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
                     outputTextArea.setText(
                             "Narrador: \n" +
                                     "Enquanto você avança pelas ruas silenciosas de Selendis, um frio sobrenatural se apodera do ambiente. Cada passo parece ecoar por toda a cidade, e a névoa espectral começa a se agitar ao seu redor, como se algo estivesse despertando.\n\n" +
@@ -1323,8 +1494,8 @@ public class Main {
         }
 
         void batalharMilira(){
-            urrentEnemy.life = 25;
-            urrentEnemy.attack = 5;
+            urrentEnemy.life = 45;
+            urrentEnemy.attack = 20;
             randomQuestionBinary = rpgComponent.questionBinary();
             numBinary = Integer.toBinaryString(randomQuestionBinary);
             battle(
@@ -1336,9 +1507,611 @@ public class Main {
                             "\nAtaque: " + urrentEnemy.attack +
                             "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
                             "Sua vida: " + playerLife +
-                            "\nSua força: " + playerAttack + "\n\n", "batalharGuardiãoEspectral"
+                            "\nSua força: " + playerAttack + "\n\n", "batalharMilira"
             );
-            currentGameState = "batalhaMilira";
         }
+
+        void entradaAto2Cena03(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "A batalha com Milira, Guardiã das Almas Perdidas, é intensa e desafiadora. A cada golpe desferido, a aura opressiva ao seu redor parece se fortalecer, e os espíritos atormentados que a cercam se agitam com fúria. Milira, por sua vez, é ágil e astuta, desviando-se de seus ataques e lançando ilusões que testam sua determinação.\n\n" +
+                                    "No entanto, você não se deixa abater. Com coragem e determinação, você enfrenta a Guardiã, resistindo aos seus ataques e desvendando seus enigmas. A cada golpe bem-sucedido, a conexão de Milira com os espíritos se enfraquece, e sua aura opressiva começa a se dissipar.\n\n" +
+                                    "Finalmente, após uma batalha árdua, você desfere o golpe final. Milira, Guardiã das Almas Perdidas, cai de joelhos diante de você, sua aura desaparecendo lentamente. Seus olhos, uma vez brilhantes e aterrorizantes, agora refletem apenas a dor e a solidão de um espírito atormentado.\n\n" +
+                                    "Narrador: \n" +
+                                    "Com um suspiro final, Milira desaparece em uma névoa etérea, deixando para trás apenas um fragmento brilhante. É o fragmento do Cetro do Espírito Eterno, o artefato que você buscava. Com cuidado, você o recolhe, sentindo a energia espiritual pulsar em suas mãos.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena04";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena04(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Com o fragmento do Cetro do Espírito Eterno em mãos, você sente uma energia antiga e poderosa pulsar em seu ser. A cidade de Selendis, outrora envolta em sombras e mistérios, parece mais calma e serena, como se a presença de Milira tivesse finalmente encontrado a paz.\n\n" +
+                                    "O fragmento brilha com uma luz dourada, refletindo a pureza e a força do Espírito Eterno. Sua missão em Selendis está cumprida, mas o caminho à frente ainda é longo e repleto de desafios. Os Guardiões dos Três Véus aguardam sua volta, prontos para orientá-lo em sua próxima jornada.\n\n" +
+                                    "Narrador: \n" +
+                                    "Com determinação e coragem, você deixa Selendis para trás, levando consigo o fragmento do Cetro do Espírito Eterno. Seu destino o aguarda, e o equilíbrio de Etheris depende de sua força e sabedoria. A jornada para restaurar o mundo fragmentado está apenas começando.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena05";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena05(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Após deixar Selendis para trás, o ar ao seu redor parece mais leve, mas a sensação de responsabilidade se intensifica. Os Guardiões dos Três Véus manifestam-se novamente, suas vozes ecoando como um coro harmonioso, preenchendo sua mente com orientação e propósito.\n\n" +
+                            "Guardião do Véu do Espírito:\n\n" +
+                                    playerName + ", o " + playerClasse + ", você mostrou grande coragem e sabedoria em Selendis. Agora, com o fragmento do Cetro do Espírito Eterno em mãos, é hora de se voltar para o próximo artefato. Sua jornada o levará até a Torre de Arcanis, um lugar onde os segredos dos Arcanos antigos ainda resistem ao tempo. Lá, está guardado o Grimório Arcano Perdido, uma peça essencial para restaurar o equilíbrio de Etheris.\n\n" +
+                            "Narrador: \n" +
+                                    "As palavras dos Guardiões despertam uma mistura de apreensão e determinação em você. A Torre de Arcanis, envolta em mistérios e magia ancestral, será um desafio como nenhum outro. Protegido por feitiços esquecidos e criaturas de puro poder arcano, o Grimório não será conquistado facilmente.\n\n" +
+                                    "Com a orientação dos Guardiões e sua força renovada, você se prepara para enfrentar o desconhecido. O destino de Etheris depende de sua próxima vitória, e cada passo o aproxima mais do equilíbrio que tanto almeja restaurar.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena06";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena06(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Guiado pela orientação dos Guardiões dos Três Véus, você parte em direção à Torre de Arcanis, um lugar de magia e mistério onde os segredos dos Arcanos antigos ainda resistem ao tempo. A paisagem ao redor se transforma à medida que você avança, as sombras se tornando mais densas e a energia arcano pulsando no ar.\n\n" +
+                                    "Ao chegar aos portões da torre, você é recebido por uma visão impressionante. A estrutura é imponente e majestosa, suas paredes de pedra antiga brilhando com runas arcanas que parecem dançar à luz do sol. A entrada está protegida por um feitiço antigo, mas sua determinação e coragem o impulsionam a avançar.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena07";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena07(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Ao adentrar os portões da Torre de Arcanis, você sente uma energia arcano pulsante ao seu redor. A torre é um labirinto de salas e corredores, cada um repleto de segredos e perigos. As paredes brilham com runas antigas, e o ar está impregnado com a essência dos Arcanos, uma magia antiga e poderosa que desafia a compreensão.\n\n" +
+                                    "Seu objetivo é claro: encontrar o Grimório Arcano Perdido e provar sua coragem diante dos desafios que a torre reserva. Cada passo o leva mais fundo no coração da magia, onde criaturas arcanas e feitiços esquecidos aguardam para testar sua determinação.\n\n" +
+                                    "1. Explorar a Torre de Arcanis\n"
+                    );
+                    currentGameState = "ato2Cena08";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaAto2Cena08(String input){
+            switch (input){
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Enquanto você avança pelos corredores cintilantes da Torre de Arcanis, um peso mágico quase tangível se acumula no ar. O ambiente parece vivo, com paredes adornadas por runas brilhantes que pulsavam em ritmos misteriosos. É como se a própria torre estivesse observando e julgando cada movimento seu.\n" +
+                                    "De repente, um brilho intenso ilumina a sala. Três figuras se materializam à sua frente — os Magos Antigos, mestres arcanos que transcenderam o tempo. Seus corpos são etéreos, envoltos em mantos ondulantes de energia mágica pura, e seus olhos brilham como estrelas, fixados em você com uma intensidade esmagadora.\n\n" +
+                            "Eryndor, Mestre da Magia Negra:\n" +
+                                    "Então, você ousa entrar em nosso domínio, " + playerName + ", o " + playerClasse + "... Equilibrador. Buscando o Grimório Arcano Perdido? Tolice. Apenas aqueles dignos do verdadeiro poder arcano podem reivindicar tal artefato!\n\n" +
+                            "Narrador: \n" +
+                                    "As vozes dos Magos Antigos se entrelaçam em uma harmonia assustadora, cada palavra carregada de uma magia que reverbera em sua alma. Eles levantam suas mãos, e o ar ao redor começa a crepitar com energia. Formas de feitiços antigos e incompreensíveis começam a se manifestar, enquanto a sala é envolta em um turbilhão de magia caótica.\n\n" +
+                            "Lunareth, Mestre da Magia Arcana:\n" +
+                                    "Prepare-se, mortal. Nós somos a prova final entre você e o Grimório. Mostre-nos que é digno... ou seja consumido pela própria magia que deseja dominar!\n\n" +
+                            "Desafio: \n" +
+                                    "Prepare-se para enfrentar os Magos Antigos, mestres arcanos que transcendem o tempo! Use sua astúcia e habilidades mágicas para superar seus feitiços e desvendar os segredos que eles guardam. A batalha será épica, mas a recompensa pode mudar o curso da magia em Etheris.\n\n" +
+                            "1. Lutar contra os Magos Antigos\n"
+                    );
+                    currentGameState = "ato2Cena09";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void opcaoLutarMagosAntigos(String input){
+            switch (input){
+                case "1":
+                    batalharMagosAntigos();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharMagosAntigos(){
+            urrentEnemy.life = 50;
+            urrentEnemy.attack = 25;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "Os três magos antigos se posicionam para enfreta-los um de cada vez e o primeiro mago que você terá que enfrentar será o Lunareth, Mestre da Magia Arcana. \n\n" +
+                            "Ele domina o conhecimento puro dos Arcanos, manipulando o tecido da realidade com precisão impecável. Runas mágicas e símbolos antigos giram ao seu redor, amplificando seu poder. Capaz de invocar ilusões aterrorizantes, teletransportar-se em um piscar de olhos e conjurar feitiços que distorcem o tempo e o espaço, Lunareth é o guardião do equilíbrio entre o conhecimento e o caos.\n\n" +
+                            "Lunareth, Mestre da Magia Arcana: Level [7]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharMagosAntigos"
+            );
+        }
+
+        void opcaoLutaContraEryndor(String input){
+            switch (input) {
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    batalharEryndor();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharEryndor(){
+            urrentEnemy.life = 55;
+            urrentEnemy.attack = 25;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "O segundo mago que você terá que enfrentar será o Eryndor, Mestre da Magia Negra. \n\n" +
+                            "Ele manipula feitiços sombrios, drenando energia vital e invocando sombras que obscurecem a visão e confundem seus oponentes. Com sua presença sinistra, ele domina a necromancia, conjurando espíritos vingativos e escuridão que consome tudo ao seu redor. Seus encantamentos corruptores enfraquecem os inimigos, transformando sua força em desespero.\n\n" +
+                            "Eryndor, Mestre da Magia Negra: Level [7]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharEryndor"
+            );
+        }
+
+        void opcaoLutarContraKaeltharion(String input){
+            switch (input) {
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    batalharKaeltharion();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharKaeltharion(){
+            urrentEnemy.life = 60;
+            urrentEnemy.attack = 30;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "O terceiro mago que você terá que enfrentar será o Kaeltharion, Mestre da Magia Elemental. \n\n" +
+                            "Ele controla os elementos primordiais, invocando tempestades de fogo, ondas de gelo e relâmpagos devastadores. Sua magia é tão antiga quanto o próprio mundo, e sua conexão com os elementos é absoluta. Capaz de moldar a própria natureza ao seu redor, Kaeltharion é o guardião do equilíbrio entre a criação e a destruição.\n\n" +
+                            "Kaeltharion, Mestre da Magia Elemental: Level [7]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharKaeltharion"
+            );
+        }
+
+        void entradaProximaCenaAto2Cena11(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Com o Grimório Arcano Perdido em mãos, você sente uma energia arcano pulsante em seu ser. A Torre de Arcanis, outrora envolta em mistérios e magia ancestral, parece mais calma e serena, como se a presença dos Magos Antigos tivesse finalmente encontrado a paz.\n\n" +
+                                    "O Grimório brilha com uma luz prateada, refletindo a sabedoria e o poder dos Arcanos antigos. Sua missão em Arcanis está cumprida, mas o caminho à frente ainda é longo e repleto de desafios. Os Guardiões dos Três Véus aguardam sua volta, prontos para orientá-lo em sua próxima jornada.\n\n" +
+                                    "Narrador: \n" +
+                                    "Com determinação e coragem, você deixa a Torre de Arcanis para trás, levando consigo o Grimório Arcano Perdido. Seu destino o aguarda, e o equilíbrio de Etheris depende de sua força e sabedoria.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena12";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena12(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Após deixar a Torre de Arcanis para trás, o ar ao seu redor parece mais leve, mas a sensação de responsabilidade se intensifica. Os Guardiões dos Três Véus manifestam-se novamente, suas vozes ecoando como um coro harmonioso, preenchendo sua mente com orientação e propósito.\n\n" +
+                                    "Guardião do Véu do Colosso Imortal:\n\n" +
+                                    playerName + ", o " + playerClasse + ", você mostrou grande coragem e sabedoria em Arcanis. Agora, com o Grimório Arcano Perdido em mãos, é hora de se voltar para o próximo artefato. Sua jornada o levará até a Terras dos Titãs, um lugar onde a força e a devoção se entre laçam. Lá repousa a Lâmina do Colosso Imortal, uma arma lendária que será essencial para restaurar o equilíbrio de Etheris.\n\n" +
+                            "Narrador: \n" +
+                                    "As palavras dos Guardiões despertam uma mistura de apreensão e determinação em você. O Templo de Valoria, envolto em lendas e mitos, será um desafio como nenhum outro. Protegido por guardiões divinos e desafios de força e fé, a Lâmina não será conquistada facilmente.\n\n" +
+                                    "Com a orientação dos Guardiões e sua força renovada, você se prepara para enfrentar o desconhecido. O destino de Etheris depende de sua próxima vitória, e cada passo o aproxima mais do equilíbrio que tanto almeja restaurar.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena13";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena13(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Guiado pela orientação dos Guardiões dos Três Véus, você parte em direção à Terras dos Titãs, um lugar de força e devoção onde a Lâmina do Colosso Imortal repousa. A paisagem ao redor se transforma à medida que você avança, as montanhas se erguendo majestosas e os céus se abrindo em um espetáculo divino.\n\n" +
+                                    "Ao chegar a Terras dos Titãs, você é recebido por uma visão impressionante. A estrutura é imponente e majestosa, suas colunas de mármore brilhando à luz do sol. A entrada está protegida por guardiões divinos, mas sua determinação e coragem o impulsionam a avançar.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena14";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena14(String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Ao adentrar os porta da Terras dos Titãs, você sente uma energia divina pulsante ao seu redor. O templo é um santuário de força e devoção, cada câmara repleta de desafios e provações. As colunas brilham com runas divinas, e o ar está impregnado com a essência dos Titãs, uma divindade que desafia a compreensão.\n\n" +
+                                    "Seu objetivo é claro: encontrar a Lâmina do Colosso Imortal e provar sua coragem diante dos desafios que o templo reserva. Cada passo o leva mais fundo no coração da divindade, onde guardiões divinos e desafios de força e fé aguardam para testar sua determinação.\n\n" +
+                                    "1. Explorar a Terras dos Titãs\n"
+                    );
+                    currentGameState = "ato2Cena15";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena15(String input) {
+            switch (input) {
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    outputTextArea.setText(
+                            "Narrador:\n" +
+                                    "Enquanto você avança pelos salões imponentes do Santuário de Titanus, uma força esmagadora parece emanar das paredes. As colunas são gigantescas, gravadas com runas antigas que vibram com uma energia ancestral. Cada passo ecoa como um trovão, e o ar parece carregado com o peso de eras passadas.\n" +
+                                    "De repente, o chão treme, e uma figura colossal emerge das sombras. É Titanus, o Colosso Guardião. Sua forma é esculpida de pedra viva, fundida com metais reluzentes e adornada com cristais que pulsam com uma luz intensa. Seus olhos brilham como fornalhas ardentes, fixando-se em você com uma presença esmagadora.\n\n" +
+                                    "Titanus, Colosso Guardião:\n" +
+                                    "Pequeno mortal, você ousa desafiar a força eterna? Eu sou Titanus, o protetor da Lâmina do Colosso Imortal. Apenas aqueles que dominam o poder da terra e a resistência do tempo podem sequer sonhar em superar-me. Prove que sua força é digna!\n\n" +
+                                    "Narrador: \n" +
+                                    "A voz de Titanus reverbera como um terremoto, fazendo as paredes ao redor tremerem. Ele ergue sua mão gigantesca, e uma maça colossal de pedra se materializa, irradiando energia primal. O chão se despedaça sob seus pés, e a sala inteira parece responder à sua presença, desafiando você a avançar contra o impossível.\n\n" +
+                                    "1. Lutar contra Titanus\n"
+                    );
+                    currentGameState = "opcaoLutarContraTitanus";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void opcaoLutarContraTitanus(String input){
+            switch (input){
+                case "1":
+                    batalharTitanus();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharTitanus(){
+            urrentEnemy.life = 65;
+            urrentEnemy.attack = 30;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "O combate com Titanus, o Colosso Guardião, começa! Use suas habilidades e estratégias com sabedoria para enfrentar seus ataques devastadores e resistir à aura opressiva que drena sua força.\n\n" +
+                            "Titanus é uma força da natureza, dominando o poder da terra e a resistência do tempo. Seus golpes são devastadores, capazes de despedaçar montanhas e desafiar os deuses. Com sua presença esmagadora, ele testa sua coragem e determinação, desafiando-o a provar que é digno de empunhar a Lâmina do Colosso Imortal.\n\n" +
+                            "Titanus, Colosso Guardião: Level [10]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharTitanus"
+            );
+        }
+
+        void entradaProximaCenaAto2Cena16 (String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "A batalha com Titanus, o Colosso Guardião, é intensa e desafiadora. A cada golpe desferido, a aura opressiva ao seu redor parece se fortalecer, e a energia primal que emana de Titanus ameaça consumir tudo ao seu redor. O chão treme, as paredes tremem, e o ar parece vibrar com a força do combate.\n\n" +
+                                    "No entanto, você não se deixa abater. Com coragem e determinação, você enfrenta o Colosso, resistindo aos seus ataques e desvendando seus movimentos. A cada golpe bem-sucedido, a conexão de Titanus com a terra se enfraquece, e sua aura opressiva começa a se dissipar.\n\n" +
+                                    "Finalmente, após uma batalha épica, você desfere o golpe final. Titanus, o Colosso Guardião, cai de joelhos diante de você, sua aura desaparecendo lentamente. Seus olhos, uma vez brilhantes e aterrorizantes, agora refletem apenas a força e a resistência de um guardião caído.\n\n" +
+                                    "Narrador: \n" +
+                                    "Com um suspiro final, Titanus desaparece em uma luz brilhante, deixando para trás apenas a Lâmina do Colosso Imortal. É a arma lendária que você buscava, uma espada de poder inigualável que vibra com a energia da terra e do tempo. Com cuidado, você a recolhe, sentindo a força divina pulsar em suas mãos.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena17";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena17 (String input) {
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Com os três artefatos em mãos — o Cetro do Espírito Eterno, o Grimório Arcano Perdido e a Lâmina do Colosso Imortal —, você retorna ao Santuário do Véu. O lugar, uma vez sereno e imponente, agora está impregnado por uma energia pulsante, como se o próprio mundo aguardasse o desfecho de sua jornada.\n\n" +
+                                    "Os Guardiões dos Três Véus se materializam diante de você, suas formas brilhando com uma intensidade nunca vista antes. Suas vozes ecoam como um coro, preenchendo o espaço ao seu redor.\n\n" +
+                            "Véu do Espírito: \n" +
+                                    "Equilibrador, você conquistou o impossível. Os artefatos estão reunidos, e o equilíbrio de Etheris está ao seu alcance. Porém, há um último obstáculo: a Ruptura, a fonte de toda a fragmentação e caos, aguarda por você.\n\n" +
+                            "Véu do Arcano: \n" +
+                                    "A Ruptura não é apenas um evento, mas uma entidade que se alimenta do desequilíbrio. Ela reside no Coração de Etheris, um lugar onde as realidades colidem e as sombras do passado se tornam palpáveis. Lá, você enfrentará a manifestação do caos em sua forma mais pura.\n\n" +
+                            "Véu do Colosso: \n" +
+                                    "Você é a última esperança deste mundo. Com os artefatos unidos, você possui o poder necessário para enfrentar a Ruptura, mas lembre-se: a força bruta não será suficiente. Será preciso coragem, sabedoria e sacrifício para vencer.\n\n" +
+                            "Narrador: \n" +
+                                    "As palavras dos Guardiões pesam em seu coração enquanto você se prepara para a última batalha. O destino de Etheris está em jogo, e cada escolha feita até aqui culmina neste momento final. Com os artefatos brilhando intensamente em suas mãos, você respira fundo e segue em direção ao Coração de Etheris.\n" +
+                                    "\n" +
+                                    "A jornada chegou ao fim, mas o verdadeiro teste está apenas começando. O equilíbrio do mundo fragmentado depende de sua coragem e determinação. O destino de Etheris está em suas mãos.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato2Cena18";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto2Cena18 (String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Guiado pela orientação dos Guardiões dos Três Véus, você parte em direção ao Coração de Etheris, um lugar onde as realidades colidem e as sombras do passado se tornam palpáveis. A paisagem ao redor se transforma à medida que você avança, as sombras se tornando mais densas e a energia caótica pulsando no ar.\n\n" +
+                                    "Ao chegar ao Coração de Etheris, você é recebido por uma visão impressionante. O lugar é um vórtice de luz e sombra, onde as realidades se entrelaçam e os limites do tempo e espaço se dissolvem. A entrada está protegida por uma barreira de energia, mas sua determinação e coragem o impulsionam a avançar.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato3Cena01";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto3Cena01 (String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "Ao adentrar os portões do Coração de Etheris, você sente uma energia caótica pulsante ao seu redor. O lugar é um vórtice de luz e sombra, onde as realidades se entrelaçam e os limites do tempo e espaço se dissolvem. As paredes brilham com runas antigas, e o ar está impregnado com a essência do caos, uma energia que desafia a compreensão.\n\n" +
+                                    "Seu objetivo é claro: enfrentar a Ruptura e restaurar o equilíbrio de Etheris. Cada passo o leva mais fundo no coração do caos, onde sombras do passado e visões do futuro se misturam em um turbilhão de energia. A batalha final está prestes a começar.\n\n" +
+                                    "1. Enfrentar a Ruptura\n"
+                    );
+                    currentGameState = "ato3Cena02";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto3Cena02(String input){
+            switch (input) {
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicBattle.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "À medida que você avança para o coração pulsante de Etheris, o ambiente ao seu redor parece dobrar as leis da realidade. O ar é denso e pesado, impregnado com a energia caótica que sustenta a Ruptura. Runas incandescentes percorrem as paredes, mudando de forma e cor enquanto pulsos rítmicos ecoam no espaço, como o batimento cardíaco de um mundo moribundo.\n\n" +
+                                    "De repente, o caos se condensa em uma forma à sua frente. A Ruptura finalmente se manifesta — uma entidade de energia bruta e destrutiva. Sua figura é uma amalgama de luz e sombra, infinitamente mutável, com tentáculos etéreos que se estendem e retraem ao seu redor. Seus olhos, brilhantes e hipnotizantes, fixam-se em você, carregados de um poder avassalador e uma malevolência silenciosa.\n\n" +
+                                    "Ruptura, Fonte do Caos:\n" +
+                                    "Um mortal ousando desafiar a eternidade! Eu sou o caos, a Ruptura que desfez Etheris, o início e o fim. Você acredita que três artefatos insignificantes e uma vontade frágil podem deter minha existência? Mostre-me, então, a extensão de sua fúria e de sua determinação. Prove que pode resistir ao colapso absoluto!\n\n" +
+                                    "Narrador: \n" +
+                                    "A voz da Ruptura ecoa como um trovão em uma tempestade infinita, cada palavra enviando ondas de energia pelo chão e paredes ao seu redor. Com um gesto, ela desencadeia um redemoinho de pura energia caótica, envolvendo o campo de batalha. Fragmentos de Etheris, memórias distorcidas e ecos de eras passadas aparecem e desaparecem no vórtice, testando sua sanidade.\n" +
+                                    "O momento final chegou. A Ruptura se ergue diante de você, não como um inimigo comum, mas como a personificação do desequilíbrio que ameaça destruir tudo. É uma batalha contra o caos, contra a própria fragmentação do mundo. O destino de Etheris está em suas mãos.\n\n" +
+                                    "1. Lutar contra a Ruptura\n"
+                    );
+                    currentGameState = "opcaoLutarContraRuptura";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void opcaoLutarContraRuptura(String input){
+            switch (input){
+                case "1":
+                    batalharRuptura();
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void batalharRuptura(){
+            urrentEnemy.life = 95;
+            urrentEnemy.attack = 35;
+            randomQuestionBinary = rpgComponent.questionBinary();
+            numBinary = Integer.toBinaryString(randomQuestionBinary);
+            battle(
+                    "Desafio:\n" +
+                            "A batalha final com a Ruptura, a Fonte do Caos, começa! Use todas as suas habilidades e estratégias para enfrentar seus ataques devastadores e resistir à energia caótica que ameaça consumir tudo ao seu redor.\n\n" +
+                            "A Ruptura é a personificação do desequilíbrio, a entidade que desfez Etheris e ameaça destruir tudo. Sua forma é uma mistura de luz e sombra, infinitamente mutável e imprevisível. Com tentáculos etéreos e olhos brilhantes, ela desafia sua existência e sua determinação, testando sua coragem até o limite.\n\n" +
+                            "Ruptura, Fonte do Caos: Level [15]\n" +
+                            "Vida: " + urrentEnemy.life +
+                            "\nAtaque: " + urrentEnemy.attack +
+                            "\n\n" + playerName + " o " + playerClasse + ": Level[" + playerLevel + "]\n" +
+                            "Sua vida: " + playerLife +
+                            "\nSua força: " + playerAttack + "\n\n", "batalharRuptura"
+            );
+        }
+
+        void entradaProximaCenaAto3Cena03(String input){
+            switch (input){
+                case "1":
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "A batalha com a Ruptura, a Fonte do Caos, é intensa e desafiadora. A cada golpe desferido, a energia caótica ao seu redor parece se fortalecer, e a entidade mutável que é a Ruptura ameaça consumir tudo ao seu redor. O chão treme, as paredes tremem, e o ar parece vibrar com a força do combate.\n\n" +
+                                    "No entanto, você não se deixa abater. Com coragem e determinação, você enfrenta a Ruptura, resistindo aos seus ataques e desvendando seus movimentos. A cada golpe bem-sucedido, a conexão da Ruptura com o caos se enfraquece, e sua energia caótica começa a se dissipar.\n\n" +
+                                    "Finalmente, após uma batalha épica, você desfere o golpe final. A Ruptura, a Fonte do Caos, se desfaz em uma explosão de luz e sombra, sua forma mutável se desfazendo em fragmentos de energia. O vórtice de caos que envolvia o Coração de Etheris se dissipa, e a paz retorna ao mundo fragmentado.\n\n" +
+                                    "Narrador: \n" +
+                                    "Com um suspiro final, a Ruptura desaparece, deixando para trás apenas um vórtice de energia pura. Os artefatos brilham intensamente em suas mãos, sua luz refletindo a harmonia restaurada de Etheris. O mundo, uma vez à beira do colapso, agora se estabiliza, as realidades se fundindo em um equilíbrio perfeito.\n\n" +
+                                    "1. Continuar"
+                    );
+                    currentGameState = "ato3Cena04";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void entradaProximaCenaAto3Cena04(String input){
+            switch (input) {
+                case "1":
+                    outputTextArea.setText(
+                      "Narrador: \n" +
+                          "Com a Ruptura derrotada, o mundo de Etheris respira aliviado. O caos que uma vez envolveu o Coração de Etheris se dissipa, dando lugar a uma tranquilidade que você nunca havia sentido antes. A luz suave das eras perdidas começa a emanar do núcleo do mundo, renovando as terras fragmentadas e unificando novamente os véus da existência.\n" +
+                          "Os Guardiões dos Três Véus surgem diante de você mais uma vez, suas presenças majestosas irradiando gratidão e reverência. Cada um se aproxima, suas vozes harmonizando-se em uma melodia de reconhecimento eterno.\n\n" +
+                    "Véu do Espírito: \n" +
+                        "Equilibrador, você enfrentou as sombras mais profundas de Etheris e triunfou. O Cetro do Espírito Eterno, que outrora simbolizava a harmonia perdida, agora brilha com renovada força. Suas ações ecoarão em cada alma viva, inspirando coragem para as gerações futuras.\n\n" +
+                    "Véu do Arcano: \n" +
+                              "O Grimório Arcano Perdido, outrora um receptáculo de segredos incontáveis, agora guarda o conhecimento da união e da força. Você mostrou que o poder mais verdadeiro vem da sabedoria e da perseverança. Etheris florescerá sob a luz que você trouxe.\n\n" +
+                    "Véu do Colosso: \n" +
+                              "A Lâmina do Colosso Imortal, símbolo de força e resiliência, encontrou em você um verdadeiro portador. Sua determinação restaurou a ordem que parecia perdida para sempre. O equilíbrio de Etheris está seguro graças à sua coragem inabalável.\n\n" +
+                    "Narrador: \n" +
+                          "Com suas palavras, os Guardiões se desfazem em brilhos de luz, cada partícula ascendendo para fundir-se ao Coração de Etheris. O mundo se transforma diante de seus olhos: terras antes desoladas ganham vida, céus tempestuosos tornam-se límpidos, e o povo de Etheris sente a renovação que você trouxe.\n" +
+                              "O equilíbrio foi restaurado, mas você sabe que Etheris sempre exigirá vigilância e coragem para preservar o que foi conquistado. Como o Equilibrador, você deixa sua marca eterna na história deste mundo.\n" +
+                              "Etheris está em paz — por agora.\n\n" +
+                    "1. Fim"
+                    );
+                    currentGameState = "fim";
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
+        void fim(String input){
+            switch (input){
+                case "1":
+                    if (musicPlayer != null) { // Verifica se o musicPlayer não é nulo
+                        musicPlayer.stop();
+                    }
+
+                    URL url = getClass().getResource("/Sounds/musicEtheris.wav");
+
+                    if (url != null) { // Verifica se a URL não é nula
+                        musicPlayer = rpgComponent.new MusicPlayer(url.getPath());
+                        musicPlayer.play();
+                    } else {
+                        System.out.println("Arquivo de música não encontrado!");
+                    }
+                    outputTextArea.setText(
+                            "Narrador: \n" +
+                                    "E assim, a jornada do Equilibrador chega ao fim. O mundo de Etheris, uma vez à beira do colapso, agora floresce sob a luz da harmonia restaurada. As terras fragmentadas se unem, os véus da existência se entrelaçam, e o povo de Etheris olha para o futuro com esperança e gratidão.\n\n" +
+                                    "O Equilibrador, cuja coragem e determinação salvaram o mundo, é lembrado como um herói eterno. Seu nome ecoa em canções e lendas, sua jornada reverenciada por gerações futuras. O Cetro do Espírito Eterno, o Grimório Arcano Perdido e a Lâmina do Colosso Imortal permanecem como símbolos de sua bravura e sacrifício.\n\n" +
+                                    "E assim, Etheris encontra a paz, mas o Equilibrador sabe que o equilíbrio do mundo é frágil e sempre exigirá vigilância e coragem. A jornada do Equilibrador pode ter chegado ao fim, mas o legado de sua coragem viverá para sempre.\n\n" +
+                                    "Fim\n\n" +
+                                    "Agradecimentos especiais aos Guardiões dos Três Véus, cuja orientação e sabedoria guiaram o Equilibrador em sua jornada. Que a luz da harmonia eterna brilhe sobre Etheris para sempre.\n\n" +
+                                    "Créditos\n\n" +
+                                    "Desenvolvido por: Arthur Araújo Sousa e Maria Eduarda\n" +
+                                    "Agradecimentos Especiais: Eduardo Takeo e Fabio Brussolo\n\n"
+                    );
+                    break;
+                default:
+                    invalidInput();
+                    break;
+            }
+        }
+
     }
 }
